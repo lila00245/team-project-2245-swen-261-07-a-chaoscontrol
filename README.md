@@ -5,7 +5,7 @@ An online U-Fund system built in Java **21** and ___ _replace with other platfor
   
 ## Team
 
-- MEMBER1
+- Vladislav
 - Owen
 - Jay
 - Lila
