@@ -29,7 +29,8 @@ public class Need{
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("cost") double cost, @JsonProperty("food_group") String food_group) {
+    public Need(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("cost") double cost,
+    @JsonProperty("food_group") String food_group) {
         this.id = id;
         this.name = name;
         this.cost = cost;
