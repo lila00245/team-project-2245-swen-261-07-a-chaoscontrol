@@ -131,8 +131,9 @@ public class NeedFileDAO implements NeedDAO {
         // Add each Need to the tree map and keep track of the greatest id
         for (Need need : needArray) {
             needs.put(need.getId(),need);
-            if (need.getId() > nextId)
+            if (need.getId() > nextId){
                 nextId = need.getId();
+            }
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;
@@ -165,10 +166,11 @@ public class NeedFileDAO implements NeedDAO {
     @Override
     public Need getNeed(int id) {
         synchronized(needs) {
-            if (needs.containsKey(id))
+            if (needs.containsKey(id)){
                 return needs.get(id);
-            else
+            }else{
                 return null;
+            }
         }
     }
 
@@ -193,8 +195,9 @@ public class NeedFileDAO implements NeedDAO {
     @Override
     public Need updateNeed(Need need) throws IOException {
         synchronized(needs) {
-            if (needs.containsKey(need.getId()) == false)
+            if (needs.containsKey(need.getId()) == false){
                 return null;  // Need does not exist
+            }
 
             needs.put(need.getId(),need);
             save(); // may throw an IOException
