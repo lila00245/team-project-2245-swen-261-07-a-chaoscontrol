@@ -59,10 +59,12 @@ public class NeedController {
         LOG.info("GET /needs/" + id);
         try {
             Need need = needDao.getNeed(id);
-            if (need != null)
+            if (need != null){
+                System.out.println(need);
                 return new ResponseEntity<Need>(need,HttpStatus.OK);
-            else
+            }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
