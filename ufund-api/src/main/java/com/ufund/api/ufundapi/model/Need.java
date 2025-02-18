@@ -12,12 +12,12 @@ public class Need{
     private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "Need [id=%d, name=%s, cost=&d, food_group=%s]";
+    static final String STRING_FORMAT = "Need [id=%d, name=%s, cost=&d, foodGroup=%s]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
     @JsonProperty("cost") private double cost;
-    @JsonProperty("food_group") private String food_group;
+    @JsonProperty("foodGroup") private String foodGroup;
 
     /**
      * Create a need with the given id and name
@@ -30,11 +30,11 @@ public class Need{
      * value, i.e. 0 for int
      */
     public Need(@JsonProperty("id") int id, @JsonProperty("name") String name, @JsonProperty("cost") double cost,
-    @JsonProperty("food_group") String food_group) {
+    @JsonProperty("foodGroup") String foodGroup) {
         this.id = id;
         this.name = name;
         this.cost = cost;
-        this.food_group = food_group;
+        this.foodGroup = foodGroup;
     }
 
     /**
@@ -46,7 +46,7 @@ public class Need{
 
     public double getCost() {return cost;}
 
-    public void setFoodGroup(String food_group) {this.food_group = food_group;}
+    public void setFoodGroup(String foodGroup) {this.foodGroup = foodGroup;}
 
     public void setCost(int cost) {this.cost = cost;}
 
@@ -66,13 +66,13 @@ public class Need{
      * Retrieves the food_group of the need
      * @return The food_group of the need
      */
-    public String getFoodGroup() {return food_group;}
+    public String getFoodGroup() {return foodGroup;}
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,name,cost,food_group);
+        return String.format(STRING_FORMAT,id,name,cost,foodGroup);
     }
 }
