@@ -9,16 +9,17 @@ geometry: margin=1in
 > and appear in the generated PDF in italics but do so only **after** all team members agree that the requirements for that section and current Sprint have been met. **Do not** delete future Sprint expectations._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: ChaosControl
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Owen
+  * Jay
+  * Ariel
+  * Lila
+  * Vlad
 
 ## Executive Summary
 
-This is a summary of the project.
+We are desiging a U-Fund website for a food pantry that provides food to people in need. This website houses the capacity for helpers and managers to update, remove, and add needs to the need bank. 
 
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
