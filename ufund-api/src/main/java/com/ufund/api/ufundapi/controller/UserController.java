@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.ufund.api.ufundapi.persistence.NeedDAO;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 import com.ufund.api.ufundapi.model.User;
 
@@ -33,6 +34,7 @@ import com.ufund.api.ufundapi.model.User;
 public class UserController {
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
     private UserDAO userDao;
+    private NeedDAO needDao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -41,8 +43,9 @@ public class UserController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public UserController(UserDAO userDao) {
+    public UserController(UserDAO userDao, NeedDAO needDao) {
         this.userDao = userDao;
+        this.needDao = needDao;
     }
 
     /**

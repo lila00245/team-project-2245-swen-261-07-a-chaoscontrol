@@ -16,7 +16,7 @@ public class User{
     static final String STRING_FORMAT = "USer [name=%s, basket=%s]";
 
     @JsonProperty("name") private String name;
-    @JsonProperty("basket") private ArrayList<User> basket;
+    @JsonProperty("basket") private ArrayList<Need> basket;
 
     /**
      * Create a user with the given name
@@ -27,7 +27,7 @@ public class User{
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public User(@JsonProperty("name") String name, @JsonProperty("basket") ArrayList<User> basket) {
+    public User(@JsonProperty("name") String name, @JsonProperty("basket") ArrayList<Need> basket) {
         this.name = name;
         this.basket = basket;
     }
@@ -53,8 +53,12 @@ public class User{
      * Retrieves the basket of the user
      * @return the basket of the user
      */
-    public ArrayList<User> getBasket(){return basket;}
+    public ArrayList<Need> getBasket(){return basket;}
 
+    public void addToBasket(Need need){
+        basket.add(need);
+    }
+    
     /**
      * {@inheritDoc}
      */
