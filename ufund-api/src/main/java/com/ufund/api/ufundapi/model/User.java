@@ -1,5 +1,6 @@
 package com.ufund.api.ufundapi.model;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +16,7 @@ public class User{
     static final String STRING_FORMAT = "USer [name=%s, basket=%s]";
 
     @JsonProperty("name") private String name;
-    @JsonProperty("basket") private Need[] basket;
+    @JsonProperty("basket") private ArrayList<User> basket;
 
     /**
      * Create a user with the given name
@@ -26,9 +27,14 @@ public class User{
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public User(@JsonProperty("name") String name, @JsonProperty("basket") Need[] basket) {
+    public User(@JsonProperty("name") String name, @JsonProperty("basket") ArrayList<User> basket) {
         this.name = name;
         this.basket = basket;
+    }
+
+    public User(String name){
+        this.name = name;
+        this.basket = new ArrayList<>();
     }
 
     /**
@@ -47,7 +53,7 @@ public class User{
      * Retrieves the basket of the user
      * @return the basket of the user
      */
-    public Need[] getBasket(){return basket;}
+    public ArrayList<User> getBasket(){return basket;}
 
     /**
      * {@inheritDoc}
