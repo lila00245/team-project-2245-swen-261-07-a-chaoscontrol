@@ -43,6 +43,11 @@ public class User{
      */
     public String getName() {return name;}
 
+    /**
+     * Retrieves the basket of the user
+     * @return the basket of the user
+     */
+    public Need[] getBasket(){return basket;}
 
     /**
      * {@inheritDoc}

@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.ufund.api.ufundapi.persistence.NeedDAO;
-import com.ufund.api.ufundapi.model.Need;
+import com.ufund.api.ufundapi.persistence.UserDAO;
+import com.ufund.api.ufundapi.model.User;
 
 /**
- * Handles the REST API requests for the Need resource
+ * Handles the REST API requests for the User resource
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
@@ -54,11 +54,11 @@ public class UserController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable int id) {
-        LOG.info("GET /users/" + id);
+    @GetMapping("/{name}")
+    public ResponseEntity<User> getUser(@PathVariable String name) {
+        LOG.info("GET /users/" + name);
         try {
-            User user = userDao.getUser(id);
+            User user = userDao.getUser(name);
             if (user != null){
                 System.out.println(user);
                 return new ResponseEntity<User>(user,HttpStatus.OK);
@@ -85,34 +85,7 @@ public class UserController {
 
         // Replace below with your implementation
         try {
-            User[] users = userDao.getUser();
-            return new ResponseEntity<>(users,HttpStatus.OK);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    /**
-     * Responds to the GET request for all {@linkplain User users} whose name contains
-     * the text in name
-     * 
-     * @param name The name parameter which contains the text used to find the {@link User users}
-     * 
-     * @return ResponseEntity with array of {@link User user} objects (may be empty) and
-     * HTTP status of OK<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     * <p>
-     * Example: Find all Users that contain the text "ma"
-     * GET http://localhost:8080/Users/?name=ma
-     */
-    @GetMapping("/")
-    public ResponseEntity<User[]> searchUsers(@RequestParam String name) {
-        LOG.info("GET /users/?name="+name);
-
-        // Replace below with your implementation
-        try {
-            User[] users = userDao.findUsers(name);
+            User[] users = userDao.getUsers();
             return new ResponseEntity<>(users,HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
@@ -160,7 +133,7 @@ public class UserController {
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         LOG.info("PUT /users " + user);
         try{
-            USer user1 = userDao.updateUser(user);
+            User user1 = userDao.updateUser(user);
             // Replace below with your implementation
             if (user1 == null){
                 return new ResponseEntity<>(user1,HttpStatus.NOT_FOUND);
@@ -175,7 +148,7 @@ public class UserController {
     }
 
     /**
-     * Deletes a {@linkplain User user} with the given id
+     * Deletes a {@linkplain User user} with the given name
      * 
      * @param id The id of the {@link User user} to deleted
      * 
@@ -183,15 +156,15 @@ public class UserController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable int id) {
-        LOG.info("DELETE /users/" + id);
+    @DeleteMapping("/{name}")
+    public ResponseEntity<User> deleteUser(@PathVariable String name) {
+        LOG.info("DELETE /users/" + name);
 
         // Replace below with your implementation
         try{
-            User user = userDao.getUser(id);
+            User user = userDao.getUser(name);
             if(user != null){
-                userDao.deleteUser(id);
+                userDao.deleteUser(name);
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
