@@ -3,11 +3,6 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics but do so only **after** all team members agree that the requirements for that section and current Sprint have been met. **Do not** delete future Sprint expectations._
-
 ## Team Information
 * Team name: ChaosControl
 * Team members
@@ -79,9 +74,8 @@ This application uses a REST API to keep track of all user information and needs
 
 The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
 **NOTE**: detailed diagrams are required in later sections of this document.
-> _**[Sprint 1]** (Augment this diagram with your **own** rendition and representations of sample system classes, placing them into the appropriate M/V/VM (orange rectangle) tier section. Focus on what is currently required to support **Sprint 1 - Demo requirements**. Make sure to describe your design choices in the corresponding _**Tier Section**_ and also in the _**OO Design Principles**_ section below.)_
 
-![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
+![The Tiers & Layers of the Architecture](Food-bank-MVVM.png)
 
 The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
@@ -119,17 +113,12 @@ This section describes the web interface flow; this is how the user views and in
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 ### ViewModel Tier
-> _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
 
 The ViewModel tier provides the application’s interface for client interaction and business logic, bridging the model (data) with the controller (API endpoints):
 
 	1.	Controllers:
-	•	NeedController and UserController handle HTTP requests related to Need and User entities, respectively.
-	•	They use REST endpoints (GET, POST, PUT, DELETE) for CRUD operations and return appropriate ResponseEntity objects, managing HTTP status codes based on the success or failure of each operation.
-	2.	Services:
-	•	NeedService and UserService encapsulate the core business logic, implementing the INeedService and IUserService interfaces.
-	•	They interact with data access objects (DAOs) to perform operations like retrieving, creating, updating, and deleting Need and User records.
-	•	The services handle additional logic, such as duplicate checks or error handling, ensuring data consistency before responding to controllers.
+	•	NeedController handles HTTP requests related to Need entities.
+	•	It uses REST endpoints (GET, POST, PUT, DELETE) for CRUD operations and return appropriate ResponseEntity objects, managing HTTP status codes based on the success or failure of each operation.
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -138,30 +127,31 @@ The ViewModel tier provides the application’s interface for client interaction
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
-![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
+![Replace with your ViewModel Tier class diagram 1, etc.](NeedControllerUML.png)
 
 ### Model Tier
-> _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
+The model tier provides the interface for business logic and persistence. This bridges the gap between storage and the model. 
+
+	1.	Data Access Objects:
+	• NeedFileDAO provides the methods for interacting with the storage. 
+	• There are methods to support creating, reading, updating, and deleting needs from storage.
 
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
-
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
-![Replace with your Model Tier class diagram 1, etc.](model-placeholder.png)
+![Replace with your Model Tier class diagram 1, etc.](NeedFileDAOUML.png)
 
 ## OO Design Principles
 
-> _**[Sprint 1]** Name and describe the initial OO Principles that your team has considered in support of your design (and implementation) for this first Sprint._
-
-For Sprint 1, we have considered foundational Object-Oriented (OO) principles that support a flexible and maintainable design. Below are the key principles we’ve applied:
-
-Abstraction
-Low Coupling
-Encapsulation
-Inheritance
+### Abstraction
+We have applied abstraction in our design by creating an interface for our data access object that our controller uses for file I/O operations.
+### Low Coupling
+Low coupling was applied in our design by utilizing dependency injection in our NeedController class. Instead of instantiating a NeedDAO in NeedController, we pass one in through it's constructor. 
+### Encapsulation
+We applied encapsulation in our design by grouping related methods and data into classes. The Need class has methods and data needed to represent the state and behavior of a need, for example. 
 
 
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
