@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ufund": {
+    "ufund-ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ufund",
+            "outputPath": "dist/ufund-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ufund:build:production"
+              "buildTarget": "ufund-ui:build:production"
             },
             "development": {
-              "buildTarget": "ufund:build:development"
+              "buildTarget": "ufund-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
