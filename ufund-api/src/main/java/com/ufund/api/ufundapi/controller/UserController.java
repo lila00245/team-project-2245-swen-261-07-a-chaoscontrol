@@ -34,7 +34,7 @@ import com.ufund.api.ufundapi.model.User;
 public class UserController {
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
     private UserDAO userDao;
-    private NeedDAO needDao;
+    
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -43,15 +43,14 @@ public class UserController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public UserController(UserDAO userDao, NeedDAO needDao) {
+    public UserController(UserDAO userDao) {
         this.userDao = userDao;
-        this.needDao = needDao;
     }
 
     /**
-     * Responds to the GET request for a {@linkplain User User} for the given id
+     * Responds to the GET request for a {@linkplain User User} for the given name
      * 
-     * @param id The id used to locate the {@link User User}
+     * @param name The name used to locate the {@link User User}
      * 
      * @return ResponseEntity with {@link User User} object and HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
@@ -91,9 +90,9 @@ public class UserController {
             User[] users = userDao.getUsers();
             return new ResponseEntity<>(users,HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
         }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /**
@@ -101,7 +100,7 @@ public class UserController {
      * 
      * @param User - The {@link User user} to create
      * 
-     * @return ResponseEntity with created {@link User user} object and HTTP status of CREATED<br>
+     * @return ResponseEntity with created {@link User user} object and HTTP status of OK<br>
      * ResponseEntity with HTTP status of CONFLICT if {@link User user} object already exists<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -141,7 +140,7 @@ public class UserController {
             if (user1 == null){
                 return new ResponseEntity<>(user1,HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(user1 ,HttpStatus.OK);
             }
         }
         catch(IOException e) {
@@ -153,7 +152,7 @@ public class UserController {
     /**
      * Deletes a {@linkplain User user} with the given name
      * 
-     * @param id The id of the {@link User user} to deleted
+     * @param name The name of the {@link User user} to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
