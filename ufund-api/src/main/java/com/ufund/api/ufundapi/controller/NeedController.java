@@ -86,9 +86,9 @@ public class NeedController {
             Need[] needs = needDao.getNeeds();
             return new ResponseEntity<>(needs,HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     /**
@@ -113,9 +113,9 @@ public class NeedController {
             Need[] needs = needDao.findNeeds(name);
             return new ResponseEntity<>(needs,HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     /**
@@ -135,7 +135,7 @@ public class NeedController {
         try{
             Need newNeed = needDao.createNeed(need);
             if(newNeed != null){
-                return new ResponseEntity<>(newNeed, HttpStatus.OK);
+                return new ResponseEntity<>(newNeed, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
