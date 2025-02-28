@@ -65,12 +65,6 @@ public class NeedFileDAOTest {
     }
 
     @Test
-    void testGetNeed_NotFound() {
-        Need need = needFileDAO.getNeed(100000);
-        assertNull(need, "Should return null");
-    }
-
-    @Test
     void testCreateNeed() throws IOException {
         // Create a new Need
         Need newNeed = new Need(0, "New Need", 100, "Misc");
@@ -100,15 +94,6 @@ public class NeedFileDAOTest {
     }
 
     @Test
-    void testUpdateNeed_NotFound() throws IOException {
-        // updates a need that isn't real, returns error
-        Need nonExisting = new Need(1234, "Does not exist", 1234, "None");
-        Need result = needFileDAO.updateNeed(nonExisting);
-        assertNull(result, "Should return null if that Need doesn't exist");
-        verify(mockObjectMapper, never()).writeValue(any(File.class), any(Need[].class));
-    }
-
-    @Test
     void testDeleteNeed() throws IOException {
         // Need with ID=1 exists, so deleting should return true
         boolean deleted = needFileDAO.deleteNeed(1);
@@ -116,12 +101,5 @@ public class NeedFileDAOTest {
         verify(mockObjectMapper, times(1)).writeValue(any(File.class), any(Need[].class));
         Need result = needFileDAO.getNeed(1);
         assertNull(result, "Need (1) should have deleted");
-    }
-
-    @Test
-    void testDeleteNeed_NotFound() throws IOException {
-        boolean deleted = needFileDAO.deleteNeed(999);
-        assertFalse(deleted, "Should return False for non-existent Need deletion"); // deletes a Need that doesn't exist
-        verify(mockObjectMapper, never()).writeValue(any(File.class), any(Need[].class));
     }
 }

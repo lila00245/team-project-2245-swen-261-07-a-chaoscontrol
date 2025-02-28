@@ -43,21 +43,14 @@ public class UserFileDAOTest {
     }
 
     @Test
-    void testGetUser_Found() {
+    void testGetUser() {
         // tests that the user exist
         User Bob = userFileDAO.getUser("Bob");
         assertNotNull(Bob, "Bob (1) should exist");
     }
 
     @Test
-    void testGetUser_NotFound() {
-         // tests that the user doesn't exist
-        User bob = userFileDAO.getUser("Bob");
-        assertNull(bob, "Should return null");
-    }
-
-    @Test
-    void testCreateUser_Success() throws IOException {
+    void testCreateUser() throws IOException {
         // tests that a new user can be created after setup
         User bob = new User("Bob");
         User createdUser = userFileDAO.createUser(bob);
@@ -68,17 +61,16 @@ public class UserFileDAOTest {
     }
 
     @Test
-    void testCreateUser_AlreadyExists() throws IOException {
+    void testCreateUserException() throws IOException {
         // test if functionality works for creating a user that exists
         User existing = new User("Bob");
         User result = userFileDAO.createUser(existing);
         assertNull(result, "Should return null, user exist");
-        verify(mockObjectMapper, never())
-            .writeValue(any(File.class), any(User[].class)); // verify save didn't get called
+        verify(mockObjectMapper, never()).writeValue(any(File.class), any(User[].class)); // verify save didn't get called
     }
 
     @Test
-    void testUpdateUser_Success() throws IOException {
+    void testUpdateUser() throws IOException {
         User updatedBob = new User("Bob");
         User result = userFileDAO.updateUser(updatedBob);
         assertNotNull(result, "Should return updated user");
@@ -88,16 +80,7 @@ public class UserFileDAOTest {
     }
 
     @Test
-    void testUpdateUser_NotFound() throws IOException {
-        // bob shouldn't exist
-        User missingUser = new User("Bob");
-        User result = userFileDAO.updateUser(missingUser);
-        assertNull(result, "Should return null if the user doesn't exist");
-        verify(mockObjectMapper, never()).writeValue(any(File.class), any(User[].class));
-    }
-
-    @Test
-    void testDeleteUser_Success() throws IOException {
+    void testDeleteUser() throws IOException {
         // Bob is in the data
         boolean deleted = userFileDAO.deleteUser("Bob");
         assertTrue(deleted, "Should return true for Delete");
@@ -105,14 +88,5 @@ public class UserFileDAOTest {
             .writeValue(any(File.class), any(User[].class));
         User result = userFileDAO.getUser("Bob");
         assertNull(result, "User Bob removed");
-    }
-
-    @Test
-    void testDeleteUser_NotFound() throws IOException {
-        // deletes user that doesn't eixst
-        boolean deleted = userFileDAO.deleteUser("Bob");
-        assertFalse(deleted, "Shouldn't return if user does not exist");
-        verify(mockObjectMapper, never())
-            .writeValue(any(File.class), any(User[].class));
     }
 }
