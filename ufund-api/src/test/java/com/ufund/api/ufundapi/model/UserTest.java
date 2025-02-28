@@ -1,5 +1,6 @@
 package com.ufund.api.ufundapi.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -62,4 +63,6 @@ public class UserTest {
         user.addToBasket(need);
         assertEquals("Corn",user.getBasket().get(0).getName());
     }
+
+
 }

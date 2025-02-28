@@ -82,7 +82,7 @@ public class UserController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
-    public ResponseEntity<User[]> getUser() {
+    public ResponseEntity<User[]> getUsers() {
         LOG.info("GET /users");
 
         // Replace below with your implementation
