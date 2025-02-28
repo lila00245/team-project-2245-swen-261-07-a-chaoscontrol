@@ -39,7 +39,7 @@ public class NeedControllerTest {
     @Test
     public void testGetNeed() throws IOException {
         // setup
-        Need need = new Need(99, "apple", 10);
+        Need need = new Need(99, "apple", 10, "fruit");
         // When the same id is passed in, our mock Hero DAO will return the Hero object
         when(mockNeedDao.getNeed(1)).thenReturn(need);
 
@@ -82,7 +82,7 @@ public class NeedControllerTest {
     @Test
     public void testCreateNeed() throws IOException {
         // set up 
-        Need need = new Need(99, "apple", 10);
+        Need need = new Need(99, "apple", 10, "fruit");
         // when creatNeed is called, return true simulating succesful creation
         // and save
         when(mockNeedDao.createNeed(need)).thenReturn(need);
@@ -98,7 +98,7 @@ public class NeedControllerTest {
     @Test
     public void testCreateNeedFailed() throws IOException {
         // set up 
-        Need need = new Need(99, "apple", 10);
+        Need need = new Need(99, "apple", 10, "fruit");
         // when creatNeed is called, return null simulating failed creation
         when(mockNeedDao.createNeed(need)).thenReturn(null);
 
@@ -112,7 +112,7 @@ public class NeedControllerTest {
     @Test
     public void testCreateNeedHandleException() throws Exception {
         // set up 
-        Need need = new Need(99, "apple", 10);
+        Need need = new Need(99, "apple", 10, "fruit");
         // when creatNeed is called, throw an IOException
         doThrow(new IOException()).when(mockNeedDao).createNeed(need);
 
@@ -126,7 +126,7 @@ public class NeedControllerTest {
     @Test
     public void testUpdateNeed() throws IOException {
         // setup 
-        Need need = new Need(99, "apple", 10);
+        Need need = new Need(99, "apple", 10, "fruit");
         // when updateNeed is called, return true simulating succesful update
         // and save
         when(mockNeedDao.updateNeed(need)).thenReturn(need);
@@ -144,7 +144,7 @@ public class NeedControllerTest {
     @Test
     public void testUpdateNeedNotFound() throws IOException {
         // setup 
-        Need need = new Need(99, "apple", 10);
+        Need need = new Need(99, "apple", 10, "fruit");
         // when updateNeed is called, return null simulating failed update
         when(mockNeedDao.updateNeed(need)).thenReturn(null);
 
@@ -158,7 +158,7 @@ public class NeedControllerTest {
     @Test
     public void testUpdateNeedHandleException() throws Exception {
         // setup 
-        Need need = new Need(99, "apple", 10);
+        Need need = new Need(99, "apple", 10, "fruit");
         // when updateNeed is called, throw an IOException
         doThrow(new IOException()).when(mockNeedDao).updateNeed(need);
 
@@ -173,8 +173,8 @@ public class NeedControllerTest {
     public void testGetNeeds() throws IOException { // works on any size from 0
         // setup
         Need[] needs = new Need[2];
-        needs[0] = new Need(99, "apple", 10);
-        needs[1] = new Need(100, "banana", 5);
+        needs[0] = new Need(99, "apple", 10, "fruit");
+        needs[1] = new Need(100, "banana", 5, "fruit");
         // When getNeeds is called on the Mock Need DAO, return the array of Needs
         when(mockNeedDao.getNeeds()).thenReturn(needs);
 
@@ -204,8 +204,8 @@ public class NeedControllerTest {
         // setup
         String searchString = "a";
         Need[] needs = new Need[2];
-        needs[0] = new Need(99, "apple", 10);
-        needs[1] = new Need(100, "banana", 5);
+        needs[0] = new Need(99, "apple", 10, "fruit");
+        needs[1] = new Need(100, "banana", 5, "fruit");
         // When findNeeds is called on the Mock Need DAO, return the array of Needs
         when(mockNeedDao.findNeeds(searchString)).thenReturn(needs);
 

@@ -9,16 +9,26 @@ geometry: margin=1in
 > and appear in the generated PDF in italics but do so only **after** all team members agree that the requirements for that section and current Sprint have been met. **Do not** delete future Sprint expectations._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: ChaosControl
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Owen
+  * Jay
+  * Ariel
+  * Lila
+  * Vlad
 
 ## Executive Summary
 
-This is a summary of the project.
+The project is a web-based application designed to support a Food Pantry that provides food to people in need.
+
+This platform serves two user types: Managers (Admins) and Helpers. The Manager accounts, representing the organization (in our case, a ficticious company) have the ability to add, remove, and update needs. Helpers, representing volunteers within the organization, have the ability to search for and sign up for needs.
+
+This workflow is optimized through a "basket" system, enabling Helpers to add multiple needs, review them, and commit to their schedule via a checkout process.
+
+Key features include:
+> TBD as our sprints continue.
+
+ 
 
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
@@ -54,7 +64,7 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![Domain Model](domain-model-placeholder.png)
+![Domain Model](Food-bank-domain-model.png)
 
 > _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
 > can discuss the more important domain entities and their relationship
@@ -63,7 +73,7 @@ This section describes the application domain.
 
 ## Architecture and Design
 
-This section describes the application architecture.
+This application uses a REST API to keep track of all user information and needs information. The API uses an Angular user interface, providing both a helper and manager view.
 
 ### Summary
 
@@ -111,6 +121,16 @@ This section describes the web interface flow; this is how the user views and in
 ### ViewModel Tier
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
 
+The ViewModel tier provides the application’s interface for client interaction and business logic, bridging the model (data) with the controller (API endpoints):
+
+	1.	Controllers:
+	•	NeedController and UserController handle HTTP requests related to Need and User entities, respectively.
+	•	They use REST endpoints (GET, POST, PUT, DELETE) for CRUD operations and return appropriate ResponseEntity objects, managing HTTP status codes based on the success or failure of each operation.
+	2.	Services:
+	•	NeedService and UserService encapsulate the core business logic, implementing the INeedService and IUserService interfaces.
+	•	They interact with data access objects (DAOs) to perform operations like retrieving, creating, updating, and deleting Need and User records.
+	•	The services handle additional logic, such as duplicate checks or error handling, ensuring data consistency before responding to controllers.
+
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
@@ -135,6 +155,14 @@ This section describes the web interface flow; this is how the user views and in
 ## OO Design Principles
 
 > _**[Sprint 1]** Name and describe the initial OO Principles that your team has considered in support of your design (and implementation) for this first Sprint._
+
+For Sprint 1, we have considered foundational Object-Oriented (OO) principles that support a flexible and maintainable design. Below are the key principles we’ve applied:
+
+Abstraction
+Low Coupling
+Encapsulation
+Inheritance
+
 
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
@@ -170,3 +198,16 @@ This section describes the web interface flow; this is how the user views and in
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
+
+## Sprint 1
+- **2025-02-02**: - Implementation of design from Heroes API base.
+- **2025-02-23**: Changed base meeting dates to Tuesdays [5:00pm-6:00pm] and Fridays [3:00pm-4:30pm]
+
+## Sprint 2
+> Currently In Progress
+
+
+## Sprint 3
+- N/A
+## Sprint 4
+- N/A
