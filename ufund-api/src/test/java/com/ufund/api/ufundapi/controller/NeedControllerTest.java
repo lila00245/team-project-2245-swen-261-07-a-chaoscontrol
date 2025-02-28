@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 /**
  * Unit tests for the NeedController class
  * 
- * @author 1A - ChaosControl
+ * @author Lila
  */
 @Tag("Controller-Tier")
 public class NeedControllerTest {

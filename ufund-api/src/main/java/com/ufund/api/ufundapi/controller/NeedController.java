@@ -160,12 +160,12 @@ public class NeedController {
     public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
         LOG.info("PUT /needs " + need);
         try{
-            Need need1 = needDao.updateNeed(need);
+            Need updatedNeed = needDao.updateNeed(need);
             // Replace below with your implementation
-            if (need1 == null){
-                return new ResponseEntity<>(need1,HttpStatus.NOT_FOUND);
+            if (updatedNeed == null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(updatedNeed,HttpStatus.OK);
             }
         }
         catch(IOException e) {
