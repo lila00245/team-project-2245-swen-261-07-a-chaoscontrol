@@ -7,13 +7,17 @@ import { LoginComponent } from './components/login/login.component';
 import { CupboardComponent } from './components/cupboard/cupboard.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NeedComponent } from './components/need/need.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CupboardComponent,
-    BasketComponent
+    BasketComponent,
+    NeedComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

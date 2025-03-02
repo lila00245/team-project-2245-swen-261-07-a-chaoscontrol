@@ -1,0 +1,9 @@
+<div *ngIf="need">
+    <h2>{{need.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{need.id}}</div>
+    <div><span>name: </span>{{need.name}}</div>
+    <div><span>cost: </span>{{need.cost}}</div>
+    <div><span>food group: </span>{{need.foodGroup}}</div>
+    
+    <button type="button" (click)="goBack()">go back</button>
+</div>

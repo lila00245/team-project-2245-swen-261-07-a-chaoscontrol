@@ -19,8 +19,8 @@ export class CupboardService {
     return this.http.get<Need[]>(this.url,this.httpOptions)
   }
 
-  getNeed(id:number):Observable<Need[]>{
-    return this.http.get<Need[]>(`${this.url}/?id = ${id}`, this.httpOptions)
+  getNeed(id:number):Observable<Need>{
+    return this.http.get<Need>(`${this.url}/${id}`, this.httpOptions)
   }
 
   searchNeeds(name: string):Observable<Need[]>{

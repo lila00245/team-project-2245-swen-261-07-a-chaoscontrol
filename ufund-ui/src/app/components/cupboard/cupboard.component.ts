@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Need } from '../../model/Need';
 import { CupboardService } from '../../services/cupboard.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cupboard',
@@ -10,7 +11,9 @@ import { CupboardService } from '../../services/cupboard.service';
 })
 export class CupboardComponent {
   needs: Need[] = [];
-  constructor(private cupboardService: CupboardService){}
+  constructor(
+    private cupboardService: CupboardService,
+  ){}
 
   ngOnInit(): void{
     this.getNeeds();
@@ -24,6 +27,10 @@ export class CupboardComponent {
     this.cupboardService.createNeed(need).subscribe(need => this.needs.push(need))
   }
 
+  // searchNeeds(): void{
+  //   const name = this.route.snapshot.paramMap.get('name')
+  //   this.cupboardService.searchNeeds(name).subscribe(needs=> this.needs = needs)
+  // }
 
 
 }
