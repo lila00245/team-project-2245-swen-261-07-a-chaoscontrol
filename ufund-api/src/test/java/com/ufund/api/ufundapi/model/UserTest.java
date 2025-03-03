@@ -1,7 +1,10 @@
 package com.ufund.api.ufundapi.model;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyByte;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.ArrayList;
 
@@ -11,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit tests for the User class
  * 
- * @author Lila
+ * @author Lila, Owen
  */
 @Tag("Model-Tier")
 public class UserTest {
@@ -77,7 +80,27 @@ public class UserTest {
         assertEquals(expected_string, actual_string);
     }
 
+    @Test
+    public void testSetName(){
+
+        //Setup
+        String name = "Owen";
+        User user = new User(name);
+
+        //Analyze
+        user.setName("Bob");
+        assertEquals("Bob", user.getName());
+    }
+
+    @Test
+    public void testAddToBasketAndGetBasket(){
+        String name = "Owen";
+        User user = new User(name);
+
+        Need need = new Need(1,"Corn",.30,"Vegetable");
+        user.addToBasket(need);
+        assertEquals("Corn",user.getBasket().get(0).getName());
+    }
 
 
-    
 }
