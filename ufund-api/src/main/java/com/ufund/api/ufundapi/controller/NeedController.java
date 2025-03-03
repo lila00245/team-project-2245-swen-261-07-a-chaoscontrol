@@ -73,7 +73,7 @@ public class NeedController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Need Needes}
+     * Responds to the GET request for all {@linkplain Need Needs}
      * 
      * @return ResponseEntity with array of {@link Need Need} objects (may be empty) and
      * HTTP status of OK<br>
@@ -88,13 +88,13 @@ public class NeedController {
             Need[] needs = needDao.getNeeds();
             return new ResponseEntity<>(needs,HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Need Needes} whose name contains
+     * Responds to the GET request for all {@linkplain Need Needs} whose name contains
      * the text in name
      * 
      * @param name The name parameter which contains the text used to find the {@link Need Needes}
@@ -115,9 +115,9 @@ public class NeedController {
             Need[] needs = needDao.findNeeds(name);
             return new ResponseEntity<>(needs,HttpStatus.OK);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     /**
@@ -137,7 +137,7 @@ public class NeedController {
         try{
             Need newNeed = needDao.createNeed(need);
             if(newNeed != null){
-                return new ResponseEntity<>(newNeed, HttpStatus.OK);
+                return new ResponseEntity<>(newNeed, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -160,12 +160,12 @@ public class NeedController {
     public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
         LOG.info("PUT /needs " + need);
         try{
-            Need need1 = needDao.updateNeed(need);
+            Need updatedNeed = needDao.updateNeed(need);
             // Replace below with your implementation
-            if (need1 == null){
-                return new ResponseEntity<>(need1,HttpStatus.NOT_FOUND);
+            if (updatedNeed == null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<>(updatedNeed,HttpStatus.OK);
             }
         }
         catch(IOException e) {
@@ -187,13 +187,10 @@ public class NeedController {
     public ResponseEntity<Need> deleteNeed(@PathVariable int id) {
         LOG.info("DELETE /needs/" + id);
 
-        // Replace below with your implementation
         try{
-            Need need = needDao.getNeed(id);
-            if(need != null){
-                needDao.deleteNeed(id);
+            if(needDao.deleteNeed(id)){ // if returns true then id was deleted
                 return new ResponseEntity<>(HttpStatus.OK);
-            } else {
+            } else {                 // if returns false then id was not found
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }
