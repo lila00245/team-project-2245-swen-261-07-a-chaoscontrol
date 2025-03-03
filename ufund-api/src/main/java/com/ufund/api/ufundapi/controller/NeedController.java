@@ -73,7 +73,7 @@ public class NeedController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Need Needes}
+     * Responds to the GET request for all {@linkplain Need Needs}
      * 
      * @return ResponseEntity with array of {@link Need Need} objects (may be empty) and
      * HTTP status of OK<br>
@@ -94,7 +94,7 @@ public class NeedController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Need Needes} whose name contains
+     * Responds to the GET request for all {@linkplain Need Needs} whose name contains
      * the text in name
      * 
      * @param name The name parameter which contains the text used to find the {@link Need Needes}
@@ -187,13 +187,10 @@ public class NeedController {
     public ResponseEntity<Need> deleteNeed(@PathVariable int id) {
         LOG.info("DELETE /needs/" + id);
 
-        // Replace below with your implementation
         try{
-            Need need = needDao.getNeed(id);
-            if(need != null){
-                needDao.deleteNeed(id);
+            if(needDao.deleteNeed(id)){ // if returns true then id was deleted
                 return new ResponseEntity<>(HttpStatus.OK);
-            } else {
+            } else {                 // if returns false then id was not found
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }

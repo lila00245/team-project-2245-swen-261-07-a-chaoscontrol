@@ -52,6 +52,7 @@ public class UserTest {
         Need need = new Need(userID, "apple", 10, "fruit");
 
         ArrayList<Need> expectedBasket = new ArrayList<>();
+        expectedBasket.add(need);
         
         // invoke
         user.addToBasket(need);

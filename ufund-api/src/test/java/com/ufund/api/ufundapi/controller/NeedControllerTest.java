@@ -59,7 +59,7 @@ public class NeedControllerTest {
         when(mockNeedDao.getNeed(needID)).thenReturn(null);
 
         // invoke
-        ResponseEntity<Need> response = needController.getNeed(1);
+        ResponseEntity<Need> response = needController.getNeed(needID);
 
         // analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -83,8 +83,7 @@ public class NeedControllerTest {
     public void testCreateNeed() throws IOException {
         // set up 
         Need need = new Need(99, "apple", 10, "fruit");
-        // when creatNeed is called, return true simulating succesful creation
-        // and save
+        // when creatNeed is called, return the need simulating succesful creation
         when(mockNeedDao.createNeed(need)).thenReturn(need);
 
         // invoke
@@ -187,7 +186,7 @@ public class NeedControllerTest {
     }
 
     @Test
-    public void testGetNeesdHandleException() throws Exception {
+    public void testGetNeedsHandleException() throws Exception {
         // setup
         // when getNeeds is called on the Mock Need DAO, throw an IOException
         doThrow(new IOException()).when(mockNeedDao).getNeeds();
@@ -234,7 +233,7 @@ public class NeedControllerTest {
     @Test
     public void testDeleteNeed() throws IOException {
         // setup
-        int needID = 99;
+        int needID = 99;        
         // When deleteNeed is called, return true simulating succesful deletion
         when(mockNeedDao.deleteNeed(needID)).thenReturn(true);
 
