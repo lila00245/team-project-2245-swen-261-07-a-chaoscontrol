@@ -11,26 +11,30 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CupboardComponent {
   needs: Need[] = [];
+  name?:string;
   constructor(
+    private route: ActivatedRoute,
     private cupboardService: CupboardService,
   ){}
 
   ngOnInit(): void{
+    this.route.queryParams.subscribe(params => {
+    this.name = params['name'];})
     this.getNeeds();
+    
   }
 
-  getNeeds(): void{
-    this.cupboardService.getNeeds().subscribe(needs => this.needs = needs)
+  getNeeds(): void{ 
+    if(this.name!= null){
+      console.log(this.name)
+      this.cupboardService.searchNeeds(this.name).subscribe(needs => this.needs = needs)
+      console.log(this.needs)
+    }else{
+      this.cupboardService.getNeeds().subscribe(needs => this.needs = needs)
+    }
   }
 
   add(need: Need):void{
     this.cupboardService.createNeed(need).subscribe(need => this.needs.push(need))
   }
-
-  // searchNeeds(): void{
-  //   const name = this.route.snapshot.paramMap.get('name')
-  //   this.cupboardService.searchNeeds(name).subscribe(needs=> this.needs = needs)
-  // }
-
-
 }

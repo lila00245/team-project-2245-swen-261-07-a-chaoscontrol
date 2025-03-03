@@ -9,10 +9,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 const routes: Routes = [
   {path:'', component: DashboardComponent},
   {path:'basket', component: BasketComponent},
-  {path:'cupboard', component: CupboardComponent},
+  {path:'needs', component: CupboardComponent},
   {path:'login', component: LoginComponent},
   {path:'needs/:id', component: NeedComponent},
-  {path:'needs/:name', component: NeedComponent},
+
 ];
 
 @NgModule({

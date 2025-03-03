@@ -1,7 +1,6 @@
 package com.ufund.api.ufundapi.model;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
@@ -10,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author SWEN Faculty
  */
 public class User{
-    private static final Logger LOG = Logger.getLogger(User.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "USer [name=%s, basket=%s]";

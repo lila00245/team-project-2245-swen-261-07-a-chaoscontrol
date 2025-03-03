@@ -24,8 +24,7 @@ export class LoginComponent {
   getUser(name: string):void{
     this.userService.getUser(name).subscribe(user => this.user = user)
     if(this.user){
-      console.log(this.user?.name)
-      this.router.navigate(['/cupboard'])
+      this.router.navigate(['/needs'])
         .then(() => {
           window.location.reload();
         });

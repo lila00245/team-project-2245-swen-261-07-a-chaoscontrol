@@ -23,8 +23,9 @@ export class CupboardService {
     return this.http.get<Need>(`${this.url}/${id}`, this.httpOptions)
   }
 
-  searchNeeds(name: string):Observable<Need[]>{
+  searchNeeds(name:string):Observable<Need[]>{
     return this.http.get<Need[]>(`${this.url}/?name=${name}`, this.httpOptions)
+    
   }
 
   createNeed(need: Need):Observable<Need>{
@@ -39,5 +40,6 @@ export class CupboardService {
     return this.http.delete<Need>(`${this.url}/${id}`,this.httpOptions)
   }
 
+  
 
 }

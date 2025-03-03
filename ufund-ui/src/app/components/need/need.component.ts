@@ -14,7 +14,6 @@ import { Location } from '@angular/common';
 export class NeedComponent {
 
   need: Need | undefined;
-
   constructor(
     private cupboardService: CupboardService,
     private route: ActivatedRoute,
