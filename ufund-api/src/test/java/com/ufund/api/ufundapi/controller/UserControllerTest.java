@@ -17,7 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Test the Hero Controller class
+
+ * Test the User Controller class
  * 
  * @author SWEN Faculty
  */
@@ -27,20 +28,22 @@ public class UserControllerTest {
     private UserDAO mockUserDAO;
 
     /**
-     * Before each test, create a new HeroController object and inject
-     * a mock Hero DAO
+
+     * Before each test, create a new UserController object and inject
+     * a mock User DAO
      */
     @BeforeEach
-    public void setupHeroController() {
+    public void setupUserController() {
         mockUserDAO = mock(UserDAO.class);
         userController = new UserController(mockUserDAO);
     }
 
     @Test
-    public void testGetUser() throws IOException {  // getHero may throw IOException
+
+    public void testGetUser() throws IOException {  // getUser may throw IOException
         // Setup
         User user = new User("Owen");
-        // When the same id is passed in, our mock Hero DAO will return the Hero object
+        // When the same id is passed in, our mock User DAO will return the User object
         when(mockUserDAO.getUser(user.getName())).thenReturn(user);
 
         // Invoke
@@ -52,11 +55,12 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetUserNotFound() throws Exception { // createHero may throw IOException
+
+    public void testGetUserNotFound() throws Exception { // createUser may throw IOException
         // Setup
         String name = "Owen";
-        // When the same id is passed in, our mock Hero DAO will return null, simulating
-        // no hero found
+        // When the same id is passed in, our mock User DAO will return null, simulating
+        // no User found
         when(mockUserDAO.getUser(name)).thenReturn(null);
 
         // Invoke
@@ -67,10 +71,11 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetUserHandleException() throws Exception { // createHero may throw IOException
+
+    public void testGetUserHandleException() throws Exception { // createUser may throw IOException
         // Setup
         String name = "Owen";
-        // When getHero is called on the Mock Hero DAO, throw an IOException
+        // When getUser is called on the Mock User DAO, throw an IOException
         doThrow(new IOException()).when(mockUserDAO).getUser(name);
 
         // Invoke
@@ -81,15 +86,18 @@ public class UserControllerTest {
     }
 
     /*****************************************************************
-     * The following tests will fail until all HeroController methods
+
+     * The following tests will fail until all UserController methods
      * are implemented.
      ****************************************************************/
 
     @Test
-    public void testCreateUser() throws IOException {  // createHero may throw IOException
+
+    public void testCreateUser() throws IOException {  // createUser may throw IOException
         // Setup
         User user = new User("Owen");
-        // when createHero is called, return true simulating successful
+        // when createUser is called, return true simulating successful
+
         // creation and save
         when(mockUserDAO.createUser(user)).thenReturn(user);
 
@@ -102,10 +110,11 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testCreateUserFailed() throws IOException {  // createHero may throw IOException
+
+    public void testCreateUserFailed() throws IOException {  // createUser may throw IOException
         // Setup
         User user = new User("Owen");
-        // when createHero is called, return false simulating failed
+        // when createUser is called, return false simulating failed
         // creation and save
         when(mockUserDAO.createUser(user)).thenReturn(null);
 
@@ -117,11 +126,12 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testCreateHeroHandleException() throws IOException {  // createHero may throw IOException
+
+    public void testCreateUserHandleException() throws IOException {  // createUser may throw IOException
         // Setup
         User user = new User("Owen");
 
-        // When createHero is called on the Mock Hero DAO, throw an IOException
+        // When createUser is called on the Mock User DAO, throw an IOException
         doThrow(new IOException()).when(mockUserDAO).createUser(user);
 
         // Invoke
@@ -132,10 +142,11 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testUpdateHero() throws IOException { // updateHero may throw IOException
+
+    public void testUpdateUser() throws IOException { // updateUser may throw IOException
         // Setup
         User user = new User("Owen");
-        // when updateHero is called, return true simulating successful
+        // when updateUser is called, return true simulating successful
         // update and save
         when(mockUserDAO.updateUser(user)).thenReturn(user);
         ResponseEntity<User> response = userController.updateUser(user);
@@ -150,10 +161,11 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testUpdateUserFailed() throws IOException { // updateHero may throw IOException
+
+    public void testUpdateUserFailed() throws IOException { // updateUser may throw IOException
         // Setup
         User user = new User("Bob");
-        // when updateHero is called, return true simulating successful
+        // when updateUser is called, return true simulating successful
         // update and save
         when(mockUserDAO.updateUser(user)).thenReturn(null);
 
@@ -165,10 +177,11 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testUpdateUserHandleException() throws IOException { // updateHero may throw IOException
+
+    public void testUpdateUserHandleException() throws IOException { // updateUser may throw IOException
         // Setup
         User user = new User("Owen");
-        // When updateHero is called on the Mock Hero DAO, throw an IOException
+        // When updateUser is called on the Mock User DAO, throw an IOException
         doThrow(new IOException()).when(mockUserDAO).updateUser(user);
 
         // Invoke
@@ -179,12 +192,14 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetUsers() throws IOException { // getHeroes may throw IOException
+
+    public void testGetUsers() throws IOException { // getUsers may throw IOException
         // Setup
         User[] users = new User[2];
         users[0] = new User("Owen");
         users[1] = new User("The Great Iguana");
-        // When getHeroes is called return the heroes created above
+
+        // When getUsers is called return the Users created above
         when(mockUserDAO.getUsers()).thenReturn(users);
 
         // Invoke
@@ -196,9 +211,11 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetUsersHandleException() throws IOException { // getHeroes may throw IOException
+
+    public void testGetUsersHandleException() throws IOException { // getUsers may throw IOException
         // Setup
-        // When getHeroes is called on the Mock Hero DAO, throw an IOException
+        // When getUsers is called on the Mock User DAO, throw an IOException
+
         doThrow(new IOException()).when(mockUserDAO).getUsers();
 
         // Invoke
@@ -210,6 +227,7 @@ public class UserControllerTest {
 
 
     @Test
+
     public void testDeleteUser() throws IOException { // deleteHero may throw IOException
         // Setup
         String name = "Owen";
@@ -231,6 +249,7 @@ public class UserControllerTest {
         // Setup
         String name = "Owen";
         // when deleteHero is called return false, simulating failed deletion
+
         when(mockUserDAO.deleteUser(name)).thenReturn(false);
 
         // Invoke
@@ -253,4 +272,5 @@ public class UserControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
 }
