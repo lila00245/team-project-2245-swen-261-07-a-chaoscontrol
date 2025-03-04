@@ -9,6 +9,7 @@ import { BasketComponent } from './components/basket/basket.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NeedComponent } from './components/need/need.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NeedSearchComponent } from './components/need-search/need-search.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     CupboardComponent,
     BasketComponent,
     NeedComponent,
-    DashboardComponent
+    DashboardComponent,
+    NeedSearchComponent
   ],
   imports: [
     BrowserModule,

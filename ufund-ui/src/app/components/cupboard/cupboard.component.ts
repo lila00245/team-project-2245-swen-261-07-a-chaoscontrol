@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Need } from '../../model/Need';
 import { CupboardService } from '../../services/cupboard.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NeedSearchComponent } from '../need-search/need-search.component';
 
 @Component({
   selector: 'app-cupboard',
@@ -13,6 +14,7 @@ export class CupboardComponent {
   needs: Need[] = [];
   name?:string;
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private cupboardService: CupboardService,
   ){}
@@ -32,6 +34,13 @@ export class CupboardComponent {
     }else{
       this.cupboardService.getNeeds().subscribe(needs => this.needs = needs)
     }
+  }
+
+  searchNeeds(name: string):void{
+    this.router.navigate([`/needs`])
+        .then(() => {
+          window.location.reload();
+        });
   }
 
   add(need: Need):void{
