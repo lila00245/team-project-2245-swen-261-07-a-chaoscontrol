@@ -21,15 +21,17 @@ export class LoginComponent {
     private userService: UsersService,
 ) {}
 
-  getUser(name: string):void{
-    this.userService.getUser(name).subscribe(user => this.user = user)
-    if(this.user){
-      this.router.navigate(['/needs'])
-        .then(() => {
+  getUser(name: string): void {
+    // Changed by Vladislav Usatii on 03 04 25: Refactored
+    // to wait for async result before routing to /needs
+    this.userService.getUser(name).subscribe(user => {
+      if (user) {
+        this.router.navigate(['/needs']).then(() => {
           window.location.reload();
         });
-    }else{
-      this.message = "Incorrect username, please enter again."
-    }
+      } else {
+        this.message = "Incorrect username, please enter again.";
+      }
+    });
   }
 }
