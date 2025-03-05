@@ -43,12 +43,29 @@ public class Need{
      */
     public int getId() {return id;}
 
+    /**
+     * Sets the id of the need
+     * @param id The id of the need
+     */
+    public void setId(int id) {this.id = id;}
 
+    /**
+     * Gets the cost of the need
+     * @return The cost of the need
+     */
     public double getCost() {return cost;}
 
+    /**
+     * Sets the food group of the need
+     * @param foodGroup The food group of the need
+     */
     public void setFoodGroup(String foodGroup) {this.foodGroup = foodGroup;}
 
-    public void setCost(int cost) {this.cost = cost;}
+    /**
+     * Sets the cost of the need
+     * @param cost The cost of the need
+     */
+    public void setCost(double cost) {this.cost = cost;}
 
     /**
      * Sets the name of the need - necessary for JSON object to Java object deserialization
