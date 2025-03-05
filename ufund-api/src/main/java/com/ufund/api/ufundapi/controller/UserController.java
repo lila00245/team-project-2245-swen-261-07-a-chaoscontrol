@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.ufund.api.ufundapi.persistence.NeedDAO;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 import com.ufund.api.ufundapi.model.User;
 
@@ -26,16 +24,14 @@ import com.ufund.api.ufundapi.model.User;
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  * 
- * @author SWEN Faculty
+ * @author Team 1A - ChaosControl
  */
-
 @RestController
 @RequestMapping("users")
 public class UserController {
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
     private UserDAO userDao;
     
-
     /**
      * Creates a REST API controller to reponds to requests
      * 
@@ -84,8 +80,6 @@ public class UserController {
     @GetMapping("")
     public ResponseEntity<User[]> getUsers() {
         LOG.info("GET /users");
-
-        // Replace below with your implementation
         try {
             User[] users = userDao.getUsers();
             return new ResponseEntity<>(users,HttpStatus.OK);
@@ -107,8 +101,6 @@ public class UserController {
     @PostMapping("")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         LOG.info("POST /users " + user);
-
-        // Replace below with your implementation
         try{
             User newUser = userDao.createUser(user);
             if(newUser != null){
@@ -136,7 +128,6 @@ public class UserController {
         LOG.info("PUT /users " + user);
         try{
             User user1 = userDao.updateUser(user);
-            // Replace below with your implementation
             if (user1 == null){
                 return new ResponseEntity<>(user1,HttpStatus.NOT_FOUND);
             } else {
@@ -161,14 +152,10 @@ public class UserController {
     @DeleteMapping("/{name}")
     public ResponseEntity<User> deleteUser(@PathVariable String name) {
         LOG.info("DELETE /users/" + name);
-
-        // Replace below with your implementation
         try{
-            User user = userDao.getUser(name);
-            if(user != null){
-                userDao.deleteUser(name);
+            if(userDao.deleteUser(name)){   // if returns true, user was deleted
                 return new ResponseEntity<>(HttpStatus.OK);
-            } else {
+            } else {                        // if returns false, user was not found
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }

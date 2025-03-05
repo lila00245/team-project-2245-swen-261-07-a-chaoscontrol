@@ -1,10 +1,6 @@
 package com.ufund.api.ufundapi.model;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.anyByte;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.util.ArrayList;
 

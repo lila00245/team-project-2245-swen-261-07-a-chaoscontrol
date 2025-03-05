@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 /**
  * Test the User Controller class
  * 
- * @author SWEN Faculty
+ * @author Owen, Lila
  */
 @Tag("Controller-tier")
 public class UserControllerTest {
@@ -79,11 +79,6 @@ public class UserControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
-
-    /*****************************************************************
-     * The following tests will fail until all UserController methods
-     * are implemented.
-     ****************************************************************/
 
     @Test
     public void testCreateUser() throws IOException {  // createUser may throw IOException
@@ -208,6 +203,20 @@ public class UserControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
+    @Test
+    public void testDeleteUser() throws IOException { // deleteUser may throw IOException
+        // Setup
+        String name = "Owen";
+        // when deleteUser is called return true, simulating successful deletion
+        when(mockUserDAO.deleteUser(name)).thenReturn(true);
+
+        // Invoke
+        ResponseEntity<User> response = userController.deleteUser(name);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
 
     @Test
     public void testDeleteUserNotFound() throws IOException { // deleteUser may throw IOException
@@ -223,4 +232,17 @@ public class UserControllerTest {
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
     }
 
+    @Test
+    public void testDeleteUserHandleException() throws IOException { // deleteUser may throw IOException
+        // Setup
+        String name = "Owen";
+        // When deleteUser is called on the Mock User DAO, throw an IOException
+        doThrow(new IOException()).when(mockUserDAO).deleteUser(name);
+
+        // Invoke
+        ResponseEntity<User> response = userController.deleteUser(name);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 }
