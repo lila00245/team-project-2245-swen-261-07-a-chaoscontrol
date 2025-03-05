@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,7 +23,6 @@ import com.ufund.api.ufundapi.model.User;
  */
 @Component
 public class UserFileDAO implements UserDAO {
-    private static final Logger LOG = Logger.getLogger(UserFileDAO.class.getName());
     Map<String,User> users;   // Provides a local cache of the User objects
                                 // so that we don't need to read from the file
                                 // each time
