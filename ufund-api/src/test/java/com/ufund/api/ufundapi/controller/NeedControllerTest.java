@@ -17,7 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Unit tests for the NeedController class
+ * Unit tests for the NeedController class.
+ * This class tests various endpoints for CRUD operations (Create, Read, Update, Delete)
+ * related to the 'Need' entity, ensuring correct HTTP status codes and response bodies.
  * 
  * @author Lila
  */
@@ -36,239 +38,206 @@ public class NeedControllerTest {
         needController = new NeedController(mockNeedDao);
     }
 
+    /**
+     * Tests the 'getNeed' method in NeedController.
+     * Verifies that a valid Need ID returns the correct Need object and an HTTP 200 OK response.
+     */
     @Test
     public void testGetNeed() throws IOException {
-        // setup
         Need need = new Need(99, "apple", 10, "fruit");
-        // When the same id is passed in, our mock Hero DAO will return the Hero object
-        when(mockNeedDao.getNeed(1)).thenReturn(need);
-
-        // invoke
-        ResponseEntity<Need> response = needController.getNeed(1);
-
-        // analyze
+        when(mockNeedDao.getNeed(99)).thenReturn(need);
+        ResponseEntity<Need> response = needController.getNeed(99);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(need, response.getBody());
     }
 
+    /**
+     * Tests the 'getNeed' method in NeedController.
+     * Verifies that an invalid Need ID returns an HTTP 404 NOT FOUND response.
+     */
     @Test
     public void testGetNeedNotFound() throws IOException {
-        // setup
-        int needID = 99;
-        // When the same id is passed in, our mock Need DAO will return null
-        when(mockNeedDao.getNeed(needID)).thenReturn(null);
-
-        // invoke
-        ResponseEntity<Need> response = needController.getNeed(needID);
-
-        // analyze
+        when(mockNeedDao.getNeed(99)).thenReturn(null);
+        ResponseEntity<Need> response = needController.getNeed(99);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'getNeed' method in NeedController.
+     * Verifies that when an exception is thrown, an HTTP 500 INTERNAL SERVER ERROR is returned.
+     */
     @Test
     public void testGetNeedHandleException() throws Exception {
-        // setup
-        int needID = 99;
-        // when getHero is called on the Mock Need DAO, throw an IOException
-        doThrow(new IOException()).when(mockNeedDao).getNeed(needID);
-
-        //invoke
-        ResponseEntity<Need> response = needController.getNeed(needID);
-    
-        //analyze
+        doThrow(new IOException()).when(mockNeedDao).getNeed(99);
+        ResponseEntity<Need> response = needController.getNeed(99);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'createNeed' method in NeedController.
+     * Verifies that a valid Need object is created and an HTTP 201 CREATED response is returned.
+     */
     @Test
     public void testCreateNeed() throws IOException {
-        // set up 
         Need need = new Need(99, "apple", 10, "fruit");
-        // when creatNeed is called, return the need simulating succesful creation
         when(mockNeedDao.createNeed(need)).thenReturn(need);
-
-        // invoke
         ResponseEntity<Need> response = needController.createNeed(need);
-
-        // analyze
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(need, response.getBody());
     }
 
+    /**
+     * Tests the 'createNeed' method in NeedController.
+     * Verifies that if the creation fails, an HTTP 409 CONFLICT response is returned.
+     */
     @Test
     public void testCreateNeedFailed() throws IOException {
-        // set up 
         Need need = new Need(99, "apple", 10, "fruit");
-        // when creatNeed is called, return null simulating failed creation
         when(mockNeedDao.createNeed(need)).thenReturn(null);
 
-        // invoke
         ResponseEntity<Need> response = needController.createNeed(need);
 
-        // analyze
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'createNeed' method in NeedController.
+     * Verifies that when an exception is thrown, an HTTP 500 INTERNAL SERVER ERROR is returned.
+     */
     @Test
     public void testCreateNeedHandleException() throws Exception {
-        // set up 
         Need need = new Need(99, "apple", 10, "fruit");
-        // when creatNeed is called, throw an IOException
         doThrow(new IOException()).when(mockNeedDao).createNeed(need);
-
-        // invoke
         ResponseEntity<Need> response = needController.createNeed(need);
-
-        // analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'updateNeed' method in NeedController.
+     * Verifies that when a valid Need object is updated, an HTTP 200 OK response is returned.
+     */
     @Test
     public void testUpdateNeed() throws IOException {
-        // setup 
         Need need = new Need(99, "apple", 10, "fruit");
-        // when updateNeed is called, return true simulating succesful update
-        // and save
         when(mockNeedDao.updateNeed(need)).thenReturn(need);
         ResponseEntity<Need> response = needController.updateNeed(need);
         need.setName("banana");
 
-        //invoke
         response = needController.updateNeed(need);
 
-        // analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(need, response.getBody());
     }
 
+    /**
+     * Tests the 'updateNeed' method in NeedController.
+     * Verifies that when a valid Need object is not found, an HTTP 404 NOT FOUND response is returned.
+     */
     @Test
     public void testUpdateNeedNotFound() throws IOException {
-        // setup 
         Need need = new Need(99, "apple", 10, "fruit");
-        // when updateNeed is called, return null simulating failed update
         when(mockNeedDao.updateNeed(need)).thenReturn(null);
-
-        //invoke
         ResponseEntity<Need> response = needController.updateNeed(need);
-
-        // analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'updateNeed' method in NeedController.
+     * Verifies that when an exception is thrown, an HTTP 500 INTERNAL SERVER ERROR is returned.
+     */
     @Test
     public void testUpdateNeedHandleException() throws Exception {
-        // setup 
         Need need = new Need(99, "apple", 10, "fruit");
-        // when updateNeed is called, throw an IOException
         doThrow(new IOException()).when(mockNeedDao).updateNeed(need);
-
-        //invoke
         ResponseEntity<Need> response = needController.updateNeed(need);
-
-        // analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'getNeeds' method in NeedController.
+     * Verifies that when multiple Needs are available, an HTTP 200 OK response is returned with the list.
+     */
     @Test
-    public void testGetNeeds() throws IOException { // works on any size from 0
-        // setup
+    public void testGetNeeds() throws IOException {
         Need[] needs = new Need[2];
         needs[0] = new Need(99, "apple", 10, "fruit");
         needs[1] = new Need(100, "banana", 5, "fruit");
-        // When getNeeds is called on the Mock Need DAO, return the array of Needs
         when(mockNeedDao.getNeeds()).thenReturn(needs);
-
-        // invoke
         ResponseEntity<Need[]> response = needController.getNeeds();
-
-        // analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(needs, response.getBody());
     }
 
+    /**
+     * Tests the 'getNeeds' method in NeedController.
+     * Verifies that when an exception is thrown, an HTTP 500 INTERNAL SERVER ERROR is returned.
+     */
     @Test
     public void testGetNeedsHandleException() throws Exception {
-        // setup
-        // when getNeeds is called on the Mock Need DAO, throw an IOException
         doThrow(new IOException()).when(mockNeedDao).getNeeds();
-    
-        // invoke
         ResponseEntity<Need[]> response = needController.getNeeds();
-
-        // analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'searchNeeds' method in NeedController.
+     * Verifies that when a valid search string is provided, the corresponding Needs are returned with an HTTP 200 OK response.
+     */
     @Test
     public void testSearchNeeds() throws IOException {
-        // setup
         String searchString = "a";
         Need[] needs = new Need[2];
         needs[0] = new Need(99, "apple", 10, "fruit");
         needs[1] = new Need(100, "banana", 5, "fruit");
-        // When findNeeds is called on the Mock Need DAO, return the array of Needs
         when(mockNeedDao.findNeeds(searchString)).thenReturn(needs);
 
-        // invoke
         ResponseEntity<Need[]> response = needController.searchNeeds(searchString);
-
-        // analyze
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(needs, response.getBody());
     }
 
+    /**
+     * Tests the 'searchNeeds' method in NeedController.
+     * Verifies that when an exception is thrown, an HTTP 500 INTERNAL SERVER ERROR is returned.
+     */
     @Test
     public void testSearchNeedsHandleException() throws Exception {
-        // setup
         String searchString = "a";
-        // when findNeeds is called on the Mock Need DAO, throw an IOException
         doThrow(new IOException()).when(mockNeedDao).findNeeds(searchString);
-    
-        // invoke
         ResponseEntity<Need[]> response = needController.searchNeeds(searchString);
-
-        // analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'deleteNeed' method in NeedController.
+     * Verifies that when a valid Need ID is provided, an HTTP 200 OK response is returned.
+     */
     @Test
     public void testDeleteNeed() throws IOException {
-        // setup
-        int needID = 99;        
-        // When deleteNeed is called, return true simulating succesful deletion
-        when(mockNeedDao.deleteNeed(needID)).thenReturn(true);
-
-        // invoke
-        ResponseEntity<Need> response = needController.deleteNeed(needID);
-
-        // analyze
+        when(mockNeedDao.deleteNeed(99)).thenReturn(true);
+        ResponseEntity<Need> response = needController.deleteNeed(99);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'deleteNeed' method in NeedController.
+     * Verifies that when an invalid Need ID is provided, an HTTP 404 NOT FOUND response is returned.
+     */
     @Test
     public void testDeleteNeedNotFound() throws IOException {
-        // setup
-        int needID = 99;
-        // When deleteNeed is called, return false simulating failed deletion
-        when(mockNeedDao.deleteNeed(needID)).thenReturn(false);
-
-        // invoke
-        ResponseEntity<Need> response = needController.deleteNeed(needID);
-
-        // analyze
+        when(mockNeedDao.deleteNeed(99)).thenReturn(false);
+        ResponseEntity<Need> response = needController.deleteNeed(99);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    /**
+     * Tests the 'deleteNeed' method in NeedController.
+     * Verifies that when an exception is thrown, an HTTP 500 INTERNAL SERVER ERROR is returned.
+     */
     @Test
     public void testDeleteNeedHandleException() throws Exception {
-        // setup
-        int needID = 99;
-        // when deleteNeed is called on the Mock Need DAO, throw an IOException
-        doThrow(new IOException()).when(mockNeedDao).deleteNeed(needID);
-
-        //invoke
-        ResponseEntity<Need> response = needController.deleteNeed(needID);
-    
-        //analyze
+        doThrow(new IOException()).when(mockNeedDao).deleteNeed(99);
+        ResponseEntity<Need> response = needController.deleteNeed(99);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 }

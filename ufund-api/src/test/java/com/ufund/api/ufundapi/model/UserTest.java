@@ -8,95 +8,78 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests for the User class
+ * Unit tests for the User class.
+ * Verifies the functionality of User methods.
  * 
  * @author Lila, Owen
  */
 @Tag("Model-Tier")
 public class UserTest {
 
+    /**
+     * Tests the constructor of the User class.
+     * Verifies that the User is correctly initialized with a name and an empty basket.
+     */
     @Test
     public void testCtor() {
-        // setup
-        String expectedName = "Denny";
-
-        // invoke
-        User user = new User(expectedName);
-
-        // analyze
-        assertEquals(expectedName, user.getName());
+        User user = new User("Denny");
+        assertEquals("Denny", user.getName());
         assertEquals(new ArrayList<>(), user.getBasket());
     }
 
+    /**
+     * Tests the 'setName' method in the User class.
+     * Verifies that the user's name is correctly updated.
+     */
     @Test
     public void testName() {
-        // setup
-        String name = "Denny";
-        User user = new User(name);
-
-        String expected_name = "Danny";
-
-        // invoke
-        user.setName(expected_name);
-
-        // analyze
-        assertEquals(expected_name, user.getName());
+        User user = new User("Denny");
+        user.setName("Danny");
+        assertEquals("Danny", user.getName());
     }
 
+    /**
+     * Tests the 'addToBasket' method in the User class.
+     * Verifies that a Need is correctly added to the user's basket.
+     */
     @Test
     public void testBasket() {
-        // setup
-        int userID = 99;
         User user = new User("Denny");
-        Need need = new Need(userID, "apple", 10, "fruit");
-
-        ArrayList<Need> expectedBasket = new ArrayList<>();
-        expectedBasket.add(need);
-        
-        // invoke
+        Need need = new Need(99, "apple", 10, "fruit");
         user.addToBasket(need);
-
-        // analyze
-        assertEquals(expectedBasket, user.getBasket());
         assertEquals(need, user.getBasket().get(0));
     }
 
+    /**
+     * Tests the 'toString' method in the User class.
+     * Verifies that the User is correctly converted to a string format.
+     */
     @Test
     public void testToString() {
-        // setup
-        String userName = "Denny";
-        ArrayList<Need> basket = new ArrayList<>();
-        String expected_string = String.format(User.STRING_FORMAT, userName, basket);
-        User user = new User(userName);
-
-        // invoke
-        String actual_string = user.toString();
-
-        // analyze
-        assertEquals(expected_string, actual_string);
+        User user = new User("Denny");
+        assertEquals(String.format(User.STRING_FORMAT, "Denny", new ArrayList<>()), user.toString());
     }
 
+    /**
+     * Tests the 'setName' method in the User class.
+     * Verifies that the user's name can be updated correctly.
+     */
     @Test
-    public void testSetName(){
-
-        //Setup
-        String name = "Owen";
-        User user = new User(name);
-
-        //Analyze
+    public void testSetName() {
+        User user = new User("Owen");
         user.setName("Bob");
         assertEquals("Bob", user.getName());
     }
 
+    /**
+     * Tests the 'addToBasket' and 'getBasket' methods in the User class.
+     * Verifies that a Need is correctly added to the basket and can be retrieved.
+     */
     @Test
-    public void testAddToBasketAndGetBasket(){
-        String name = "Owen";
-        User user = new User(name);
-
-        Need need = new Need(1,"Corn",.30,"Vegetable");
+    public void testAddToBasketAndGetBasket() {
+        User user = new User("Owen");
+        Need need = new Need(1, "Corn", 0.30, "Vegetable");
         user.addToBasket(need);
-        assertEquals("Corn",user.getBasket().get(0).getName());
+        assertEquals("Corn", user.getBasket().get(0).getName());
     }
-
-
 }

@@ -71,7 +71,7 @@ public class UserController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain User useres}
+     * Responds to the GET request for all {@linkplain User users}
      * 
      * @return ResponseEntity with array of {@link User user} objects (may be empty) and
      * HTTP status of OK<br>

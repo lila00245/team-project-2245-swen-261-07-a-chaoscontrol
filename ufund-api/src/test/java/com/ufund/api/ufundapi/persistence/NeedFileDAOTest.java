@@ -1,9 +1,11 @@
 package com.ufund.api.ufundapi.persistence;
+
 import com.ufund.api.ufundapi.model.Need;
 import java.io.File;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,11 +19,18 @@ import static org.mockito.Mockito.when;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+/**
+ * Unit tests for the Need File DAO class.
+ * 
+ * @author Vlad
+ */
+@Tag("Persistence-Tier")
 @ExtendWith(MockitoExtension.class)
 public class NeedFileDAOTest {
 
@@ -31,17 +40,26 @@ public class NeedFileDAOTest {
     private ObjectMapper mockObjectMapper;
     private NeedFileDAO needFileDAO;
 
-    // this method runs before each test to ensure setup functions
-    // for all methods in addition to the method itself
+    /**
+     * Sets up the test environment by mocking the necessary dependencies 
+     * and initializing the NeedFileDAO instance before each test.
+     *
+     * @throws IOException if there is an issue reading or writing to the file.
+     */
     @BeforeEach
     void testSetUp() throws IOException {
         Need[] mockNeeds = { new Need(1, "Test Need", 50, "Food") };
         when(mockObjectMapper.readValue(any(File.class), eq(Need[].class)))
             .thenReturn(mockNeeds);
-        // manually create the NeedFileDAO to avoid NPE
         needFileDAO = new NeedFileDAO(TEST_FILE, mockObjectMapper);
     }
 
+    /**
+     * Tests that the NeedFileDAO correctly loads data from the file on construction.
+     * Verifies that the loaded Need has the expected attributes.
+     *
+     * @throws IOException if there is an issue loading the data.
+     */
     @Test
     void testLoadOnConstruction() throws IOException {
         Need need = needFileDAO.getNeed(1);
@@ -51,6 +69,10 @@ public class NeedFileDAOTest {
         assertEquals("Food", need.getFoodGroup());
     }
 
+    /**
+     * Tests the 'getNeeds' method of the NeedFileDAO.
+     * Verifies that it retrieves all available 'Need' entities from the file.
+     */
     @Test
     void testGetNeeds() {
         Need[] allNeeds = needFileDAO.getNeeds();
@@ -58,6 +80,10 @@ public class NeedFileDAOTest {
         assertEquals("Test Need", allNeeds[0].getName());
     }
 
+    /**
+     * Tests the 'findNeeds' method of the NeedFileDAO.
+     * Verifies that it correctly finds needs based on a search string.
+     */
     @Test
     void testFindNeeds() {
         Need[] found = needFileDAO.findNeeds("Test");
@@ -66,6 +92,12 @@ public class NeedFileDAOTest {
         assertEquals(0, notFound.length, "Should find no Needs with string 'NotReal'");
     }
 
+    /**
+     * Tests the 'createNeed' method of the NeedFileDAO.
+     * Verifies that it successfully creates a new 'Need' and returns it with the correct ID and values.
+     * 
+     * @throws IOException if there is an issue writing the data to the file.
+     */
     @Test
     void testCreateNeed() throws IOException {
         Need newNeed = new Need(0, "New Need", 100, "Misc");
@@ -79,6 +111,12 @@ public class NeedFileDAOTest {
             .writeValue(any(File.class), any(Need[].class));
     }
 
+    /**
+     * Tests the 'updateNeed' method of the NeedFileDAO.
+     * Verifies that it correctly updates an existing 'Need' and returns the updated entity.
+     * 
+     * @throws IOException if there is an issue writing the data to the file.
+     */
     @Test
     void testUpdateNeed() throws IOException {
         Need updatedNeed = new Need(1, "Update", 200, "UpdatedGroup");
@@ -92,6 +130,27 @@ public class NeedFileDAOTest {
             .writeValue(any(File.class), any(Need[].class));
     }
 
+    /**
+     * Tests the 'updateNeed' method of the NeedFileDAO when a non-existent 'Need' is being updated.
+     * Verifies that it returns null and does not attempt to write to the file.
+     * 
+     * @throws IOException if there is an issue writing the data to the file.
+     */
+    @Test
+    void testUpdateNeedNotFound() throws IOException {
+        Need updatedNeed = new Need(2, "Update", 200, "UpdatedGroup");
+        Need result = needFileDAO.updateNeed(updatedNeed);
+        assertNull(result, "Updating a non-existent need should return null");
+        verify(mockObjectMapper, times(0))
+            .writeValue(any(File.class), any(Need[].class));
+    }
+
+    /**
+     * Tests the 'deleteNeed' method of the NeedFileDAO.
+     * Verifies that it correctly deletes an existing 'Need' and returns true.
+     * 
+     * @throws IOException if there is an issue writing the data to the file.
+     */
     @Test
     void testDeleteNeed() throws IOException {
         boolean deleted = needFileDAO.deleteNeed(1);
@@ -100,5 +159,19 @@ public class NeedFileDAOTest {
             .writeValue(any(File.class), any(Need[].class));
         Need result = needFileDAO.getNeed(1);
         assertNull(result, "Need (1) should have deleted");
+    }
+
+    /**
+     * Tests the 'deleteNeed' method of the NeedFileDAO when trying to delete a non-existent 'Need'.
+     * Verifies that it returns false and does not attempt to write to the file.
+     * 
+     * @throws IOException if there is an issue writing the data to the file.
+     */
+    @Test
+    void testDeleteNeedNotFound() throws IOException {
+        boolean deleted = needFileDAO.deleteNeed(2);
+        assertFalse(deleted, "Deleting non-existent Need should return false");
+        verify(mockObjectMapper, times(0))
+            .writeValue(any(File.class), any(Need[].class));
     }
 }

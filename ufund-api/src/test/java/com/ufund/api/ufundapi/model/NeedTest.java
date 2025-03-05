@@ -6,13 +6,19 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests for the User class
+ * Unit tests for the Need class.
+ * These tests cover the creation, getter and setter methods,
+ * and the toString method of the Need class.
  * 
- * @author 
+ * @author Ariel
  */
 @Tag("Model-tier")
 public class NeedTest {
 
+    /**
+     * Test the creation of a Need object and its getter methods.
+     * Verifies that the correct values are returned by the getters.
+     */
     @Test
     public void testCreateNeedAndGetters() {
         // Setup
@@ -31,59 +37,10 @@ public class NeedTest {
         assertEquals(foodGroup, need.getFoodGroup());
     }
 
-    @Test
-    public void testSetID() {
-        // Setup
-        Need need = new Need(101, "Chicken Wings", 4.56, "Meat");
-        int id = 201;
-
-        // Invoke
-        need.setId(id);
-
-        // Analyze
-        assertEquals(id, need.getId());
-    }
-
-    @Test
-    public void testSetName() {
-        // Setup
-        Need need = new Need(101, "Chicken Wings", 4.56, "Meat");
-        String name = "Grapes";
-
-        // Invoke
-        need.setName(name);
-
-        // Analyze
-        assertEquals(name, need.getName());
-    }
-
-    @Test
-    public void testSetCost() {
-        // Setup
-        Need need = new Need(101, "Chicken Wings", 4.56, "Meat");
-        double cost = 1.23;
-
-        // Invoke
-        need.setCost(cost);
-
-        // Analyze
-        assertEquals(cost, need.getCost());
-    }
-
-    @Test
-    public void testSetFoodGroup() {
-        // Setup
-        Need need = new Need(101, "Chicken Wings", 4.56, "Meat");
-        String foodGroup = "Fruit";
-
-        // Invoke
-        need.setFoodGroup(foodGroup);
-
-        // Analyze
-        assertEquals(foodGroup, need.getFoodGroup());
-    }
-
-
+    /**
+     * Test the setter methods for all fields in the Need class.
+     * Verifies that the setters correctly update the values.
+     */
     @Test
     public void testSetters() {
         // Setup
@@ -106,6 +63,10 @@ public class NeedTest {
         assertEquals(foodGroup, need.getFoodGroup());
     }
 
+    /**
+     * Test the toString method in the Need class.
+     * Verifies that the toString method returns the correct string representation.
+     */
     @Test
     public void testToString() {
         // Setup

@@ -92,7 +92,7 @@ public class NeedController {
 
     /**
      * Responds to the GET request for all {@linkplain Need Needs} whose name contains
-     * the text in name
+     * the specified text in name
      * 
      * @param name The name parameter which contains the text used to find the {@link Need Needes}
      * 

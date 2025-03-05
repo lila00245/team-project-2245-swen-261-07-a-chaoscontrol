@@ -20,7 +20,7 @@ import com.ufund.api.ufundapi.model.User;
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  * 
- * @author SWEN Faculty
+ * @author Team 1A - ChaosControl
  */
 @Component
 public class UserFileDAO implements UserDAO {
@@ -46,7 +46,6 @@ public class UserFileDAO implements UserDAO {
         this.objectMapper = objectMapper;
         load();  // load the users from the file
     }
-
 
     /**
      * Generates an array of {@linkplain User users} from the tree map for any
@@ -136,7 +135,7 @@ public class UserFileDAO implements UserDAO {
     public User createUser(User user) throws IOException {
         synchronized(user) {
             // We create a new User object because the id field is immutable
-            // and we user to assign the next unique id
+            // and we use to assign the next unique id
             if(getUser(user.getName())==null){
                 User newUser = new User(user.getName());
                 users.put(newUser.getName(),newUser);
@@ -153,13 +152,11 @@ public class UserFileDAO implements UserDAO {
     public User updateUser(User user) throws IOException {
         synchronized(users) {
             if (users.containsKey(user.getName()) == false){
-                return null;  // Need does not exist
+                return null;  // user does not exist
             }
-            if(getUser(user.getName())!=null){
-                users.put(user.getName(),user);
-                save(); // may throw an IOException
-                return user;
-            } return null;
+            users.put(user.getName(),user);
+            save(); // may throw an IOException
+            return user;
         }
     }
 

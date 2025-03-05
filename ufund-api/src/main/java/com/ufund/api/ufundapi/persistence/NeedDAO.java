@@ -6,7 +6,7 @@ import com.ufund.api.ufundapi.model.Need;
 /**
  * Defines the interface for Need object persistence
  * 
- * @author SWEN Faculty
+ * @author Team 1A - ChaosControl
  */
 public interface NeedDAO {
     /**
@@ -23,7 +23,7 @@ public interface NeedDAO {
      * 
      * @param containsText The text to match against
      * 
-     * @return An array of {@link Need needs} whose nemes contains the given text, may be empty
+     * @return An array of {@link Need needs} whose names contains the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
