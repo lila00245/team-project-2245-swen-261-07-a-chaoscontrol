@@ -100,9 +100,10 @@ public class UserControllerTest {
      */
     @Test
     public void testCreateUserHandleException() throws IOException {
-        doThrow(new IOException()).when(mockUserDAO).createUser(new User("Owen"));
-        ResponseEntity<User> response = userController.createUser(new User("Owen"));
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        User user = new User("Owen");
+        doThrow(new IOException()).when(mockUserDAO).createUser(user);
+        ResponseEntity<User> response = userController.createUser(user);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     /**
@@ -137,9 +138,10 @@ public class UserControllerTest {
      */
     @Test
     public void testUpdateUserHandleException() throws IOException {
-        doThrow(new IOException()).when(mockUserDAO).updateUser(new User("Owen"));
-        ResponseEntity<User> response = userController.updateUser(new User("Owen"));
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        User user = new User("Owen");
+        doThrow(new IOException()).when(mockUserDAO).updateUser(user);
+        ResponseEntity<User> response = userController.updateUser(user);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
 
     /**

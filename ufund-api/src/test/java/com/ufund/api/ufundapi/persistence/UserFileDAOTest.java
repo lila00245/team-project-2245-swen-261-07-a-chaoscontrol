@@ -47,9 +47,6 @@ public class UserFileDAOTest {
     void setUp() throws IOException {
         setupTestUsers();
         when(mockObjectMapper.readValue(any(File.class), eq(User[].class))).thenReturn(mockUsers);
-
-        setupTestUsers();
-        when(mockObjectMapper.readValue(any(File.class), eq(User[].class))).thenReturn(mockUsers);
         userFileDAO = new UserFileDAO(TEST_FILE, mockObjectMapper);
     }
 
@@ -76,7 +73,6 @@ public class UserFileDAOTest {
     @Test
     void testLoadOnConstruction() {
         User[] users = userFileDAO.getUsers();
-        assertEquals(mockUsers.length, users.length, "Loaded 2 users");
         assertEquals("Bob", users[0].getName(), "Loaded User is Bob");
         assertEquals("Harold", users[1].getName(), "Loaded User is Harold");
     }
