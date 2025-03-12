@@ -78,7 +78,7 @@ public class UserControllerTest {
         User user = new User("Owen");
         when(mockUserDAO.createUser(user)).thenReturn(user);
         ResponseEntity<User> response = userController.createUser(user);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(user, response.getBody());
     }
 

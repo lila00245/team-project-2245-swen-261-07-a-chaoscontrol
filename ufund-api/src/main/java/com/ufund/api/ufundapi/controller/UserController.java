@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.ufund.api.ufundapi.persistence.UserDAO;
 import com.ufund.api.ufundapi.model.User;
+import com.ufund.api.ufundapi.persistence.UserDAO;
 
 /**
  * Handles the REST API requests for the User resource
@@ -30,7 +30,7 @@ import com.ufund.api.ufundapi.model.User;
 @RequestMapping("users")
 public class UserController {
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
-    private UserDAO userDao;
+    private UserDAO userDAO;
     
     /**
      * Creates a REST API controller to reponds to requests
@@ -39,8 +39,8 @@ public class UserController {
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public UserController(UserDAO userDao) {
-        this.userDao = userDao;
+    public UserController(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     /**
@@ -56,7 +56,7 @@ public class UserController {
     public ResponseEntity<User> getUser(@PathVariable String name) {
         LOG.info("GET /users/" + name);
         try {
-            User user = userDao.getUser(name);
+            User user = userDAO.getUser(name);
             if (user != null){
                 System.out.println(user);
                 return new ResponseEntity<User>(user,HttpStatus.OK);
@@ -81,7 +81,7 @@ public class UserController {
     public ResponseEntity<User[]> getUsers() {
         LOG.info("GET /users");
         try {
-            User[] users = userDao.getUsers();
+            User[] users = userDAO.getUsers();
             return new ResponseEntity<>(users,HttpStatus.OK);
         } catch (IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -102,9 +102,14 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody User user) {
         LOG.info("POST /users " + user);
         try{
-            User newUser = userDao.createUser(user);
+            // check that user does not already exist
+            if (userDAO.getUser(user.getName()) != null) {
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
+            }
+            // otherwise we create the user
+            User newUser = userDAO.createUser(user);
             if(newUser != null){
-                return new ResponseEntity<>(newUser, HttpStatus.OK);
+                return new ResponseEntity<>(newUser, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -127,11 +132,11 @@ public class UserController {
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         LOG.info("PUT /users " + user);
         try{
-            User user1 = userDao.updateUser(user);
-            if (user1 == null){
-                return new ResponseEntity<>(user1,HttpStatus.NOT_FOUND);
+            User updatedUser = userDAO.updateUser(user);
+            if (updatedUser == null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
-                return new ResponseEntity<>(user1 ,HttpStatus.OK);
+                return new ResponseEntity<>(updatedUser ,HttpStatus.OK);
             }
         }
         catch(IOException e) {
@@ -153,7 +158,7 @@ public class UserController {
     public ResponseEntity<User> deleteUser(@PathVariable String name) {
         LOG.info("DELETE /users/" + name);
         try{
-            if(userDao.deleteUser(name)){   // if returns true, user was deleted
+            if(userDAO.deleteUser(name)){   // if returns true, user was deleted
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {                        // if returns false, user was not found
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
