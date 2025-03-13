@@ -54,6 +54,13 @@ public class User{
         this.role = "user";
     }
 
+    /**
+     * Create a user with the given name and password
+     * basket is initialized to empty list
+     * role is set to "user"
+     * @param name The name of the user
+     * @param password The password of the user
+     */
     public User(String name, String password){
         this.name = name;
         this.password = password;
@@ -74,7 +81,7 @@ public class User{
     }
     
     /**
-     * Sets the name of the user - necessary for JSON object to Java object deserialization
+     * Sets the name of the user 
      * @param name The name of the user
      */
     public void setName(String name) {this.name = name;}
@@ -92,7 +99,7 @@ public class User{
     public String getPassword() {return password;}
 
     /**
-     * Sets the password of the user - necessary for JSON object to Java object deserialization
+     * Sets the password of the user 
      * @param password The password of the user
      */
     public void setPassword(String password) {this.password = password;}
@@ -104,7 +111,7 @@ public class User{
     public String getRole() {return role;}
     
     /**
-     * Sets the role of the user - necessary for JSON object to Java object deserialization
+     * Sets the role of the user 
      * @param role The role of the user
      */
     public void setRole(String role) {this.role = role;}

@@ -1,32 +1,35 @@
 package com.ufund.api.ufundapi.service;
 
 import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ufund.api.ufundapi.model.User;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 
+/**
+ * Provides registration services for users.
+ * <p>
+ * {@literal @}Service annotation identifies this class as a Spring
+ * 
+ * @Author Team 1A - ChaosControl
+ */
 @Service
-public class AuthService {
+public class RegistrationService {
 
     private UserDAO userDAO;
 
     @Autowired
-    public AuthService(UserDAO userDAO) {
+    public RegistrationService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
-    public User authenticateUser(String name, String password) throws IOException {
-        User user = userDAO.getUser(name);
-        
-        if (user != null && user.getPassword().equals(password)) {
-            return user;  // If user exists and passwords match, return the user
-        }
-        return null;  // Authentication failed, return null
-    }
-
+    /**
+     * Registers a new user with the given name and password
+     * @param name The name of the user
+     * @param password The password of the user
+     * @return The {@link User} object if registered, null otherwise
+     * @throws IOException when file cannot be accessed or read from
+     */
     public User registerUser(String name, String password) throws IOException {
         // Check if user already exists
         if (userDAO.getUser(name) != null) {
@@ -36,8 +39,6 @@ public class AuthService {
         // Create a new user if it doesn't exist
         User newUser = new User(name);
         newUser.setPassword(password);  // Set the user's password
-
         return userDAO.createUser(newUser);  // Save the new user to the database
     }
-
 }
