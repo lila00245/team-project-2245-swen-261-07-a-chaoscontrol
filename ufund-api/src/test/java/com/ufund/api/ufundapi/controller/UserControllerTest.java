@@ -25,7 +25,7 @@ public class UserControllerTest {
     private UserController userController;
     private UserDAO mockUserDAO;
 
-
+    /**
      * Setup the UserController and mock UserDAO before each test.
      * This method is executed before each test method.
      */
@@ -257,7 +257,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testDeleteUserNotFound() throws IOException { // deleteHero may throw IOException
+    public void testDeleteUserNotFoundOwen() throws IOException { // deleteHero may throw IOException
         // Setup
         String name = "Owen";
         // when deleteHero is called return false, simulating failed deletion
@@ -266,7 +266,7 @@ public class UserControllerTest {
 
         // Invoke
         ResponseEntity<User> response = userController.deleteUser(name);
-
+    }
 
     /**
      * Tests the 'deleteUser' method when user deletion fails.
