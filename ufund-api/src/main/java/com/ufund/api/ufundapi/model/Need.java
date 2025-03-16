@@ -1,7 +1,5 @@
 package com.ufund.api.ufundapi.model;
 
-import java.util.logging.Logger;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a need entity
@@ -9,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Team 1A - ChaosControl
  */
 public class Need{
-    private static final Logger LOG = Logger.getLogger(Need.class.getName());
 
     // Package private for tests
     static final String STRING_FORMAT = "Need [id=%d, name=%s, cost=&.2f, foodGroup=%s]";

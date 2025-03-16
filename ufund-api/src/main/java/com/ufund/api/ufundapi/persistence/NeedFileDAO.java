@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,7 +23,6 @@ import com.ufund.api.ufundapi.model.Need;
  */
 @Component
 public class NeedFileDAO implements NeedDAO {
-    private static final Logger LOG = Logger.getLogger(NeedFileDAO.class.getName());
     Map<Integer,Need> needs;   // Provides a local cache of the Need objects
                                 // so that we don't need to read from the file
                                 // each time
@@ -79,13 +77,11 @@ public class NeedFileDAO implements NeedDAO {
      */
     private Need[] getNeedsArray(String containsText) { // if containsText == null, no filter
         ArrayList<Need> needArrayList = new ArrayList<>();
-
         for (Need need : needs.values()) {
-            
-            if (containsText == null || need.getName().contains(containsText)) {
+            String name = need.getName().toLowerCase();
+            if (containsText == null || name.contains(containsText.toLowerCase())) {
                 needArrayList.add(need);
             }
-            
         }
 
         Need[] needArray = new Need[needArrayList.size()];
@@ -149,6 +145,7 @@ public class NeedFileDAO implements NeedDAO {
             return getNeedsArray();
         }
     }
+
 
     /**
     ** {@inheritDoc}
