@@ -25,9 +25,8 @@ import com.ufund.api.ufundapi.model.Need;
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  * 
- * @author SWEN Faculty
+ * @author Team 1A - ChaosControl
  */
-
 @RestController
 @RequestMapping("needs")
 public class NeedController {
@@ -82,8 +81,6 @@ public class NeedController {
     @GetMapping("")
     public ResponseEntity<Need[]> getNeeds() {
         LOG.info("GET /needs");
-
-        // Replace below with your implementation
         try {
             Need[] needs = needDao.getNeeds();
             return new ResponseEntity<>(needs,HttpStatus.OK);
@@ -95,7 +92,7 @@ public class NeedController {
 
     /**
      * Responds to the GET request for all {@linkplain Need Needs} whose name contains
-     * the text in name
+     * the specified text in name
      * 
      * @param name The name parameter which contains the text used to find the {@link Need Needes}
      * 
@@ -109,8 +106,6 @@ public class NeedController {
     @GetMapping("/")
     public ResponseEntity<Need[]> searchNeeds(@RequestParam String name) {
         LOG.info("GET /needs/?name="+name);
-
-        // Replace below with your implementation
         try {
             Need[] needs = needDao.findNeeds(name);
             return new ResponseEntity<>(needs,HttpStatus.OK);
@@ -133,8 +128,6 @@ public class NeedController {
     @PostMapping("")
     public ResponseEntity<Need> createNeed(@RequestBody Need need) {
         LOG.info("POST /needs " + need);
-
-        // Replace below with your implementation
         try{
             Need newNeed = needDao.createNeed(need);
             if(newNeed != null){
@@ -162,7 +155,6 @@ public class NeedController {
         LOG.info("PUT /needs " + need);
         try{
             Need updatedNeed = needDao.updateNeed(need);
-            // Replace below with your implementation
             if (updatedNeed == null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
@@ -187,7 +179,6 @@ public class NeedController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Need> deleteNeed(@PathVariable int id) {
         LOG.info("DELETE /needs/" + id);
-
         try{
             if(needDao.deleteNeed(id)){ // if returns true then id was deleted
                 return new ResponseEntity<>(HttpStatus.OK);

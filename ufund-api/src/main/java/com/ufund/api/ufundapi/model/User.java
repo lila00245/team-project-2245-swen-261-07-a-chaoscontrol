@@ -3,15 +3,16 @@ package com.ufund.api.ufundapi.model;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a user entity
  * 
- * @author SWEN Faculty
+ * @author Team 1A - ChaosControl
  */
 public class User{
 
     // Package private for tests
-    static final String STRING_FORMAT = "USer [name=%s, basket=%s]";
+    static final String STRING_FORMAT = "User [name=%s, basket=%s]";
 
     @JsonProperty("name") private String name;
     @JsonProperty("basket") private ArrayList<Need> basket;
@@ -30,6 +31,10 @@ public class User{
         this.basket = basket;
     }
 
+    /**
+     * Create a user with the given name and an empty basket
+     * @param name The name of the user
+     */
     public User(String name){
         this.name = name;
         this.basket = new ArrayList<>();
@@ -53,9 +58,11 @@ public class User{
      */
     public ArrayList<Need> getBasket(){return basket;}
 
-    public void addToBasket(Need need){
-        basket.add(need);
-    }
+    /**
+     * Adds a need to the basket
+     * @param need The need to add to the basket
+     */
+    public void addToBasket(Need need){basket.add(need);}
     
     /**
      * {@inheritDoc}

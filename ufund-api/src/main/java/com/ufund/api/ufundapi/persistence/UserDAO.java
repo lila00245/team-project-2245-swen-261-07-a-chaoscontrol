@@ -6,7 +6,7 @@ import com.ufund.api.ufundapi.model.User;
 /**
  * Defines the interface for User object persistence
  * 
- * @author SWEN Faculty
+ * @author Team 1A - ChaosControl
  */
 public interface UserDAO {
     /**
@@ -36,9 +36,9 @@ public interface UserDAO {
      * 
      * @param User {@linkplain User user} object to be created and saved
      * <br>
-     * The name of the User object is ignored and a new uniqe name is assigned
+     * The name of the User object is ignored and a new unique name is assigned
      *
-     * @return new {@link User user} if successful, false otherwise 
+     * @return The new {@link User} object if successful, or null if the user could not be created
      * 
      * @throws IOException if an issue with underlying storage
      */
