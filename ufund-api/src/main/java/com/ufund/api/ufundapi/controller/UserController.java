@@ -188,7 +188,8 @@ public class UserController {
             User user = userDAO.getUser(name);      // fetch curr user
             if (user == null) { return new ResponseEntity<>(HttpStatus.NOT_FOUND); }
             user.addToBasket(need);                 // add need to basket if logged in
-            return new ResponseEntity<>(userDAO.updateUser(user), HttpStatus.OK); // save the user 
+            User updated = userDAO.updateUser(user);   // save the user 
+            return new ResponseEntity<>(updated, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
