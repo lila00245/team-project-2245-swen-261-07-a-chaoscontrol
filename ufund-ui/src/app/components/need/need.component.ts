@@ -32,6 +32,15 @@ export class NeedComponent {
       const id = parseInt(this.route.snapshot.paramMap.get('id')!,10)
       this.cupboardService.getNeed(id).subscribe(need => this.need = need) 
   }
+
+  /**
+   * Add need to basket from UI
+   * 
+   * @author Vlad
+   */
+  addNeedToBasket(): void {
+    console.log('Added to basket', this.need);
+  }
   
   goBack(): void {
     this.location.back();
