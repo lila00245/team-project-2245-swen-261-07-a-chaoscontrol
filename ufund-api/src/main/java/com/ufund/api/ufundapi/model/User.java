@@ -50,6 +50,7 @@ public class User{
      * @param password The password of the user
      */
     public User(String name, String password){
+
         this.name = name;
         this.password = password;
         this.basket = new ArrayList<>();

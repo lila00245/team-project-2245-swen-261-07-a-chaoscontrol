@@ -10,7 +10,7 @@ export class UsersService {
   private httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-
+  currentUser?: User
   url = "http://localhost:8080/users"
 
   constructor(private http: HttpClient) { }

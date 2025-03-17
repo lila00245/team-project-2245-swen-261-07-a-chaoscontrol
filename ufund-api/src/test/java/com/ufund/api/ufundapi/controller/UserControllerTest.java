@@ -24,7 +24,7 @@ public class UserControllerTest {
     private UserController userController;
     private UserDAO mockUserDAO;
 
-    /*
+    /**
      * Setup the UserController and mock UserDAO before each test.
      * This method is executed before each test method.
      */
@@ -53,7 +53,8 @@ public class UserControllerTest {
      */
     @Test
     public void testGetUserNotFound() throws Exception {
-        when(mockUserDAO.getUser("Owen")).thenReturn(null);
+        String name = "Owen";
+        when(mockUserDAO.getUser(name)).thenReturn(null);
         ResponseEntity<User> response = userController.getUser("Owen");
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -104,6 +105,7 @@ public class UserControllerTest {
         doThrow(new IOException()).when(mockUserDAO).createUser(user);
         ResponseEntity<User> response = userController.createUser(user);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+
     }
 
     /**
@@ -142,6 +144,7 @@ public class UserControllerTest {
         doThrow(new IOException()).when(mockUserDAO).updateUser(user);
         ResponseEntity<User> response = userController.updateUser(user);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+
     }
 
     /**

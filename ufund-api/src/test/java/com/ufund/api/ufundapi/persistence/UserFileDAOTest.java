@@ -61,8 +61,8 @@ public class UserFileDAOTest {
         haroldBasket.add(new Need(1, "Beans", 5.50, "Vegetable"));
         haroldBasket.add(new Need(2, "Carrots", 3.32, "Vegetable"));
         mockUsers = new User[]{
-            new User("Bob", "password", bobBasket),
-            new User("Harold", "password", haroldBasket)
+          new User("Bob", "password", bobBasket),
+          new User("Harold", "password", haroldBasket)
         };
     }
 
@@ -73,6 +73,7 @@ public class UserFileDAOTest {
     @Test
     void testLoadOnConstruction() {
         User[] users = userFileDAO.getUsers();
+        assertEquals(mockUsers.length, users.length, "Loaded 2 users");
         assertEquals("Bob", users[0].getName(), "Loaded User is Bob");
         assertEquals("Harold", users[1].getName(), "Loaded User is Harold");
     }
