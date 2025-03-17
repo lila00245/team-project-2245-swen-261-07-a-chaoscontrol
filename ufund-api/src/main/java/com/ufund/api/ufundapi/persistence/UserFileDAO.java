@@ -68,12 +68,10 @@ public class UserFileDAO implements UserDAO {
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        User[] userArray = getUsersArray();
-
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),userArray);
+        objectMapper.writeValue(new File(filename),getUsersArray());
         return true;
     }
 
@@ -131,11 +129,11 @@ public class UserFileDAO implements UserDAO {
      */
     @Override
     public User createUser(User user) throws IOException {
-        synchronized(user) {
+        synchronized(users) {
             // We create a new User object because the id field is immutable
             // and we use to assign the next unique id
             if(getUser(user.getName())==null){
-                User newUser = new User(user.getName());
+                User newUser = new User(user.getName(), user.getPassword());
                 users.put(newUser.getName(),newUser);
                 save(); // may throw an IOException
                 return newUser;
@@ -168,8 +166,7 @@ public class UserFileDAO implements UserDAO {
                 users.remove(name);
                 return save();
             }
-            else
-                return false;
+            return false;
         }
     }
 }

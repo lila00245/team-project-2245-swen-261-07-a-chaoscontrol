@@ -23,12 +23,12 @@ export class LoginComponent {
     
 ) {}
 
-  getUser(name: string): void {
-    // Changed by Vladislav Usatii on 03 04 25: Refactored
-    // to wait for async result before routing to /needs
-      this.userService.getUser(name)
-      .pipe(catchError((ex: any, caught: Observable<User>) => {
-        this.message.next("Failed to login: "+ ex.status)
+  login(name: string, password: string): void {
+    console.log("logging in with: ", {name, password});
+
+    this.userService.getUser(name
+      .pipe(catchError((ex:any, caught: Observable<User>) => {
+        this.message.next("Failed to login: " + ex.status)
         return of(undefined);
       }))
       .subscribe(user => {
@@ -38,10 +38,11 @@ export class LoginComponent {
           this.router.navigate(['/needs']).then(() => {
             window.location.reload();
           });
-        } else {
-          this.message.next("Incorrect username, please enter again.");
-        }
-      });
+
+      } else {
+        this.message.next = "Incorrect username, please enter again.";
+      }
+    });
   }
 
 }

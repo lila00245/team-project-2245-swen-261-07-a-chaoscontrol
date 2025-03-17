@@ -8,7 +8,7 @@ import { User } from '../model/User';
 })
 export class UsersService {
   private httpOptions = {
-      headers: new HttpHeaders({'Conent-Type': 'application/json'})
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
   currentUser?: User
   url = "http://localhost:8080/users"

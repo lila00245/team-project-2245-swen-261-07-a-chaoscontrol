@@ -47,9 +47,6 @@ public class UserFileDAOTest {
     void setUp() throws IOException {
         setupTestUsers();
         when(mockObjectMapper.readValue(any(File.class), eq(User[].class))).thenReturn(mockUsers);
-
-        setupTestUsers();
-        when(mockObjectMapper.readValue(any(File.class), eq(User[].class))).thenReturn(mockUsers);
         userFileDAO = new UserFileDAO(TEST_FILE, mockObjectMapper);
     }
 
@@ -64,8 +61,8 @@ public class UserFileDAOTest {
         haroldBasket.add(new Need(1, "Beans", 5.50, "Vegetable"));
         haroldBasket.add(new Need(2, "Carrots", 3.32, "Vegetable"));
         mockUsers = new User[]{
-            new User("Bob", bobBasket),
-            new User("Harold", haroldBasket)
+          new User("Bob", "password", bobBasket),
+          new User("Harold", "password", haroldBasket)
         };
     }
 
@@ -108,7 +105,7 @@ public class UserFileDAOTest {
      */
     @Test
     void testCreateUser() throws IOException {
-        User newUser = new User("Bill");
+        User newUser = new User("Bill", "password");
         User createdUser = userFileDAO.createUser(newUser);
         assertNotNull(createdUser, "Should return a new user");
         assertEquals("Bill", createdUser.getName(), "User must be Bill");
@@ -123,7 +120,7 @@ public class UserFileDAOTest {
      */
     @Test
     void testCreateUserNotUnique() throws IOException {
-        User existingUser = new User("Bob");
+        User existingUser = new User("Bob", "password");
         User createdUser = userFileDAO.createUser(existingUser);
         assertNull(createdUser, "Should return null when user already exists");
     }
@@ -136,7 +133,7 @@ public class UserFileDAOTest {
      */
     @Test
     void testUpdateUser() throws IOException {
-        User updatedUser = new User("Harold");
+        User updatedUser = new User("Harold", "password");
         User result = userFileDAO.updateUser(updatedUser);
         assertNotNull(result, "Should return updated Harold");
         assertEquals("Harold", result.getName());
@@ -151,7 +148,7 @@ public class UserFileDAOTest {
      */
     @Test
     void testUpdateUserNotFound() throws IOException {
-        User nonExistentUser = new User("Greg");
+        User nonExistentUser = new User("Greg", "password");
         User result = userFileDAO.updateUser(nonExistentUser);
         assertNull(result, "Should return null when user does not exist");
     }
