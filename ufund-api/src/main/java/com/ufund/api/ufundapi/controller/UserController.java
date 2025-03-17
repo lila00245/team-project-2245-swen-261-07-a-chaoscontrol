@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.User;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 
@@ -169,5 +170,29 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         
+    }
+
+    /**
+     * Adds to {@linkplain User user} basket with the given {@linkplain Need need}
+     * 
+     * @param name The name of the {@link User user} to add a Need for
+     * @param need The name of the {@link Need need} to add
+     * @return ResponseEntity HTTP status of OK if saved
+     * ResponseEntity with HTTP status of NOT_FOUND if user is not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PostMapping("/{name}/basket")
+    public ResponseEntity<User> addNeedToBasket(@PathVariable String name, @RequestBody Need need) {
+        LOG.info("POST /users" + name + "/basket " + need);
+        try {
+            User user = userDAO.getUser(name);      // fetch curr user
+            if (user == null) { return new ResponseEntity<>(HttpStatus.NOT_FOUND); }
+            user.addToBasket(need);                 // add need to basket if logged in
+            return new ResponseEntity<>(userDAO.updateUser(user), HttpStatus.OK); // save the user 
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
