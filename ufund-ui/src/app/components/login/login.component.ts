@@ -20,6 +20,7 @@ export class LoginComponent {
     private route: ActivatedRoute,
     private location: Location,
     private userService: UsersService,
+    
 ) {}
 
   getUser(name: string): void {
@@ -31,7 +32,9 @@ export class LoginComponent {
         return of(undefined);
       }))
       .subscribe(user => {
-        if (user) {
+        if (user){
+          localStorage.setItem('user',user.name)
+          this.userService.setCurrentUser(user)
           this.router.navigate(['/needs']).then(() => {
             window.location.reload();
           });
@@ -40,4 +43,5 @@ export class LoginComponent {
         }
       });
   }
+
 }

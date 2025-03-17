@@ -34,4 +34,12 @@ export class UsersService {
   deleteUser(name: string):Observable<User>{
     return this.http.delete<User>(`${this.url}/${name}`,this.httpOptions)    
   }
+
+  setCurrentUser(user:User): void{
+    this.currentUser = user;
+  }
+  
+  getCurrentUser():User | undefined{
+    return this.currentUser;
+  }
 }
