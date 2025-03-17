@@ -1,1 +1,1 @@
-[{"name":"RandomUser","basket":[]}]
+[{"name":"","password":"","basket":[],"role":"admin"},{"name":"Owen","password":"1234","basket":[],"role":"admin"},{"name":"admin","password":"password","basket":[],"role":"admin"},{"name":"surely","password":"work","basket":[],"role":"user"}]

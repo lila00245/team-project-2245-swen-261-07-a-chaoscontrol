@@ -1,6 +1,7 @@
 package com.ufund.api.ufundapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a need entity
  * 

@@ -1,0 +1,9 @@
+<p>Create a new account!!</p>
+
+<input placeholder="enter name..." type="name" id = "name" class="inputField" #name required>
+<input placeholder="enter password..." type="password" id = "password" class="inputField" #password required>
+<form>
+    admin<input type="radio" name="option" id="admin" value="admin" #value>
+    user<input type="radio" name="option" id="user" value="user" #value>
+</form>
+<button type="button" (click) = "register(name.value, password.value, value.value)">Register</button>

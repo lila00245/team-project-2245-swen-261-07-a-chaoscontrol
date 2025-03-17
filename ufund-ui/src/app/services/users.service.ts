@@ -8,9 +8,9 @@ import { User } from '../model/User';
 })
 export class UsersService {
   private httpOptions = {
-      headers: new HttpHeaders({'Conent-Type': 'application/json'})
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-
+  currentUser?: User
   url = "http://localhost:8080/users"
 
   constructor(private http: HttpClient) { }
@@ -33,5 +33,13 @@ export class UsersService {
 
   deleteUser(name: string):Observable<User>{
     return this.http.delete<User>(`${this.url}/${name}`,this.httpOptions)    
+  }
+
+  setCurrentUser(user:User): void{
+    this.currentUser = user;
+  }
+  
+  getCurrentUser():User | undefined{
+    return this.currentUser;
   }
 }

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { CupboardComponent } from './components/cupboard/cupboard.component';
 import { BasketComponent } from './components/basket/basket.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +16,7 @@ import { NeedSearchComponent } from './components/need-search/need-search.compon
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     CupboardComponent,
     BasketComponent,
     NeedComponent,

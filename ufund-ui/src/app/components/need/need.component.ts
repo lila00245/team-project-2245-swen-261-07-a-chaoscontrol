@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{ Need } from '../../model/Need';
 import {CupboardService} from '../../services/cupboard.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 
@@ -15,12 +15,16 @@ export class NeedComponent {
 
   need: Need | undefined;
   constructor(
+    private router: Router,
     private cupboardService: CupboardService,
     private route: ActivatedRoute,
     private location: Location
   ){}
 
   ngOnInit(): void{
+    if(!localStorage.getItem('user')){
+      this.router.navigate([`/`])
+    }
     this.getNeed();
   }
 

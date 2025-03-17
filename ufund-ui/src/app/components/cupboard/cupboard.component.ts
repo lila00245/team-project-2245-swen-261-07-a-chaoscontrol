@@ -3,6 +3,8 @@ import { Need } from '../../model/Need';
 import { CupboardService } from '../../services/cupboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NeedSearchComponent } from '../need-search/need-search.component';
+import { LoginComponent } from '../login/login.component';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-cupboard',
@@ -10,6 +12,7 @@ import { NeedSearchComponent } from '../need-search/need-search.component';
   templateUrl: './cupboard.component.html',
   styleUrl: './cupboard.component.css'
 })
+
 export class CupboardComponent {
   needs: Need[] = [];
   name?:string;
@@ -17,13 +20,17 @@ export class CupboardComponent {
     private router: Router,
     private route: ActivatedRoute,
     private cupboardService: CupboardService,
+    private userService: UsersService
   ){}
 
   ngOnInit(): void{
+    if(!localStorage.getItem('user')){
+      this.router.navigate([`/`])
+    }
+    console.log(localStorage.getItem('user'))
     this.route.queryParams.subscribe(params => {
     this.name = params['name'];})
     this.getNeeds();
-    
   }
 
   getNeeds(): void{ 
@@ -45,5 +52,10 @@ export class CupboardComponent {
 
   add(need: Need):void{
     this.cupboardService.createNeed(need).subscribe(need => this.needs.push(need))
+  }
+
+  logOut(): void{
+    localStorage.removeItem('user')
+    this.router.navigate([`/`])
   }
 }
