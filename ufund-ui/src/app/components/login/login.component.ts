@@ -13,13 +13,14 @@ import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 })
 export class LoginComponent {
   user?:User
-  message = new BehaviorSubject<String>("Enter Username and Password!");
+  message = new BehaviorSubject<String>("Enter Username!");
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     private userService: UsersService,
+    
 ) {}
 
   login(name: string, password: string): void {
@@ -29,17 +30,19 @@ export class LoginComponent {
       .pipe(catchError((ex:any, caught: Observable<User>) => {
         this.message.next("Failed to login: " + ex.status)
         return of(undefined);
-    }))
-    .subscribe(user => {
-      if (user) {
-        if (user.password === password) {  // checking password
-          this.router.navigate(['/needs']);
-        } else {
-          this.message.next = "Incorrect password, please try again.";
-        }
+      }))
+      .subscribe(user => {
+        if (user){
+          localStorage.setItem('user',user.name)
+          this.userService.setCurrentUser(user)
+          this.router.navigate(['/needs']).then(() => {
+            window.location.reload();
+          });
+
       } else {
         this.message.next = "Incorrect username, please enter again.";
       }
     });
   }
+
 }
