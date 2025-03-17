@@ -10,6 +10,7 @@ import { UsersService } from '../../services/users.service';
   styleUrl: './basket.component.css'
 })
 export class BasketComponent {
+  name:string|null = localStorage.getItem('user');
   constructor(
       private router: Router,
       private cupboardService: CupboardService,

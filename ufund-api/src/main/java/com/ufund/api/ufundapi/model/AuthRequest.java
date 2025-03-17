@@ -11,15 +11,17 @@ package com.ufund.api.ufundapi.model;
 public class AuthRequest {
     private String name;
     private String password;
+    private String role;
 
     /**
      * Create an authentication request with the given name and password
      * @param name The name of the user
      * @param password The password of the user
      */
-    public AuthRequest(String name, String password) {
+    public AuthRequest(String name, String password, String role) {
         this.name = name;
         this.password = password;
+        this.role = role;
     }
 
     /**
@@ -44,6 +46,10 @@ public class AuthRequest {
      */
     public String getPassword() {
         return password;
+    }
+
+    public String getRole(){
+        return this.role;
     }
 
     /**

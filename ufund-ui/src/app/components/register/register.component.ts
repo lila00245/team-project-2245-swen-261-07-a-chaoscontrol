@@ -20,23 +20,17 @@ export class RegisterComponent {
     private authService: AuthService,
   ) {}
 
-  register(name:string, password:string) {
-    const user = { name, password };
+  register(name:string, password:string, role:string) {
+    const user = { name, password, role };
 
-    console.log("regitsering with:", {name, password});
+    console.log("regitsering with:", {name, password, role});
 
-    this.authService.register(user.name, user.password).subscribe(response => {
+    this.authService.register(user.name, user.password, user.role).subscribe(response => {
       console.log('Registration successful', response);
       this.router.navigate(['/login']);
     }, error => {
       console.error('Registration failed', error);
     }
-
-      // next: (user) => {
-      //   this.router.navigate(['/login'])  // redirect to login after creating account
-      // }, error: (err) => {
-      //   console.error(err);
-      // }}
     );
   }
 }

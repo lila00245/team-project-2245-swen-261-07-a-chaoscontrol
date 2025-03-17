@@ -22,7 +22,7 @@ public class UserTest {
      */
     @Test
     public void testCtor() {
-        User user = new User("Denny", "password");
+        User user = new User("Denny", "password","user");
         assertEquals("Denny", user.getName());
         assertEquals(new ArrayList<>(), user.getBasket());
     }
@@ -33,7 +33,7 @@ public class UserTest {
      */
     @Test
     public void testName() {
-        User user = new User("Denny", "password");
+        User user = new User("Denny", "password","user");
         user.setName("Danny");
         assertEquals("Danny", user.getName());
     }
@@ -44,7 +44,7 @@ public class UserTest {
      */
     @Test
     public void testBasket() {
-        User user = new User("Denny", "password");
+        User user = new User("Denny", "password","user");
         Need need = new Need(99, "apple", 10, "fruit");
         user.addToBasket(need);
         assertEquals(need, user.getBasket().get(0));
@@ -56,7 +56,7 @@ public class UserTest {
      */
     @Test
     public void testToString() {
-        User user = new User("Denny", "password");
+        User user = new User("Denny", "password","user");
         assertEquals(String.format(User.STRING_FORMAT, "Denny", new ArrayList<>()), user.toString());
     }
 
@@ -66,7 +66,7 @@ public class UserTest {
      */
     @Test
     public void testSetName() {
-        User user = new User("Owen", "password");
+        User user = new User("Owen", "password","user");
         user.setName("Bob");
         assertEquals("Bob", user.getName());
     }
@@ -77,7 +77,7 @@ public class UserTest {
      */
     @Test
     public void testAddToBasketAndGetBasket() {
-        User user = new User("Owen", "password");
+        User user = new User("Owen", "password","user");
         Need need = new Need(1, "Corn", 0.30, "Vegetable");
         user.addToBasket(need);
         assertEquals("Corn", user.getBasket().get(0).getName());

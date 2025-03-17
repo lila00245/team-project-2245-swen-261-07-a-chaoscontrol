@@ -49,12 +49,12 @@ public class User{
      * @param name The name of the user
      * @param password The password of the user
      */
-    public User(String name, String password){
+    public User(String name, String password, String role){
 
         this.name = name;
         this.password = password;
         this.basket = new ArrayList<>();
-        this.role = "user";
+        this.role = role;
     }
 
     /**
@@ -66,7 +66,6 @@ public class User{
     public User(String name, String password, ArrayList<Need> basket){
         this.name = name;
         this.basket = basket;
-        this.role = "user";
     }
     
     /**

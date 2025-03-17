@@ -30,7 +30,7 @@ public class RegistrationService {
      * @return The {@link User} object if registered, null otherwise
      * @throws IOException when file cannot be accessed or read from
      */
-    public User registerUser(String name, String password) throws IOException {
+    public User registerUser(String name, String password, String role) throws IOException {
         if (name == null || password == null) {
             throw new IllegalArgumentException("Username or password cannot be null");
         }
@@ -40,7 +40,7 @@ public class RegistrationService {
         }
 
         // Create a new user if it doesn't exist
-        User newUser = new User(name, password);
+        User newUser = new User(name, password, role);
         return userDAO.createUser(newUser);  // Save the new user to the database
     }
 }

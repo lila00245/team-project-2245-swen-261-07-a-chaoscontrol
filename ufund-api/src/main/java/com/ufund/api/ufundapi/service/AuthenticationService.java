@@ -37,7 +37,7 @@ public class AuthenticationService {
      * @return The {@link User} object if authenticated, null otherwise
      * @throws IOException when file cannot be accessed or read from
      */
-    public User authenticateUser(String name, String password) throws IOException {
+    public User authenticateUser(String name, String password, String role) throws IOException {
         User user = userDAO.getUser(name);
         System.out.println("User retrieved: " + user);  // Debugging: Print user object
 

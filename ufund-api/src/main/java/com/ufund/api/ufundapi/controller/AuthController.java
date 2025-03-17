@@ -49,9 +49,9 @@ public class AuthController {
      */
     @PostMapping("login")
     public ResponseEntity<User> login(@RequestBody AuthRequest authRequest) throws IOException {
-        LOG.info("POST /login " + authRequest.getName() + " / " + authRequest.getPassword());        
+        LOG.info("POST /login " + authRequest.getName() + " / " + authRequest.getPassword() +" / ");        
             try {
-            User authUser = authenticationService.authenticateUser(authRequest.getName(), authRequest.getPassword());
+            User authUser = authenticationService.authenticateUser(authRequest.getName(), authRequest.getPassword(),authRequest.getRole());
             if (authUser != null){
                 System.out.println(authUser);
                 return new ResponseEntity<User>(authUser, HttpStatus.CREATED);
@@ -74,8 +74,8 @@ public class AuthController {
      */
     @PostMapping("register")
     public ResponseEntity<User> register(@RequestBody AuthRequest authRequest) throws IOException {
-        LOG.info("POST /register " + authRequest.getName() + " / " + authRequest.getPassword());        try {
-            User newUser = registrationService.registerUser(authRequest.getName(), authRequest.getPassword());
+        LOG.info("POST /register " + authRequest.getName() + " / " + authRequest.getPassword() + " / " + authRequest.getRole());        try {
+            User newUser = registrationService.registerUser(authRequest.getName(), authRequest.getPassword(), authRequest.getRole() );
             if (newUser != null){
                 System.out.println(newUser);
                 return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
