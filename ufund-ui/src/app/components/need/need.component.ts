@@ -39,7 +39,19 @@ export class NeedComponent {
    * @author Vlad
    */
   addNeedToBasket(): void {
-    console.log('Added to basket', this.need);
+    console.log('Adding to basket', this.need);
+    const username = localStorage.getItem('user');
+
+    // Error checking
+    if (!username) { console.error("User must be logged in."); }
+    if (!this.need) { console.error("Need must exist."); }
+
+    if (username && this.need) { // TODO: && user.status == helper
+      this.cupboardService.addNeedToBasket(username, this.need).subscribe({
+        next: (updated) => { console.log("Added to basket, ", updated); }, // TODO: update UI to show the new basket addition
+        error: (e) => { console.error("Error adding to basket."); }
+      });
+    }
   }
   
   goBack(): void {

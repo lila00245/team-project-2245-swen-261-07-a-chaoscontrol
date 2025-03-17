@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Need } from '../model/Need';
 import { Observable } from 'rxjs';
+import { User } from '../model/User';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,13 @@ export class CupboardService {
     return this.http.delete<Need>(`${this.url}/${id}`,this.httpOptions)
   }
 
+  /**
+   * Add need to basket given the user and their Need
+   * @author Vlad
+   */
+  addNeedToBasket(username: string, need: Need):Observable<User> {
+    return this.http.post<User>(`${this.url}/users/${username}/basket`, need);
+  }
   
 
 }
