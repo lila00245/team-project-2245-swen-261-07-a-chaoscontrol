@@ -56,6 +56,7 @@ export class CupboardComponent {
 
   logOut(): void{
     localStorage.removeItem('user')
+    localStorage.removeItem('role')
     this.router.navigate([`/`])
   }
 }
