@@ -1,4 +1,4 @@
-<p>{{message}}</p>
+<p>{{message | async}}</p>
 
 <input type="username" id = "username" class="inputField" #username>
 <button type="button" (click) = "getUser(username.value)">Username</button>

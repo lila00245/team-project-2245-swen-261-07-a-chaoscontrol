@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { User } from '../../model/User';
 import { UsersService } from '../../services/users.service';
+import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { UsersService } from '../../services/users.service';
 })
 export class LoginComponent {
   user?:User
-  message:string = "Enter Username!"
+  message = new BehaviorSubject<String>("Enter Username!");
 
   constructor(
     private router: Router,
@@ -24,14 +25,19 @@ export class LoginComponent {
   getUser(name: string): void {
     // Changed by Vladislav Usatii on 03 04 25: Refactored
     // to wait for async result before routing to /needs
-    this.userService.getUser(name).subscribe(user => {
-      if (user) {
-        this.router.navigate(['/needs']).then(() => {
-          window.location.reload();
-        });
-      } else {
-        this.message = "Incorrect username, please enter again.";
-      }
-    });
+      this.userService.getUser(name)
+      .pipe(catchError((ex: any, caught: Observable<User>) => {
+        this.message.next("Failed to login: "+ ex.status)
+        return of(undefined);
+      }))
+      .subscribe(user => {
+        if (user) {
+          this.router.navigate(['/needs']).then(() => {
+            window.location.reload();
+          });
+        } else {
+          this.message.next("Incorrect username, please enter again.");
+        }
+      });
   }
 }
