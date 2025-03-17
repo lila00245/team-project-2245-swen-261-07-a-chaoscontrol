@@ -13,7 +13,7 @@ import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 })
 export class LoginComponent {
   user?:User
-  message:string = "Login with Username and Password!"
+  message = new BehaviorSubject<String>("Enter Username and Password!");
 
   constructor(
     private router: Router,
