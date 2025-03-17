@@ -13,7 +13,7 @@ import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 })
 export class LoginComponent {
   user?:User
-  message = new BehaviorSubject<String>("Enter Username!");
+  message = new BehaviorSubject<String>("Enter Username and Password!");
 
   constructor(
     private router: Router,
@@ -22,22 +22,24 @@ export class LoginComponent {
     private userService: UsersService,
 ) {}
 
-  getUser(name: string): void {
-    // Changed by Vladislav Usatii on 03 04 25: Refactored
-    // to wait for async result before routing to /needs
-      this.userService.getUser(name)
-      .pipe(catchError((ex: any, caught: Observable<User>) => {
-        this.message.next("Failed to login: "+ ex.status)
+  login(name: string, password: string): void {
+    console.log("logging in with: ", {name, password});
+
+    this.userService.getUser(name
+      .pipe(catchError((ex:any, caught: Observable<User>) => {
+        this.message.next("Failed to login: " + ex.status)
         return of(undefined);
-      }))
-      .subscribe(user => {
-        if (user) {
-          this.router.navigate(['/needs']).then(() => {
-            window.location.reload();
-          });
+    }))
+    .subscribe(user => {
+      if (user) {
+        if (user.password === password) {  // checking password
+          this.router.navigate(['/needs']);
         } else {
-          this.message.next("Incorrect username, please enter again.");
+          this.message.next = "Incorrect password, please try again.";
         }
-      });
+      } else {
+        this.message.next = "Incorrect username, please enter again.";
+      }
+    });
   }
 }
