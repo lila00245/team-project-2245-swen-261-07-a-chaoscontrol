@@ -31,14 +31,16 @@ public class RegistrationService {
      * @throws IOException when file cannot be accessed or read from
      */
     public User registerUser(String name, String password) throws IOException {
+        if (name == null || password == null) {
+            throw new IllegalArgumentException("Username or password cannot be null");
+        }
         // Check if user already exists
         if (userDAO.getUser(name) != null) {
             return null;  // null if User already exists
         }
 
         // Create a new user if it doesn't exist
-        User newUser = new User(name);
-        newUser.setPassword(password);  // Set the user's password
+        User newUser = new User(name, password);
         return userDAO.createUser(newUser);  // Save the new user to the database
     }
 }

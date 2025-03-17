@@ -12,7 +12,7 @@ import { UsersService } from '../../services/users.service';
 })
 export class LoginComponent {
   user?:User
-  message:string = "Enter Username!"
+  message:string = "Login with Username and Password!"
 
   constructor(
     private router: Router,
@@ -21,12 +21,11 @@ export class LoginComponent {
     private userService: UsersService,
 ) {}
 
-  getUser(name: string): void {
+  login(name: string, password: string): void {
+    console.log("logging in with: ", {name, password} )
     this.userService.getUser(name).subscribe(user => {
       if (user) {
-        this.router.navigate(['/needs']).then(() => {
-          window.location.reload();
-        });
+        this.router.navigate(['/needs']);
       } else {
         this.message = "Incorrect username, please enter again.";
       }

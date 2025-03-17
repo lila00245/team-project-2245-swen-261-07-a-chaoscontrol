@@ -6,12 +6,14 @@ import { LoginComponent } from './components/login/login.component';
 import { NeedComponent } from './components/need/need.component'
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NeedSearchComponent } from './components/need-search/need-search.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {path:'', component: DashboardComponent},
   {path:'basket', component: BasketComponent},
   {path:'needs', component: CupboardComponent},
   {path:'login', component: LoginComponent},
+  {path:'register', component: RegisterComponent},
   {path:'needs/:id', component: NeedComponent},
 
 ];

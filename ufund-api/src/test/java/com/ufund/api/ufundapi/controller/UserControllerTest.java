@@ -40,7 +40,7 @@ public class UserControllerTest {
      */
     @Test
     public void testGetUser() throws IOException {
-        User user = new User("Owen");
+        User user = new User("Owen", "password");
         when(mockUserDAO.getUser(user.getName())).thenReturn(user);
         ResponseEntity<User> response = userController.getUser(user.getName());
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -75,7 +75,7 @@ public class UserControllerTest {
      */
     @Test
     public void testCreateUser() throws IOException {
-        User user = new User("Owen");
+        User user = new User("Owen", "password");
         when(mockUserDAO.createUser(user)).thenReturn(user);
         ResponseEntity<User> response = userController.createUser(user);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -88,7 +88,7 @@ public class UserControllerTest {
      */
     @Test
     public void testCreateUserFailed() throws IOException {
-        User user = new User("Owen");
+        User user = new User("Owen", "password");
         when(mockUserDAO.createUser(user)).thenReturn(null);
         ResponseEntity<User> response = userController.createUser(user);
         assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
@@ -100,7 +100,7 @@ public class UserControllerTest {
      */
     @Test
     public void testCreateUserHandleException() throws IOException {
-        User user = new User("Owen");
+        User user = new User("Owen", "password");
         doThrow(new IOException()).when(mockUserDAO).createUser(user);
         ResponseEntity<User> response = userController.createUser(user);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
@@ -112,7 +112,7 @@ public class UserControllerTest {
      */
     @Test
     public void testUpdateUser() throws IOException {
-        User user = new User("Owen");
+        User user = new User("Owen", "password");
         when(mockUserDAO.updateUser(user)).thenReturn(user);
         user.setName("Bob");
         ResponseEntity<User> response = userController.updateUser(user);
@@ -126,7 +126,7 @@ public class UserControllerTest {
      */
     @Test
     public void testUpdateUserFailed() throws IOException {
-        User user = new User("Bob");
+        User user = new User("Bob", "password");
         when(mockUserDAO.updateUser(user)).thenReturn(null);
         ResponseEntity<User> response = userController.updateUser(user);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -138,7 +138,7 @@ public class UserControllerTest {
      */
     @Test
     public void testUpdateUserHandleException() throws IOException {
-        User user = new User("Owen");
+        User user = new User("Owen", "password");
         doThrow(new IOException()).when(mockUserDAO).updateUser(user);
         ResponseEntity<User> response = userController.updateUser(user);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
@@ -151,8 +151,8 @@ public class UserControllerTest {
     @Test
     public void testGetUsers() throws IOException {
         User[] users = new User[2];
-        users[0] = new User("Owen");
-        users[1] = new User("The Great Iguana");
+        users[0] = new User("Owen", "password");
+        users[1] = new User("The Great Iguana", "password");
         when(mockUserDAO.getUsers()).thenReturn(users);
         ResponseEntity<User[]> response = userController.getUsers();
         assertEquals(HttpStatus.OK, response.getStatusCode());

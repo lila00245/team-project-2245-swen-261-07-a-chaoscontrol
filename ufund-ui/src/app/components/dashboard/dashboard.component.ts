@@ -16,12 +16,11 @@ export class DashboardComponent {
     private location: Location
   ){}
 
-  goTo():void{
-    this.router.navigate(['/login'])
-        .then(() => {
-          window.location.reload();
-        });
+  goToLogin():void{
+    this.router.navigate(['/login']);
   }
 
-
+  goToRegister():void{
+    this.router.navigate(['/register']);
+  }
 }

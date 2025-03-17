@@ -104,7 +104,7 @@ public class UserFileDAOTest {
      */
     @Test
     void testCreateUser() throws IOException {
-        User newUser = new User("Bill");
+        User newUser = new User("Bill", "password");
         User createdUser = userFileDAO.createUser(newUser);
         assertNotNull(createdUser, "Should return a new user");
         assertEquals("Bill", createdUser.getName(), "User must be Bill");
@@ -119,7 +119,7 @@ public class UserFileDAOTest {
      */
     @Test
     void testCreateUserNotUnique() throws IOException {
-        User existingUser = new User("Bob");
+        User existingUser = new User("Bob", "password");
         User createdUser = userFileDAO.createUser(existingUser);
         assertNull(createdUser, "Should return null when user already exists");
     }
@@ -132,7 +132,7 @@ public class UserFileDAOTest {
      */
     @Test
     void testUpdateUser() throws IOException {
-        User updatedUser = new User("Harold");
+        User updatedUser = new User("Harold", "password");
         User result = userFileDAO.updateUser(updatedUser);
         assertNotNull(result, "Should return updated Harold");
         assertEquals("Harold", result.getName());
@@ -147,7 +147,7 @@ public class UserFileDAOTest {
      */
     @Test
     void testUpdateUserNotFound() throws IOException {
-        User nonExistentUser = new User("Greg");
+        User nonExistentUser = new User("Greg", "password");
         User result = userFileDAO.updateUser(nonExistentUser);
         assertNull(result, "Should return null when user does not exist");
     }

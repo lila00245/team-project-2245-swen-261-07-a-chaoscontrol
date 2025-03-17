@@ -39,7 +39,10 @@ public class AuthenticationService {
      */
     public User authenticateUser(String name, String password) throws IOException {
         User user = userDAO.getUser(name);
-        if (user != null && user.getPassword().equals(password)) {
+        System.out.println("User retrieved: " + user);  // Debugging: Print user object
+
+        if (user != null && user.getPassword() != null && user.getPassword().equals(password)) {
+            System.out.println("Password retrieved: " + user.getPassword());  // Debugging: Print password
             return user;  // If user exists and passwords match, return the user
         }
         return null;  // Authentication failed, return null
