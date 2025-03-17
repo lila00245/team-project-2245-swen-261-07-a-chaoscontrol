@@ -33,4 +33,13 @@ export class NeedComponent {
     this.location.back();
   }
 
+  remove(): void {
+    // Check if user logged in is a manager
+    // If they are not, return
+    // If they are, remove the need from the cupboard and go back. 
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10)
+    this.cupboardService.deleteNeed(id)
+    //this.goBack();
+  }
+
 }
