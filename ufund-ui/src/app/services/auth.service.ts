@@ -15,13 +15,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login(name: string, password: string): Observable<User> {
+  login(name: string, password: string): Observable<any> {
     console.log("Sending login request:", { name, password });
 
     return this.http.post<User>(`${this.url}/login`, { name, password }, this.httpOptions);
   }
 
-  register(name: string, password: string): Observable<User> {
+  register(name: string, password: string): Observable<any> {
     console.log("Sending register request:", { name, password });
 
     return this.http.post<User>(`${this.url}/register`, { name, password }, this.httpOptions );

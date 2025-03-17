@@ -22,10 +22,15 @@ export class LoginComponent {
 ) {}
 
   login(name: string, password: string): void {
-    console.log("logging in with: ", {name, password} )
+    console.log("logging in with: ", {name, password});
+
     this.userService.getUser(name).subscribe(user => {
       if (user) {
-        this.router.navigate(['/needs']);
+        if (user.password === password) {  // checking password
+          this.router.navigate(['/needs']);
+        } else {
+          this.message = "Incorrect password, please try again.";
+        }
       } else {
         this.message = "Incorrect username, please enter again.";
       }

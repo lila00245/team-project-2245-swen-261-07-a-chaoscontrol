@@ -42,8 +42,6 @@ public class User{
         this.role = role;
     }
 
-
-
     /**
      * Create a user with the given name and password
      * basket is initialized to empty list
@@ -64,7 +62,7 @@ public class User{
      * @param name The name of the user
      * @param basket The basket of the user
      */
-    public User(String name, ArrayList<Need> basket){
+    public User(String name, String password, ArrayList<Need> basket){
         this.name = name;
         this.basket = basket;
         this.role = "user";

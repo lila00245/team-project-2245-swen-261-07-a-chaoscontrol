@@ -61,8 +61,8 @@ public class UserFileDAOTest {
         haroldBasket.add(new Need(1, "Beans", 5.50, "Vegetable"));
         haroldBasket.add(new Need(2, "Carrots", 3.32, "Vegetable"));
         mockUsers = new User[]{
-            new User("Bob", bobBasket),
-            new User("Harold", haroldBasket)
+            new User("Bob", "password", bobBasket),
+            new User("Harold", "password", haroldBasket)
         };
     }
 
