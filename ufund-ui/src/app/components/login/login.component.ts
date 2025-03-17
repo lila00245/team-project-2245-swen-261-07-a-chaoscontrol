@@ -23,24 +23,23 @@ export class LoginComponent {
     
 ) {}
 
-  login(name: string, password: string): void {
-    console.log("logging in with: ", {name, password});
-
-    this.userService.getUser(name
-      .pipe(catchError((ex:any, caught: Observable<User>) => {
-        this.message.next("Failed to login: " + ex.status)
-        return of(undefined);
-      }))
-      .subscribe(user => {
-        if (user){
-          localStorage.setItem('user',user.name)
-          this.userService.setCurrentUser(user)
-          this.router.navigate(['/needs']).then(() => {
-            window.location.reload();
-          });
-
+getUser(name: string, password: string): void {
+  // Changed by Vladislav Usatii on 03 04 25: Refactored
+  // to wait for async result before routing to /needs
+    this.userService.getUser(name)
+    .pipe(catchError((ex: any, caught: Observable<User>) => {
+      this.message.next("Failed to login: "+ ex.status)
+      return of(undefined);
+    }))
+    .subscribe(user => {
+      if (user && user.password === password){
+        localStorage.setItem('user',user.name)
+        this.userService.setCurrentUser(user)
+        this.router.navigate(['/needs']).then(() => {
+          window.location.reload();
+        });
       } else {
-        this.message.next = "Incorrect username, please enter again.";
+        this.message.next("Incorrect username, please enter again.");
       }
     });
   }
