@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Need } from '../model/Need';
 import { Observable } from 'rxjs';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,9 @@ export class CupboardService {
 
   deleteNeed(id:number):Observable<Need>{
     console.log("Need " + id + " deleted");
-    return this.http.delete<Need>(`${this.url}/${id}`)
+    let result = this.http.delete<Need>(`${this.url}/${id}`)
+    return result
+
   }
 
 }
