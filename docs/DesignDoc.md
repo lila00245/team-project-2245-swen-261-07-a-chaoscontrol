@@ -40,6 +40,7 @@ The purpose of this project is to create a web portal for a food bank that needs
 | MVP | Minimum Viable Product|
 | DAO | Data Access Object|
 | MVVM | Model-View-ViewModel|
+| CRUD | Create, Read, Update, Delete|
 
 
 ## Requirements
@@ -100,7 +101,7 @@ This section describes the web interface flow; this is how the user views and in
 > _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages/navigation in the web application.
 >  (Add low-fidelity mockups prior to initiating your **[Sprint 2]**  work so you have a good idea of the user interactions.) Eventually replace with representative screen shots of your high-fidelity results as these become available and finally include future recommendations improvement recommendations for your **[Sprint 4]** )_
 
-When a user navigates to the site, they are greeted with a login prompt. They can either choose to log in with a username and password, or register as a new user. Once logged in, they will see the need cupboard for the organization where they can click on needs to view their details such as name, price, and the food group they belong to. When viewing the need as a helper, there will be options to return to the cupboard, or add the need to their funding basket. As a manager, they will have the options to return to the cupboard, or remove the need from the cupboard. 
+When a user navigates to the site, they are greeted with a login prompt. They can either choose to log in with a username and password, or register as a new user. Once logged in, they will see the need cupboard for the organization where they can click on needs to view their details such as name, price, and the food group they belong to. When viewing the need as a helper, there will be options to return to the cupboard, or add the need to their funding basket. As a manager, they will have the options to return to the cupboard, or remove the need from the cupboard. When a helper views their basket, a table of all the needs in the basket are shown as well as the total cost of the basket.
 
 
 ### View Tier
@@ -126,8 +127,11 @@ When a user navigates to the site, they are greeted with a login prompt. They ca
 The ViewModel tier provides the application’s interface for client interaction and business logic, bridging the model (data) with the controller (API endpoints):
 
 	1.	Controllers:
-	•	NeedController handles HTTP requests related to Need entities.
-	•	It uses REST endpoints (GET, POST, PUT, DELETE) for CRUD operations and return appropriate ResponseEntity objects, managing HTTP status codes based on the success or failure of each operation.
+	• NeedController handles HTTP requests related to Need entities. 
+	  It uses REST endpoints (GET, POST, PUT, DELETE) for CRUD operations and return appropriate ResponseEntity objects, managing HTTP status codes based on the success or failure of each operation.
+	• UserController handles HTTP requests related to users. 
+	  It allows you to perform CRUD operations to manage the users of the system.
+	• AuthController allows users to either login to the system, or register as a new user.
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -138,12 +142,17 @@ The ViewModel tier provides the application’s interface for client interaction
 > 
 ![Replace with your ViewModel Tier class diagram 1, etc.](NeedControllerUML.png)
 
+![AuthController with relations](AuthControllerWithRelations.png)
+![UserController with relations](UserControllerWithRelations.png)
+
 ### Model Tier
 The model tier provides the interface for business logic and persistence. This bridges the gap between storage and the model. 
 
 	1.	Data Access Objects:
-	• NeedFileDAO provides the methods for interacting with the storage. 
-	• There are methods to support creating, reading, updating, and deleting needs from storage.
+	• NeedFileDAO provides the methods for interacting with the need storage. 
+	There are methods to support creating, reading, updating, and deleting needs from storage.
+	• UserFileDAO provides the methods for managing the storage of user accounts.
+	  It supports retrieving all or single users, creating users, updating users, and deleting users. 
 
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -152,6 +161,7 @@ The model tier provides the interface for business logic and persistence. This b
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
 ![Replace with your Model Tier class diagram 1, etc.](NeedFileDAOUML.png)
+![UserFileDAO with relations](UserFileDAOWithRelations.png)
 
 ## OO Design Principles
 
