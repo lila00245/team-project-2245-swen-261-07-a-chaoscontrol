@@ -198,6 +198,7 @@ We applied encapsulation in our design by grouping related methods and data into
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
 
+All of our user stories for sprint 2 have been tested and their functionality has been verified to match the acceptance criteria. In total, we tested 8 different user stories each with at least 2 acceptance criterion. 
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
@@ -206,7 +207,7 @@ We applied encapsulation in our design by grouping related methods and data into
 
 >_**[Sprint 2, 3 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
-
+![Jacoco report](sprint-2-code-coverage.png)
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
 
@@ -215,10 +216,11 @@ We applied encapsulation in our design by grouping related methods and data into
 - **2025-02-23**: Changed base meeting dates to Tuesdays [5:00pm-6:00pm] and Fridays [3:00pm-4:30pm]
 
 ## Sprint 2
-> Currently In Progress
+- **2025/03/05**: Getting the UI to interface with the backend.
+- **2025/03/15**: Finished acceptance testing. 
 
 
 ## Sprint 3
-- N/A
+> currently in progress
 ## Sprint 4
 - N/A
