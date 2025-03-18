@@ -15,6 +15,7 @@ export class NeedComponent {
 
   need: Need | undefined;
   userAdmin?: Boolean
+  edit: Boolean = true;
 
   constructor(
     private router: Router,
@@ -39,6 +40,21 @@ export class NeedComponent {
       const id = parseInt(this.route.snapshot.paramMap.get('id')!,10)
       this.cupboardService.getNeed(id).subscribe(need => this.need = need) 
   }
+
+  editMode():void{
+    if(this.edit){
+      this.edit = false;
+    } else {
+      this.edit = true;
+    }
+  }
+
+  editNeed(name:string, foodGroup:string, price:string):void{
+    if(this.need){
+      this.cupboardService.updateNeed(this.need?.id, name, foodGroup, price).subscribe()
+      this.router.navigate(["needs"])
+    }
+    }
 
   /**
    * Add need to basket from UI

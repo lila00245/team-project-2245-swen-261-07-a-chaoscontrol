@@ -34,8 +34,9 @@ export class CupboardService {
     return this.http.post<Need>(this.url,{name, foodGroup, price},this.httpOptions)
   }
 
-  updateNeed(need: Need):Observable<Need>{
-    return this.http.put<Need>(this.url,need,this.httpOptions)
+  updateNeed(id:number, name: string, foodGroup:string, price:string):Observable<Need>{
+    console.log(name,id,price,foodGroup)
+    return this.http.put<Need>(this.url,{id:id,name:name,price:price,foodGroup:foodGroup},this.httpOptions)
   }
 
   deleteNeed(id:number):Observable<Need>{

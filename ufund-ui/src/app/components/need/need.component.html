@@ -1,12 +1,20 @@
-<div *ngIf="need">
+<div *ngIf="need && edit" >
     <h2>{{need.name | uppercase}} Details</h2>
     <div><span>id: </span>{{need.id}}</div>
     <div><span>name: </span>{{need.name}}</div>
     <div><span>cost: </span>{{need.cost}}</div>
     <div><span>food group: </span>{{need.foodGroup}}</div>
-
-    <button type="button" (click)="addNeedToBasket()">add to basket</button>
     
+</div>
+<div>
+    <div *ngIf="!edit">
+        <input placeholder="Enter Need Name..." type="name" id = "name" class="inputField" #name><br>
+        <input placeholder="Enter Need Food Group..." type="foodGroup" id = "foodGroup" class="inputField" #foodGroup><br>
+        <input placeholder="Enter Need Food Price..." type="price" id = "price" class="inputField" #price><br>
+        <button  *ngIf="!edit" (click)="editNeed(name.value,foodGroup.value,price.value)">save</button>
+    </div>
+    <button *ngIf="edit" type="button" (click)="addNeedToBasket()">add to basket</button>
     <button type="button" (click)="goBack()">go back</button>
-    <button *ngIf="userAdmin" type="button" (click)="remove()">remove</button>
+    <button *ngIf="userAdmin && edit" type="button" (click)="remove()">remove</button>
+    <button type="button" (click)="editMode()">edit mode</button>
 </div>
