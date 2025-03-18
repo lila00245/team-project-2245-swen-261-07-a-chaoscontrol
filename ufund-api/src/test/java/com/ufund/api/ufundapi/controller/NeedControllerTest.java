@@ -85,7 +85,7 @@ public class NeedControllerTest {
         Map<String, Object> m = Map.ofEntries(
             Map.entry("name", "apple"),
             Map.entry("foodGroup", "fruit"),
-            Map.entry("price", 10)
+            Map.entry("price", "10")
         );
         ResponseEntity<Need> response = needController.createNeed(m);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -102,7 +102,7 @@ public class NeedControllerTest {
         Map<String, Object> m = Map.ofEntries(
             Map.entry("name", "apple"),
             Map.entry("foodGroup", "fruit"),
-            Map.entry("price", 10)
+            Map.entry("price", "10")
         );
         ResponseEntity<Need> response = needController.createNeed(m);
 
@@ -119,7 +119,7 @@ public class NeedControllerTest {
         Map<String, Object> m = Map.ofEntries(
             Map.entry("name", "apple"),
             Map.entry("foodGroup", "fruit"),
-            Map.entry("price", 10)
+            Map.entry("price", "10")
         );
         ResponseEntity<Need> response = needController.createNeed(m);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
@@ -135,7 +135,6 @@ public class NeedControllerTest {
         when(mockNeedDao.updateNeed(need)).thenReturn(need);
         ResponseEntity<Need> response = needController.updateNeed(need);
         need.setName("banana");
-
         response = needController.updateNeed(need);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
