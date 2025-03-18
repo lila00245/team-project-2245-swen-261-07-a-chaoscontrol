@@ -73,7 +73,9 @@ This section describes the application domain.
 > can discuss the more important domain entities and their relationship
 > to each other._
 
-
+The domain for this project mainly consists of managers and helpers and the operations they can perform on baskets and cupboards that contain needs. 
+The cupboard is the central storage for the needs of the organization. In this project, the needs are food items that a food bank is in need of. Managers oversee the cupboard and add, remove, and update needs when necessary.
+A basket belongs to a helper to keep track of the food items they plan to buy for the food bank. A user has access to the cupboard so they can add the food items they wish to buy to their basket. 
 ## Architecture and Design
 
 This application uses a REST API to keep track of all user information and needs information. The API uses an Angular user interface, providing both a helper and manager view.
