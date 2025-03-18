@@ -1,6 +1,7 @@
 package com.ufund.api.ufundapi.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -129,6 +130,9 @@ public class NeedController {
     @PostMapping("")
     public ResponseEntity<Need> createNeed(@RequestBody Map<String, Object> data) {
         try{
+            if(data.get("name")=="" || data.get("foodGroup")=="" || data.get("price")==""){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
             Need newNeed = needDao.createNeed((String)data.get("name"),
             (String)data.get("foodGroup"),
             Double.parseDouble((String)data.get("price")));
