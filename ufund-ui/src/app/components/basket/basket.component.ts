@@ -72,6 +72,7 @@ export class BasketComponent {
             next: (updated: User) => {
               this.basket = updated.basket;// re-set Needs basket
               this.totalCostCalculation(); // re-run cost calculation with updated basket
+              // alert("Removed Need " + need.id + " from " + this.name + " basket.");
             },
             error: (e) => { console.error("Error removing Need from User, ", e); }
           });
