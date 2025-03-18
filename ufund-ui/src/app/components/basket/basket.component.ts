@@ -26,7 +26,6 @@ export class BasketComponent {
       this.router.navigate([`/`])
     }
     this.loadBasket();
-    this.totalCostCalculation();
   }
 
   loadBasket():void {
@@ -53,6 +52,17 @@ export class BasketComponent {
         sum += 100 * need.cost;
       }
       this.totalCost = sum / 100;
+    }
+  }
+
+  removeNeed(need: Need):void {
+    if (need && this.name) {
+      this.userService.getUser(this.name).subscribe({
+        next: (user: User) => {
+          console.log("Removing need from list.");
+        },
+        error: (e) => { console.error("Error removing Need."); }
+      });
     }
   }
 

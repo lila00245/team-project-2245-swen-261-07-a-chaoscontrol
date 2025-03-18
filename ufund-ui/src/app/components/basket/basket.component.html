@@ -7,6 +7,7 @@
                 <th>name</th>
                 <th>cost</th>
                 <th>food group</th>
+                <th>remove from basket</th>
             </tr>
         </thead>
         <tbody>
@@ -15,11 +16,13 @@
             <td>{{ need.name }}</td>
             <td>${{ need.cost }}</td>
             <td>{{ need.foodGroup }}</td>
+            <td><button (click)="removeNeed(need)">remove</button></td>
           </tr>
           <tr>
             <th></th>
             <th></th>
             <th>Total cost: ${{totalCost}}</th>
+            <th></th>
             <th></th>
           </tr>
         </tbody>
