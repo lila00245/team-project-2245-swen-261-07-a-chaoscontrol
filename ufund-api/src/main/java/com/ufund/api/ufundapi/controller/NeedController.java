@@ -159,13 +159,14 @@ public class NeedController {
     @PutMapping("")
     public ResponseEntity<Need> updateNeed(@RequestBody Map<String, Object> data) {
         try{
-
+            System.out.println((String)data.get("foodGroup"));
             Need updatedNeed = needDao.updateNeed(
                 (int) data.get("id"),
                 (String) data.get("name"),
-                (String) data.get("foodGroup"),
-                Double.parseDouble((String) data.get("price"))
+                Double.parseDouble((String) data.get("price")),
+                (String) data.get("foodGroup")
             );
+
             if (updatedNeed == null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {

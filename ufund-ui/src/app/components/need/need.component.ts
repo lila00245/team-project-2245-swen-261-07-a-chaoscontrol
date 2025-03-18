@@ -52,6 +52,7 @@ export class NeedComponent {
   editNeed(name:string, foodGroup:string, price:string):void{
     if(this.need){
       this.cupboardService.updateNeed(this.need?.id, name, foodGroup, price).subscribe()
+      this.router.navigate(["needs"])
     }
     }
 

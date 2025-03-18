@@ -132,7 +132,7 @@ public class NeedControllerTest {
     @Test
     public void testUpdateNeed() throws IOException {
         Need need = new Need(99, "apple", 10, "fruit");
-        when(mockNeedDao.updateNeed(99,"apple","fruit",10)).thenReturn(need);
+        when(mockNeedDao.updateNeed(99,"apple",10,"fruit")).thenReturn(need);
         Map<String, Object> m = Map.ofEntries(
             Map.entry("name", "apple"),
             Map.entry("foodGroup", "fruit"),
@@ -157,7 +157,7 @@ public class NeedControllerTest {
             Map.entry("foodGroup", "fruit"),
             Map.entry("price", "10")
         );
-        when(mockNeedDao.updateNeed(99,"apple","fruit",10)).thenReturn(null);
+        when(mockNeedDao.updateNeed(99,"apple",10,"fruit")).thenReturn(null);
         ResponseEntity<Need> response = needController.updateNeed(m);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -173,7 +173,7 @@ public class NeedControllerTest {
             Map.entry("foodGroup", "fruit"),
             Map.entry("price", "10")
         );
-        doThrow(new IOException()).when(mockNeedDao).updateNeed(99,"apple","fruit",10);
+        doThrow(new IOException()).when(mockNeedDao).updateNeed(99,"apple",10,"fruit");
         ResponseEntity<Need> response = needController.updateNeed(m);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }

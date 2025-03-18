@@ -65,7 +65,7 @@ public interface NeedDAO {
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Need updateNeed(int id, String name, String foodGroup, double price) throws IOException;
+    Need updateNeed(int id, String name, double price, String foodGroup) throws IOException;
 
     /**
      * Deletes a {@linkplain Need Need} with the given id
