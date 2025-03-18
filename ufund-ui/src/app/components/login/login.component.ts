@@ -34,6 +34,8 @@ getUser(name: string, password: string): void {
     .subscribe(user => {
       if (user && user.password === password){
         localStorage.setItem('user',user.name)
+        localStorage.setItem('role',user.role)
+        console.log(localStorage.getItem('role'))
         this.userService.setCurrentUser(user)
         this.router.navigate(['/needs']).then(() => {
           window.location.reload();

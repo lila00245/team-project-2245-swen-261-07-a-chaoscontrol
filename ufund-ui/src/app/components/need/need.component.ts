@@ -14,7 +14,8 @@ import { UsersService } from '../../services/users.service';
 export class NeedComponent {
 
   need: Need | undefined;
-  userAdmin: boolean = false
+  userAdmin?: Boolean
+
   constructor(
     private router: Router,
     private cupboardService: CupboardService,
@@ -27,9 +28,9 @@ export class NeedComponent {
     if(!localStorage.getItem('user')){
       this.router.navigate([`/`])
     }
-    if(this.usersService.currentUser != null && this.usersService.currentUser.role == "admin"){
-      this.userAdmin = true
-    }
+
+    this.userAdmin = localStorage.getItem('role') == "admin"
+    console.log(localStorage.getItem('role'))
     console.log("User admin status: " + this.userAdmin)
     this.getNeed();
   }
@@ -51,7 +52,7 @@ export class NeedComponent {
     this.cupboardService.deleteNeed(id).subscribe({
       next: (v) => {
         console.log("Need " + id + " deleted")
-        this.goBack()
+        this.router.navigate(['/needs'])
       },
       error: (v) => console.log("Could not delete need " + id)
     })

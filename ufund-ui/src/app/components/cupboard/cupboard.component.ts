@@ -16,6 +16,7 @@ import { UsersService } from '../../services/users.service';
 export class CupboardComponent {
   needs: Need[] = [];
   name?:string;
+  userAdmin?: Boolean
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class CupboardComponent {
     if(!localStorage.getItem('user')){
       this.router.navigate([`/`])
     }
+    this.userAdmin = localStorage.getItem('role') === "admin"
     console.log(localStorage.getItem('user'))
     this.route.queryParams.subscribe(params => {
     this.name = params['name'];})
@@ -56,6 +58,7 @@ export class CupboardComponent {
 
   logOut(): void{
     localStorage.removeItem('user')
+    localStorage.removeItem('role')
     this.router.navigate([`/`])
   }
 }
