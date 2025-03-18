@@ -14,6 +14,7 @@ import { User } from '../../model/User';
 export class BasketComponent {
   name:string|null = localStorage.getItem('user');
   basket:Need[] = [];
+  totalCost:number = 0;
   constructor(
       private router: Router,
       private cupboardService: CupboardService,
@@ -25,14 +26,34 @@ export class BasketComponent {
       this.router.navigate([`/`])
     }
     this.loadBasket();
+    this.totalCostCalculation();
   }
 
   loadBasket():void {
     if (this.name) {
       this.userService.getUser(this.name).subscribe({
-        next: (user: User) => { this.basket = user.basket; },
+        next: (user: User) => {
+          this.basket = user.basket;    // set user's basket to variable
+          this.totalCostCalculation();  // initialize the basket's sum
+        },
         error: (e) => { console.error("Error loading user."); }
       });
     }
   }
+
+  /**
+   * Sums up all columns from basket
+   * 
+   * @author Vlad
+   */
+  totalCostCalculation():void {
+    if (this.name) {
+      let sum = 0;
+      for (const need of this.basket) {
+        sum += 100 * need.cost;
+      }
+      this.totalCost = sum / 100;
+    }
+  }
+
 }

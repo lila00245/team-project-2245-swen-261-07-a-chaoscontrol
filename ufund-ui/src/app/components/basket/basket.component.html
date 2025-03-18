@@ -1,9 +1,28 @@
 <h2>{{name}}'s basket</h2>
 <div *ngIf="basket; else emptyBasket">
-    <ul>
-      <li *ngFor="let need of basket">
-        <strong>{{ need.name }}</strong>
-      </li>
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>cost</th>
+                <th>food group</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let need of basket">
+            <td>{{ need.id }}</td>
+            <td>{{ need.name }}</td>
+            <td>${{ need.cost }}</td>
+            <td>{{ need.foodGroup }}</td>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>Total cost: ${{totalCost}}</th>
+            <th></th>
+          </tr>
+        </tbody>
+    </table>
 </div>
 <ng-template #emptyBasket><p>Your basket is empty.</p></ng-template>
