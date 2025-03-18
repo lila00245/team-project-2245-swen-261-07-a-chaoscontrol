@@ -29,12 +29,17 @@ Key features include:
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
 > important user group and user goals._
 
+The purpose of this project is to create a web portal for a food bank that needs certain objectives fulfilled. The most important user group is the helpers who purchase needs for the organization. The goals of the helpers are to add needs to their funding baskets and buy the needs they add to support the food bank. 
+
 ### Glossary and Acronyms
 > _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
 | SPA | Single Page |
+| MVP | Minimum Viable Product|
+| DAO | Data Access Object|
+| MVVM | Model-View-ViewModel|
 
 
 ## Requirements
@@ -47,6 +52,8 @@ This section describes the features of the application.
 
 ### Definition of MVP
 > _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
+
+The MVP will be an online portal for a food bank to request certain items to be purchased by helpers to restock the food bank. It will allow helpers to add needs to a funding basket and checkout with those needs to purchase them. It will also allow managers to manage a cupboard of needs by adding, removing, and modifying needs in the cupboard. 
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
@@ -75,7 +82,7 @@ This application uses a REST API to keep track of all user information and needs
 The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
 **NOTE**: detailed diagrams are required in later sections of this document.
 
-![The Tiers & Layers of the Architecture](Food-bank-MVVM.png)
+![The Tiers & Layers of the Architecture](Food-bank-MVVM-sprint-2.png)
 
 The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
@@ -92,6 +99,8 @@ This section describes the web interface flow; this is how the user views and in
 
 > _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages/navigation in the web application.
 >  (Add low-fidelity mockups prior to initiating your **[Sprint 2]**  work so you have a good idea of the user interactions.) Eventually replace with representative screen shots of your high-fidelity results as these become available and finally include future recommendations improvement recommendations for your **[Sprint 4]** )_
+
+When a user navigates to the site, they are greeted with a login prompt. They can either choose to log in with a username and password, or register as a new user. Once logged in, they will see the need cupboard for the organization where they can click on needs to view their details such as name, price, and the food group they belong to. When viewing the need as a helper, there will be options to return to the cupboard, or add the need to their funding basket. As a manager, they will have the options to return to the cupboard, or remove the need from the cupboard. 
 
 
 ### View Tier
