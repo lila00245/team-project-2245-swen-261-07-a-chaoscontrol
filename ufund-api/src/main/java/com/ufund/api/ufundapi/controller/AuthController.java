@@ -49,16 +49,15 @@ public class AuthController {
     @PostMapping("login")
     public ResponseEntity<User> login(@RequestBody User user) throws IOException {
         LOG.info("POST /login " + user.getName() + " / " + user.getPassword() +" / ");        
-            try {
+        try {
             User authUser = authenticationService.authenticateUser(user.getName(), user.getPassword(),user.getRole());
             if (authUser != null){
                 System.out.println(authUser);
-                return new ResponseEntity<User>(authUser, HttpStatus.CREATED);
+                return new ResponseEntity<User>(authUser, HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-        }
-        catch(IOException e) {
+        } catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -79,7 +78,7 @@ public class AuthController {
                 System.out.println(newUser);
                 return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
             }else{
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
         }
         catch(IOException e) {

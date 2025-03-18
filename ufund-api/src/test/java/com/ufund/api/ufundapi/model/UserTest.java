@@ -71,6 +71,21 @@ public class UserTest {
         assertEquals("Bob", user.getName());
     }
 
+    @Test
+    public void testSetPassword() {
+        User user = new User("Owen", "password","user");
+        user.setPassword("123");
+        assertEquals("123", user.getPassword());
+    }
+
+    @Test
+    public void testSetRole() {
+        User user = new User("Owen", "password","user");
+        user.setRole("admin");
+        assertEquals("admin", user.getRole());
+    }
+
+
     /**
      * Tests the 'addToBasket' and 'getBasket' methods in the User class.
      * Verifies that a Need is correctly added to the basket and can be retrieved.
