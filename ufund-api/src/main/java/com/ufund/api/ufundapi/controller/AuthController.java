@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ufund.api.ufundapi.model.User;
 import com.ufund.api.ufundapi.service.AuthenticationService;
 import com.ufund.api.ufundapi.service.RegistrationService;
-import com.ufund.api.ufundapi.model.AuthRequest;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,16 +41,16 @@ public class AuthController {
     /**
      * Handles the POST request for user login.
      * 
-     * @param authRequest The {@link AuthRequest} containing the username and password
-     * @return A {@link ResponseEntity} containing the {@link AuthUser} object and HTTP status {@link HttpStatus#OK} if successful,
+     * @param user The {@link User} containing the username and password
+     * @return A {@link ResponseEntity} containing the {@link User} object and HTTP status {@link HttpStatus#OK} if successful,
      *         or HTTP status {@link HttpStatus#NOT_FOUND} if the user does not exist.
      * @throws IOException when file cannot be accessed or read from
      */
     @PostMapping("login")
-    public ResponseEntity<User> login(@RequestBody AuthRequest authRequest) throws IOException {
-        LOG.info("POST /login " + authRequest.getName() + " / " + authRequest.getPassword() +" / ");        
+    public ResponseEntity<User> login(@RequestBody User user) throws IOException {
+        LOG.info("POST /login " + user.getName() + " / " + user.getPassword() +" / ");        
             try {
-            User authUser = authenticationService.authenticateUser(authRequest.getName(), authRequest.getPassword(),authRequest.getRole());
+            User authUser = authenticationService.authenticateUser(user.getName(), user.getPassword(),user.getRole());
             if (authUser != null){
                 System.out.println(authUser);
                 return new ResponseEntity<User>(authUser, HttpStatus.CREATED);
@@ -68,14 +67,14 @@ public class AuthController {
     /**
      * Handles the POST request for user registration.
      *      * 
-     * @param authRequest The {@link AuthRequest} containing the username and password
-     * @return A {@link ResponseEntity} containing the {@link AuthUser} object and HTTP status {@link HttpStatus#CREATED} if successful,
+     * @param authRequest The {@link User} containing the user and password
+     * @return A {@link ResponseEntity} containing the {@link User} object and HTTP status {@link HttpStatus#CREATED} if successful,
      *         or HTTP status {@link HttpStatus#CONFLICT} if the user already exists.
      */
     @PostMapping("register")
-    public ResponseEntity<User> register(@RequestBody AuthRequest authRequest) throws IOException {
-        LOG.info("POST /register " + authRequest.getName() + " / " + authRequest.getPassword() + " / " + authRequest.getRole());        try {
-            User newUser = registrationService.registerUser(authRequest.getName(), authRequest.getPassword(), authRequest.getRole() );
+    public ResponseEntity<User> register(@RequestBody User user) throws IOException {
+        LOG.info("POST /register " + user.getName() + " / " + user.getPassword() + " / " + user.getRole());        try {
+            User newUser = registrationService.registerUser(user.getName(), user.getPassword(), user.getRole() );
             if (newUser != null){
                 System.out.println(newUser);
                 return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
