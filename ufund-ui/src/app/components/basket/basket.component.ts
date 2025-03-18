@@ -55,11 +55,26 @@ export class BasketComponent {
     }
   }
 
+  /**
+   * Takes in selected Need and current user, filters out item, and passes in updated user to the UserDAO
+   * 
+   * @author Vlad
+   */
   removeNeed(need: Need):void {
     if (need && this.name) {
       this.userService.getUser(this.name).subscribe({
         next: (user: User) => {
-          console.log("Removing need from list.");
+          console.log("Removing need from list, ", need);
+          user.basket = user.basket.filter(item => item.id !== need.id); // filter out item to be removed by id
+
+          // run an update to the UserDAO
+          this.userService.updateUser(user).subscribe({
+            next: (updated: User) => {
+              this.basket = updated.basket;// re-set Needs basket
+              this.totalCostCalculation(); // re-run cost calculation with updated basket
+            },
+            error: (e) => { console.error("Error removing Need from User, ", e); }
+          });
         },
         error: (e) => { console.error("Error removing Need."); }
       });
