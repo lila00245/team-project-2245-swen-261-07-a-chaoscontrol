@@ -2,11 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Need } from '../model/Need';
 import { Observable } from 'rxjs';
-<<<<<<< HEAD
 import { User } from '../model/User';
-=======
 import { UsersService } from './users.service';
->>>>>>> main
 
 @Injectable({
   providedIn: 'root'
