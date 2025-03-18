@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NeedComponent } from './components/need/need.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NeedSearchComponent } from './components/need-search/need-search.component';
+import { CreateComponent } from './components/create/create.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NeedSearchComponent } from './components/need-search/need-search.compon
     BasketComponent,
     NeedComponent,
     DashboardComponent,
-    NeedSearchComponent
+    NeedSearchComponent,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,
