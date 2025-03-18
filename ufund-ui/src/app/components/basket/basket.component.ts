@@ -82,4 +82,8 @@ export class BasketComponent {
     }
   }
 
+  goToCupboard():void{
+    this.router.navigate(['/needs']);
+  }
+
 }

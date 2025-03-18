@@ -1,5 +1,5 @@
 <h2>{{name}}'s basket</h2>
-<div *ngIf="basket; else emptyBasket">
+<div *ngIf="basket?.length ?? 0 > 0; else emptyBasket">
     <table>
         <thead>
             <tr>
@@ -28,4 +28,7 @@
         </tbody>
     </table>
 </div>
-<ng-template #emptyBasket><p>Your basket is empty.</p></ng-template>
+<ng-template #emptyBasket>
+  <p>Your basket is empty.</p>
+  <button (click)="goToCupboard()">go to cupboard</button>
+</ng-template>
