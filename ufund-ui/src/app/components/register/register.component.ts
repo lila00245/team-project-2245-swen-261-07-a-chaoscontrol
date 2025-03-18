@@ -20,9 +20,17 @@ export class RegisterComponent {
     private authService: AuthService,
   ) {}
 
-  register(name:string, password:string, role:string) {
-    const user = { name, password, role };
+  register(name:string, password:string) {
+    let value = document.getElementsByName('option')
+    let role = ""
+    if((value[0] as HTMLInputElement).checked){
+      role = "admin"
+    } else {
+      role = "user"
+    }
 
+    const user = { name, password, role };
+    
     console.log("regitsering with:", {name, password, role});
 
     this.authService.register(user.name, user.password, user.role).subscribe(response => {

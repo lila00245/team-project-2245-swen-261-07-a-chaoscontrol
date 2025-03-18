@@ -1,11 +1,13 @@
 package com.ufund.api.ufundapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 
 import com.ufund.api.ufundapi.persistence.UserDAO;
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.User;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -203,6 +205,62 @@ public class UserControllerTest {
     public void testDeleteUserHandleException() throws IOException {
         doThrow(new IOException()).when(mockUserDAO).deleteUser("Owen");
         ResponseEntity<User> response = userController.deleteUser("Owen");
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+
+    /**
+     * Tests the 'addNeedToBasket' method when the user isn't found.
+     * Verifies that a 404 NOT FOUND response is returned when an exception is thrown.
+     */
+    @Test
+    public void testAddNeedToBasketUserNotFound() throws IOException {
+        Need testNeed = new Need(1, "Broccoli", 0.59, "vegetable");
+        when(mockUserDAO.getUser("Owen")).thenReturn(null);
+        ResponseEntity<User> response = userController.addNeedToBasket("Owen", testNeed);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    /**
+     * Tests the 'addNeedToBasket' method when the user is found.
+     * Verifies that an HTTP 200 OK response is returned with the updated User and their Need.
+     */
+    @Test
+    public void testAddNeedToBasketSuccess() throws IOException {
+        Need testNeed = new Need(1, "Broccoli", 0.59, "vegetable");
+        User testUser = new User("testUser", "password", "user");
+        when(mockUserDAO.getUser("testUser")).thenReturn(testUser);
+        User updatedUser = new User("testUser", "password", "user");
+        updatedUser.addToBasket(testNeed); // now basket size will be 1.
+        when(mockUserDAO.updateUser(any(User.class))).thenReturn(updatedUser);
+        ResponseEntity<User> response = userController.addNeedToBasket("testUser", testNeed);
+        assertEquals(HttpStatus.OK, response.getStatusCode());                   // returns 200 status code
+        assertEquals(1, response.getBody().getBasket().size());         // checks expected size
+        assertEquals(testNeed, response.getBody().getBasket().get(0));     // checks that it was added to database
+    }
+
+    /**
+     * Tests the 'addNeedToBasket' method when an IOException occurs in getUser.
+     * Verifies that a 500 INTERNAL SERVER ERROR response is returned when an exception is thrown.
+     */
+    @Test
+    public void testAddNeedToBasketGetUserException() throws IOException {
+        Need testNeed = new Need(1, "Broccoli", 0.59, "vegetable");
+        doThrow(new IOException("test")).when(mockUserDAO).getUser("Owen");
+        ResponseEntity<User> response = userController.addNeedToBasket("Owen", testNeed);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+
+    /**
+     * Tests the 'addNeedToBasket' method when an IOException occurs in getUser.
+     * Verifies that a 500 INTERNAL SERVER ERROR response is returned when an exception is thrown.
+     */
+    @Test
+    public void testAddNeedToBasketUpdateUserException() throws IOException {
+        User testUser = new User("Owen", "password", "user");
+        Need testNeed = new Need(1, "Broccoli", 0.59, "vegetable");
+        when(mockUserDAO.getUser("Owen")).thenReturn(testUser);
+        doThrow(new IOException("test")).when(mockUserDAO).updateUser(testUser);
+        ResponseEntity<User> response = userController.addNeedToBasket("Owen", testNeed);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 }
