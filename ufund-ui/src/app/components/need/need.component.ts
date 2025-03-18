@@ -39,6 +39,28 @@ export class NeedComponent {
       const id = parseInt(this.route.snapshot.paramMap.get('id')!,10)
       this.cupboardService.getNeed(id).subscribe(need => this.need = need) 
   }
+
+  /**
+   * Add need to basket from UI
+   * 
+   * @author Vlad
+   */
+  addNeedToBasket(): void {
+    console.log('Adding to basket', this.need);
+    const username = localStorage.getItem('user');
+
+    // Error checking
+    if (!username) { console.error("User must be logged in."); }
+    if (!this.need) { console.error("Need must exist."); }
+
+    if (username && this.need) { // TODO: && user.status == helper
+      let newNeed = this.need;
+      this.cupboardService.addNeedToBasket(username, this.need).subscribe({
+        next: (updated) => { alert("Successfully added " + newNeed.name + " to basket."); },
+        error: (e) => { console.error("Error adding to basket,", e); }
+      });
+    }
+  }
   
   goBack(): void {
     this.location.back();

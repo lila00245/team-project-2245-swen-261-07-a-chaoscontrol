@@ -4,6 +4,8 @@
     <div><span>name: </span>{{need.name}}</div>
     <div><span>cost: </span>{{need.cost}}</div>
     <div><span>food group: </span>{{need.foodGroup}}</div>
+
+    <button type="button" (click)="addNeedToBasket()">add to basket</button>
     
     <button type="button" (click)="goBack()">go back</button>
     <button *ngIf="userAdmin" type="button" (click)="remove()">remove</button>
