@@ -53,7 +53,7 @@ public interface NeedDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Need createNeed(Need need) throws IOException;
+    Need createNeed(String name, String foodGroup, double price) throws IOException;
 
     /**
      * Updates and saves a {@linkplain Need Need}
