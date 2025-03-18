@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CupboardService } from '../../services/cupboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
+
+
 @Component({
   selector: 'app-create',
   standalone: false,
@@ -12,9 +15,11 @@ export class CreateComponent {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private cupboardService: CupboardService,
-) {}
+    private cupboardService: CupboardService
+  ) {}
 
-  createNeed(name: string, foodGroup: string, price: number){
+  createNeed(name: string, foodGroup: string, price: string){
+    this.cupboardService.createNeed(name, foodGroup, price).subscribe()
+    this.router.navigate(["/needs"])
   }
 }

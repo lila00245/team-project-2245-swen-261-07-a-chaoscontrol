@@ -100,8 +100,7 @@ public class NeedFileDAOTest {
      */
     @Test
     void testCreateNeed() throws IOException {
-        Need newNeed = new Need(0, "New Need", 100, "Misc");
-        Need createdNeed = needFileDAO.createNeed(newNeed);
+        Need createdNeed = needFileDAO.createNeed("New Need","Misc", 100);
         assertNotNull(createdNeed, "Created need should not be null");
         assertEquals(2, createdNeed.getId(), "New ID should be 2");
         assertEquals("New Need", createdNeed.getName());

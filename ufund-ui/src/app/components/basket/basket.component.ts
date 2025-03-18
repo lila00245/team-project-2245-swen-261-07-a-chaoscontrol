@@ -61,18 +61,30 @@ export class BasketComponent {
    * @author Vlad
    */
   removeNeed(need: Need):void {
+    // case where needs or the user don't exist
+    if (!need || !this.name){
+      if (!need) { console.error("There are no needs in your basket to remove."); }
+      if (!this.name) { console.error("The User is not valid."); }
+    }
     if (need && this.name) {
       this.userService.getUser(this.name).subscribe({
         next: (user: User) => {
           console.log("Removing need from list, ", need);
-          user.basket = user.basket.filter(item => item.id !== need.id); // filter out item to be removed by id
+          if (user.basket.length === 0) { console.error("Basket has 0 items."); return; } // case where there are 0 items in basket
+
+          for (let i = 0; i < user.basket.length; i++) {
+            if (user.basket[i].id === need.id) {
+              user.basket.splice(i, 1); // find first occurrence of the Need
+              break;
+            }
+          }
 
           // run an update to the UserDAO
           this.userService.updateUser(user).subscribe({
             next: (updated: User) => {
               this.basket = updated.basket;// re-set Needs basket
               this.totalCostCalculation(); // re-run cost calculation with updated basket
-              // alert("Removed Need " + need.id + " from " + this.name + " basket.");
+              alert("Removed Need " + need.id + " from " + this.name + " basket.");
             },
             error: (e) => { console.error("Error removing Need from User, ", e); }
           });

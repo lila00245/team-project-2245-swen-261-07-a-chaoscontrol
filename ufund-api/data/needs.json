@@ -1,1 +1,1 @@
-[]
+[{"id":1,"name":"Pasta","cost":12.5,"foodGroup":"Starch"},{"id":2,"name":"Farfalle","cost":5.4,"foodGroup":"Starch"},{"id":4,"name":"Milk","cost":3.5,"foodGroup":"Dairy"},{"id":5,"name":"Lasagna","cost":10.25,"foodGroup":"Meal"},{"id":6,"name":"Corn","cost":1.23,"foodGroup":"Vegetable"},{"id":7,"name":"water","cost":1.2,"foodGroup":"liquid"}]
