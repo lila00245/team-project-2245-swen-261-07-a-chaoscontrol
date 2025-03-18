@@ -6,4 +6,5 @@
     <div><span>food group: </span>{{need.foodGroup}}</div>
     
     <button type="button" (click)="goBack()">go back</button>
+    <button *ngIf="userAdmin" type="button" (click)="remove()">remove</button>
 </div>
