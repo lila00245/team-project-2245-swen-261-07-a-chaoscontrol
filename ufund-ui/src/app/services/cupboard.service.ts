@@ -8,7 +8,8 @@ import { User } from '../model/User';
   providedIn: 'root'
 })
 export class CupboardService {
-  private url = "http://localhost:8080/needs"
+  private base_url = "http://localhost:8080"
+  private url = this.base_url + "/needs"
   
   private httpOptions = {
     headers: new HttpHeaders({'Conent-Type': 'application/json'})
@@ -26,7 +27,6 @@ export class CupboardService {
 
   searchNeeds(name:string):Observable<Need[]>{
     return this.http.get<Need[]>(`${this.url}/?name=${name}`, this.httpOptions)
-    
   }
 
   createNeed(need: Need):Observable<Need>{
@@ -46,8 +46,7 @@ export class CupboardService {
    * @author Vlad
    */
   addNeedToBasket(username: string, need: Need):Observable<User> {
-    return this.http.post<User>(`${this.url}/users/${username}/basket`, need);
+    return this.http.post<User>(`${this.base_url}/users/${username}/basket`, need);
   }
   
-
 }

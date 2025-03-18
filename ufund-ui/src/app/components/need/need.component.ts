@@ -47,9 +47,10 @@ export class NeedComponent {
     if (!this.need) { console.error("Need must exist."); }
 
     if (username && this.need) { // TODO: && user.status == helper
+      let newNeed = this.need;
       this.cupboardService.addNeedToBasket(username, this.need).subscribe({
-        next: (updated) => { console.log("Added to basket, ", updated); }, // TODO: update UI to show the new basket addition
-        error: (e) => { console.error("Error adding to basket."); }
+        next: (updated) => { alert("Successfully added " + newNeed.name + " to basket."); },
+        error: (e) => { console.error("Error adding to basket,", e); }
       });
     }
   }

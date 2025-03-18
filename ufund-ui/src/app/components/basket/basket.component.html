@@ -1,1 +1,9 @@
 <h2>{{name}}'s basket</h2>
+<div *ngIf="basket; else emptyBasket">
+    <ul>
+      <li *ngFor="let need of basket">
+        <strong>{{ need.name }}</strong>
+      </li>
+    </ul>
+</div>
+<ng-template #emptyBasket><p>Your basket is empty.</p></ng-template>
