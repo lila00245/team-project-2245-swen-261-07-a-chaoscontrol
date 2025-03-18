@@ -190,15 +190,15 @@ public class NeedFileDAO implements NeedDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Need updateNeed(Need need) throws IOException {
+    public Need updateNeed(int id, String name, String foodGroup, double price) throws IOException {
         synchronized(needs) {
-            if (needs.containsKey(need.getId()) == false){
+            if (needs.containsKey(id) == false){
                 return null;  // Need does not exist
             }
-
-            needs.put(need.getId(),need);
+            Need newNeed = new Need(id,name,price,foodGroup);
+            needs.put(id,newNeed);
             save(); // may throw an IOException
-            return need;
+            return newNeed;
         }
     }
 

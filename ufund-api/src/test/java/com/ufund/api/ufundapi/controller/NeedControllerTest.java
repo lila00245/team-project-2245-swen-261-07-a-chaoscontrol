@@ -132,10 +132,15 @@ public class NeedControllerTest {
     @Test
     public void testUpdateNeed() throws IOException {
         Need need = new Need(99, "apple", 10, "fruit");
-        when(mockNeedDao.updateNeed(need)).thenReturn(need);
-        ResponseEntity<Need> response = needController.updateNeed(need);
+        when(mockNeedDao.updateNeed(99,"apple","fruit",10)).thenReturn(need);
+        Map<String, Object> m = Map.ofEntries(
+            Map.entry("name", "apple"),
+            Map.entry("foodGroup", "fruit"),
+            Map.entry("price", "10")
+        );
+        ResponseEntity<Need> response = needController.updateNeed(m);
         need.setName("banana");
-        response = needController.updateNeed(need);
+        response = needController.updateNeed(m);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(need, response.getBody());
@@ -147,9 +152,13 @@ public class NeedControllerTest {
      */
     @Test
     public void testUpdateNeedNotFound() throws IOException {
-        Need need = new Need(99, "apple", 10, "fruit");
-        when(mockNeedDao.updateNeed(need)).thenReturn(null);
-        ResponseEntity<Need> response = needController.updateNeed(need);
+        Map<String, Object> m = Map.ofEntries(
+            Map.entry("name", "apple"),
+            Map.entry("foodGroup", "fruit"),
+            Map.entry("price", "10")
+        );
+        when(mockNeedDao.updateNeed(99,"apple","fruit",10)).thenReturn(null);
+        ResponseEntity<Need> response = needController.updateNeed(m);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
@@ -159,9 +168,13 @@ public class NeedControllerTest {
      */
     @Test
     public void testUpdateNeedHandleException() throws Exception {
-        Need need = new Need(99, "apple", 10, "fruit");
-        doThrow(new IOException()).when(mockNeedDao).updateNeed(need);
-        ResponseEntity<Need> response = needController.updateNeed(need);
+        Map<String, Object> m = Map.ofEntries(
+            Map.entry("name", "apple"),
+            Map.entry("foodGroup", "fruit"),
+            Map.entry("price", "10")
+        );
+        doThrow(new IOException()).when(mockNeedDao).updateNeed(99,"apple","fruit",10);
+        ResponseEntity<Need> response = needController.updateNeed(m);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
