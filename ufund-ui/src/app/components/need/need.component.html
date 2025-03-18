@@ -8,4 +8,5 @@
     <button type="button" (click)="addNeedToBasket()">add to basket</button>
     
     <button type="button" (click)="goBack()">go back</button>
+    <button *ngIf="userAdmin" type="button" (click)="remove()">remove</button>
 </div>

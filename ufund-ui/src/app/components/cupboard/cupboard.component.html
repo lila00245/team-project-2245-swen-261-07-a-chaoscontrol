@@ -1,6 +1,9 @@
 <h1>Cupboard
     <button type="button" (click)="logOut()">Log Out</button>
-    <a href="/basket"><button>my basket</button></a>
+    <a href="/basket"><button>My Basket</button></a>
+    <a href="/create">
+        <button *ngIf="userAdmin">Add Needs</button>
+    </a>
 </h1>
 <app-need-search></app-need-search>
 <li *ngFor="let need of needs">
