@@ -20,6 +20,6 @@ export class CreateComponent {
 
   createNeed(name: string, foodGroup: string, price: string){
     this.cupboardService.createNeed(name, foodGroup, price).subscribe()
-    console.log(name, foodGroup, price)
+    this.router.navigate(["/needs"])
   }
 }
