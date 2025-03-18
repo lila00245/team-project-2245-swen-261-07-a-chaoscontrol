@@ -175,11 +175,11 @@ public class NeedFileDAO implements NeedDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Need createNeed(Need need) throws IOException {
+    public Need createNeed(String name, String foodGroup, double price) throws IOException {
         synchronized(needs) {
             // We create a new Need object because the id field is immutable
             // and we need to assign the next unique id
-            Need newNeed = new Need(nextId(),need.getName(), need.getCost(), need.getFoodGroup());
+            Need newNeed = new Need(nextId(),name, price, foodGroup);
             needs.put(newNeed.getId(),newNeed);
             save(); // may throw an IOException
             return newNeed;
@@ -190,15 +190,16 @@ public class NeedFileDAO implements NeedDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Need updateNeed(Need need) throws IOException {
+    public Need updateNeed(int id, String name, double price,String foodGroup) throws IOException {
         synchronized(needs) {
-            if (needs.containsKey(need.getId()) == false){
+            if (needs.containsKey(id) == false){
                 return null;  // Need does not exist
             }
-
-            needs.put(need.getId(),need);
+            Need newNeed = new Need(id,name,price,foodGroup);
+            System.out.println(foodGroup);
+            needs.put(id,newNeed);
             save(); // may throw an IOException
-            return need;
+            return newNeed;
         }
     }
 

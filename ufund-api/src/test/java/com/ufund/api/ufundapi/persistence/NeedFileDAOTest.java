@@ -100,8 +100,7 @@ public class NeedFileDAOTest {
      */
     @Test
     void testCreateNeed() throws IOException {
-        Need newNeed = new Need(0, "New Need", 100, "Misc");
-        Need createdNeed = needFileDAO.createNeed(newNeed);
+        Need createdNeed = needFileDAO.createNeed("New Need","Misc", 100);
         assertNotNull(createdNeed, "Created need should not be null");
         assertEquals(2, createdNeed.getId(), "New ID should be 2");
         assertEquals("New Need", createdNeed.getName());
@@ -119,8 +118,7 @@ public class NeedFileDAOTest {
      */
     @Test
     void testUpdateNeed() throws IOException {
-        Need updatedNeed = new Need(1, "Update", 200, "UpdatedGroup");
-        Need result = needFileDAO.updateNeed(updatedNeed);
+        Need result = needFileDAO.updateNeed(1,"Update",200,"UpdatedGroup");
         assertNotNull(result, "Updating an existing need should return the need");
         assertEquals(1, result.getId());
         assertEquals("Update", result.getName());
@@ -138,8 +136,7 @@ public class NeedFileDAOTest {
      */
     @Test
     void testUpdateNeedNotFound() throws IOException {
-        Need updatedNeed = new Need(2, "Update", 200, "UpdatedGroup");
-        Need result = needFileDAO.updateNeed(updatedNeed);
+        Need result = needFileDAO.updateNeed(2,"Update",200,"UpdatedGroup");
         assertNull(result, "Updating a non-existent need should return null");
         verify(mockObjectMapper, times(0))
             .writeValue(any(File.class), any(Need[].class));

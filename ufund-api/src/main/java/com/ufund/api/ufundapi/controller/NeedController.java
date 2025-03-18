@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -126,10 +127,15 @@ public class NeedController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Need> createNeed(@RequestBody Need need) {
-        LOG.info("POST /needs " + need);
+    public ResponseEntity<Need> createNeed(@RequestBody Map<String, Object> data) {
         try{
-            Need newNeed = needDao.createNeed(need);
+            if(data.get("name")=="" || data.get("foodGroup")=="" || data.get("price")==""){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            Need newNeed = needDao.createNeed((String)data.get("name"),
+            (String)data.get("foodGroup"),
+            Double.parseDouble((String)data.get("price")));
+            
             if(newNeed != null){
                 return new ResponseEntity<>(newNeed, HttpStatus.CREATED);
             } else {
@@ -151,10 +157,16 @@ public class NeedController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
-        LOG.info("PUT /needs " + need);
+    public ResponseEntity<Need> updateNeed(@RequestBody Map<String, Object> data) {
         try{
-            Need updatedNeed = needDao.updateNeed(need);
+            System.out.println((String)data.get("foodGroup"));
+            Need updatedNeed = needDao.updateNeed(
+                (int) data.get("id"),
+                (String) data.get("name"),
+                Double.parseDouble((String) data.get("price")),
+                (String) data.get("foodGroup")
+            );
+
             if (updatedNeed == null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {

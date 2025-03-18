@@ -52,9 +52,9 @@ export class CupboardComponent {
         });
   }
 
-  add(need: Need):void{
-    this.cupboardService.createNeed(need).subscribe(need => this.needs.push(need))
-  }
+  // add(need: Need):void{
+  //   this.cupboardService.createNeed(need).subscribe(need => this.needs.push(need))
+  // }
 
   logOut(): void{
     localStorage.removeItem('user')
