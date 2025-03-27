@@ -16,5 +16,5 @@
     <button *ngIf="edit" type="button" (click)="addNeedToBasket()">add to basket</button>
     <button type="button" (click)="goBack()">go back</button>
     <button *ngIf="userAdmin && edit" type="button" (click)="remove()">remove</button>
-    <button type="button" (click)="editMode()">edit mode</button>
+    <button *ngIf="userAdmin" type="button" (click)="editMode()">edit mode</button>
 </div>
