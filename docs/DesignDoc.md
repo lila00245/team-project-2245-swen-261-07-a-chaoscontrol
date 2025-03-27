@@ -29,12 +29,18 @@ Key features include:
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
 > important user group and user goals._
 
+The purpose of this project is to create a web portal for a food bank that needs certain objectives fulfilled. The most important user group is the helpers who purchase needs for the organization. The goals of the helpers are to add needs to their funding baskets and buy the needs they add to support the food bank. 
+
 ### Glossary and Acronyms
 > _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
 | SPA | Single Page |
+| MVP | Minimum Viable Product|
+| DAO | Data Access Object|
+| MVVM | Model-View-ViewModel|
+| CRUD | Create, Read, Update, Delete|
 
 
 ## Requirements
@@ -47,6 +53,8 @@ This section describes the features of the application.
 
 ### Definition of MVP
 > _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
+
+The MVP will be an online portal for a food bank to request certain items to be purchased by helpers to restock the food bank. It will allow helpers to add needs to a funding basket and checkout with those needs to purchase them. It will also allow managers to manage a cupboard of needs by adding, removing, and modifying needs in the cupboard. 
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
@@ -65,7 +73,9 @@ This section describes the application domain.
 > can discuss the more important domain entities and their relationship
 > to each other._
 
-
+The domain for this project mainly consists of managers and helpers and the operations they can perform on baskets and cupboards that contain needs. 
+The cupboard is the central storage for the needs of the organization. In this project, the needs are food items that a food bank is in need of. Managers oversee the cupboard and add, remove, and update needs when necessary.
+A basket belongs to a helper to keep track of the food items they plan to buy for the food bank. A user has access to the cupboard so they can add the food items they wish to buy to their basket. 
 ## Architecture and Design
 
 This application uses a REST API to keep track of all user information and needs information. The API uses an Angular user interface, providing both a helper and manager view.
@@ -75,7 +85,7 @@ This application uses a REST API to keep track of all user information and needs
 The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
 **NOTE**: detailed diagrams are required in later sections of this document.
 
-![The Tiers & Layers of the Architecture](Food-bank-MVVM.png)
+![The Tiers & Layers of the Architecture](Food-bank-MVVM-sprint-2.png)
 
 The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
@@ -92,6 +102,8 @@ This section describes the web interface flow; this is how the user views and in
 
 > _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages/navigation in the web application.
 >  (Add low-fidelity mockups prior to initiating your **[Sprint 2]**  work so you have a good idea of the user interactions.) Eventually replace with representative screen shots of your high-fidelity results as these become available and finally include future recommendations improvement recommendations for your **[Sprint 4]** )_
+
+When a user navigates to the site, they are greeted with a login prompt. They can either choose to log in with a username and password, or register as a new user. Once logged in, they will see the need cupboard for the organization where they can click on needs to view their details such as name, price, and the food group they belong to. When viewing the need as a helper, there will be options to return to the cupboard, or add the need to their funding basket. As a manager, they will have the options to return to the cupboard, or remove the need from the cupboard. When a helper views their basket, a table of all the needs in the basket are shown as well as the total cost of the basket.
 
 
 ### View Tier
@@ -117,8 +129,11 @@ This section describes the web interface flow; this is how the user views and in
 The ViewModel tier provides the application’s interface for client interaction and business logic, bridging the model (data) with the controller (API endpoints):
 
 	1.	Controllers:
-	•	NeedController handles HTTP requests related to Need entities.
-	•	It uses REST endpoints (GET, POST, PUT, DELETE) for CRUD operations and return appropriate ResponseEntity objects, managing HTTP status codes based on the success or failure of each operation.
+	• NeedController handles HTTP requests related to Need entities. 
+	  It uses REST endpoints (GET, POST, PUT, DELETE) for CRUD operations and return appropriate ResponseEntity objects, managing HTTP status codes based on the success or failure of each operation.
+	• UserController handles HTTP requests related to users. 
+	  It allows you to perform CRUD operations to manage the users of the system.
+	• AuthController allows users to either login to the system, or register as a new user.
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -129,12 +144,17 @@ The ViewModel tier provides the application’s interface for client interaction
 > 
 ![Replace with your ViewModel Tier class diagram 1, etc.](NeedControllerUML.png)
 
+![AuthController with relations](AuthControllerWithRelations.png)
+![UserController with relations](UserControllerWithRelations.png)
+
 ### Model Tier
 The model tier provides the interface for business logic and persistence. This bridges the gap between storage and the model. 
 
 	1.	Data Access Objects:
-	• NeedFileDAO provides the methods for interacting with the storage. 
-	• There are methods to support creating, reading, updating, and deleting needs from storage.
+	• NeedFileDAO provides the methods for interacting with the need storage. 
+	There are methods to support creating, reading, updating, and deleting needs from storage.
+	• UserFileDAO provides the methods for managing the storage of user accounts.
+	  It supports retrieving all or single users, creating users, updating users, and deleting users. 
 
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -143,6 +163,7 @@ The model tier provides the interface for business logic and persistence. This b
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
 ![Replace with your Model Tier class diagram 1, etc.](NeedFileDAOUML.png)
+![UserFileDAO with relations](UserFileDAOWithRelations.png)
 
 ## OO Design Principles
 
@@ -177,6 +198,7 @@ We applied encapsulation in our design by grouping related methods and data into
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
 
+All of our user stories for sprint 2 have been tested and their functionality has been verified to match the acceptance criteria. In total, we tested 8 different user stories each with at least 2 acceptance criterion. 
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
@@ -186,6 +208,7 @@ We applied encapsulation in our design by grouping related methods and data into
 >_**[Sprint 2, 3 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
 
+![Jacoco report](sprint-2-code-coverage.png)
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
 
@@ -194,10 +217,11 @@ We applied encapsulation in our design by grouping related methods and data into
 - **2025-02-23**: Changed base meeting dates to Tuesdays [5:00pm-6:00pm] and Fridays [3:00pm-4:30pm]
 
 ## Sprint 2
-> Currently In Progress
+- **2025/03/05**: Getting the UI to interface with the backend.
+- **2025/03/15**: Finished acceptance testing. 
 
 
 ## Sprint 3
-- N/A
+> currently in progress
 ## Sprint 4
 - N/A
