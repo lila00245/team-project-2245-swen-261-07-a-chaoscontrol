@@ -134,6 +134,7 @@ public class NeedControllerTest {
         Need need = new Need(99, "apple", 10, "fruit");
         when(mockNeedDao.updateNeed(99,"apple",10,"fruit")).thenReturn(need);
         Map<String, Object> m = Map.ofEntries(
+            Map.entry("id",99),
             Map.entry("name", "apple"),
             Map.entry("foodGroup", "fruit"),
             Map.entry("price", "10")
@@ -153,6 +154,7 @@ public class NeedControllerTest {
     @Test
     public void testUpdateNeedNotFound() throws IOException {
         Map<String, Object> m = Map.ofEntries(
+            Map.entry("id", 99),
             Map.entry("name", "apple"),
             Map.entry("foodGroup", "fruit"),
             Map.entry("price", "10")
@@ -169,6 +171,7 @@ public class NeedControllerTest {
     @Test
     public void testUpdateNeedHandleException() throws Exception {
         Map<String, Object> m = Map.ofEntries(
+            Map.entry("id", 99),
             Map.entry("name", "apple"),
             Map.entry("foodGroup", "fruit"),
             Map.entry("price", "10")
