@@ -1,25 +1,21 @@
-/* Reset and base layout */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Full-screen background image applied to html */
 html {
   height: 100%;
   background: url('../../images/Tornado.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-/* Body styling */
 body {
   height: 100%;
   font-family: Arial, sans-serif;
   color: white;
 }
 
-/* Transparent gray content wrapper */
 .content-body {
   max-width: 1200px;
   margin: 3rem auto;
@@ -44,7 +40,6 @@ body::before {
   z-index: -1;
 }
 
-/* Header layout */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -53,7 +48,6 @@ body::before {
   margin-bottom: 2rem;
 }
 
-/* Header buttons */
 .header-buttons {
   display: flex;
   gap: 1rem;
@@ -74,12 +68,10 @@ body::before {
   background-color: #fff;
 }
 
-/* Search section */
 .search-container {
   margin-bottom: 2rem;
 }
 
-/* Grid of needs */
 .needs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -88,7 +80,6 @@ body::before {
   padding: 0;
 }
 
-/* Each need item */
 .needs-grid li {
   background: white;
   padding: 1.5rem;

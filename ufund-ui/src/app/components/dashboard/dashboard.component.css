@@ -11,7 +11,6 @@
     position: relative;
   }
   
-  /* Background image */
   body::before {
     content: "";
     position: fixed;
@@ -26,7 +25,6 @@
     z-index: -1;
   }
   
-  /* Position login/register top-right */
   #options {
     position: absolute;
     top: 2rem;
@@ -53,7 +51,6 @@
     transform: translateY(-2px);
   }
   
-  /* Info sections centered on page */
   #info-sections {
     display: flex;
     flex-wrap: wrap;
@@ -66,7 +63,6 @@
     z-index: 1;
   }
   
-  /* Who / Goal cards */
   #Who, #Goal {
     background: rgba(100, 100, 100, 0.3); /* transparent gray */
     color: white;

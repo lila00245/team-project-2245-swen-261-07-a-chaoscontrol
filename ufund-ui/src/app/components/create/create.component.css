@@ -1,4 +1,3 @@
-/* Full screen layout */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -10,7 +9,6 @@ body {
   height: 100vh;
 }
 
-/* Centered card container */
 .create-form {
   background-color: #fff;
   padding: 2.5rem;
@@ -21,7 +19,6 @@ body {
   text-align: center;
 }
 
-/* Heading */
 .create-form p {
   font-size: 1.5rem;
   font-weight: bold;
@@ -29,7 +26,6 @@ body {
   color: #333;
 }
 
-/* Inputs */
 .inputField {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -45,7 +41,6 @@ body {
   outline: none;
 }
 
-/* Button */
 .create-form button {
   background-color: #333;
   color: white;

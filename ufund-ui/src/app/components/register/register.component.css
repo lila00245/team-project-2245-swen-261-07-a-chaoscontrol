@@ -11,7 +11,6 @@ html, body {
   position: relative;
 }
 
-/* Fullscreen background image */
 body::before {
   content: "";
   position: fixed;
@@ -26,7 +25,6 @@ body::before {
   z-index: -1;
 }
 
-/* Center the form */
 body {
   display: flex;
   justify-content: center;
@@ -34,7 +32,6 @@ body {
   padding: 2rem;
 }
 
-/* Form container */
 #register-form {
   background-color: rgba(100, 100, 100, 0.6);
   backdrop-filter: blur(6px);
@@ -56,7 +53,6 @@ body {
   text-align: center;
 }
 
-/* Input fields */
 .inputField {
   width: 100%;
   padding: 12px;
@@ -66,7 +62,6 @@ body {
   font-size: 16px;
 }
 
-/* Radio buttons */
 form {
   margin-bottom: 1.5rem;
   display: flex;
@@ -75,7 +70,6 @@ form {
   font-size: 1rem;
 }
 
-/* Button */
 button {
   background-color: rgba(255, 255, 255, 0.8);
   color: #000;

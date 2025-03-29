@@ -1,5 +1,4 @@
 
-  /* Search component container */
 #search-component {
     max-width: 600px;
     width: 100%;
@@ -9,14 +8,12 @@
     gap: 0.75rem;
   }
   
-  /* Label above the search box */
   #search-component label {
     font-size: 1rem;
     font-weight: bold;
     color: #ffffff;
   }
   
-  /* Search input styling */
   #search-component input {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -32,7 +29,6 @@
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   }
   
-  /* Search result list */
   .search-result {
     list-style: none;
     margin-top: 0.5rem;
@@ -43,7 +39,6 @@
     overflow: hidden;
   }
   
-  /* Each result item */
   .search-result li {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid #eee;
@@ -54,12 +49,10 @@
     border-bottom: none;
   }
   
-  /* Hover effect */
   .search-result li:hover {
     background-color: #f0f0f0;
   }
   
-  /* Links */
   .search-result a {
     text-decoration: none;
     color: #333;
