@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    position: relative;
+  }
+  
+  /* Background image */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: url('../../images/town.png') no-repeat center center;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.65);
+    z-index: -1;
+  }
+  
+  /* Position login/register top-right */
+  #options {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    gap: 1rem;
+    z-index: 1;
+  }
+  
+  #options button {
+    background-color: rgba(100, 100, 100, 0.3); /* transparent gray */
+    color: white;
+    border: 2px solid #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  #options button:hover {
+    background-color: #fff;
+    transform: translateY(-2px);
+  }
+  
+  /* Info sections centered on page */
+  #info-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 4rem;
+    padding-inline: 2rem;
+    z-index: 1;
+  }
+  
+  /* Who / Goal cards */
+  #Who, #Goal {
+    background: rgba(100, 100, 100, 0.3); /* transparent gray */
+    color: white;
+    border: 2px solid #ffffff;
+    padding: 2rem;
+    border-radius: 16px;
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+  }
+  
+  #Who:hover, #Goal:hover {
+    transform: translateY(-4px);
+  }
+  
+  #Who h2, #Goal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  #Who p, #Goal p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  

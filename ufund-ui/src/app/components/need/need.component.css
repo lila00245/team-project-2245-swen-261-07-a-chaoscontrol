@@ -1,0 +1,60 @@
+/* Container for the whole product section */
+.product-view {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Product title */
+  .product-view h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+  
+  /* Detail rows */
+  .product-view div {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: #444;
+  }
+  
+  .product-view span {
+    font-weight: bold;
+    color: #222;
+  }
+  
+  /* Form fields */
+  .inputField {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  /* Buttons */
+  .product-view button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    margin-right: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .product-view button:hover {
+    background-color: #555;
+  }
+  
