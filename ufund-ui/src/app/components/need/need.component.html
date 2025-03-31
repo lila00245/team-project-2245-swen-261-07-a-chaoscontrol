@@ -1,3 +1,4 @@
+<body>
 <div class="product-view">
 
     <div *ngIf="need && edit">
@@ -18,7 +19,7 @@
       <button (click)="editNeed(name.value, foodGroup.value, price.value)">Save</button>
     </div>
   
-    <div>
+    <div id="description">
       <button *ngIf="edit" (click)="addNeedToBasket()">Add to Basket</button>
       <button (click)="goBack()">Go Back</button>
       <button *ngIf="userAdmin && edit" (click)="remove()">Remove</button>
@@ -26,4 +27,5 @@
     </div>
   
   </div>
+  </body>
   
