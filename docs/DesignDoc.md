@@ -1,7 +1,7 @@
 ---
 geometry: margin=1in
 ---
-# PROJECT Design Documentation
+# Food Bank Design Documentation
 
 ## Team Information
 * Team name: ChaosControl
@@ -85,7 +85,7 @@ This application uses a REST API to keep track of all user information and needs
 The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
 **NOTE**: detailed diagrams are required in later sections of this document.
 
-![The Tiers & Layers of the Architecture](Food-bank-MVVM-sprint-2.png)
+![The Tiers & Layers of the Architecture](Food-bank-MVVM.png)
 
 The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
@@ -173,7 +173,8 @@ We have applied abstraction in our design by creating an interface for our data 
 Low coupling was applied in our design by utilizing dependency injection in our NeedController class. Instead of instantiating a NeedDAO in NeedController, we pass one in through it's constructor. 
 ### Encapsulation
 We applied encapsulation in our design by grouping related methods and data into classes. The Need class has methods and data needed to represent the state and behavior of a need, for example. 
-
+### Dependency Injection
+Dependency injection is applied in our design with the Angular services we created. With the authentication service, we've injected it into the root of the app so other components will use the same instance of the service instead of creating new instances.
 
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
@@ -208,7 +209,8 @@ All of our user stories for sprint 2 have been tested and their functionality ha
 >_**[Sprint 2, 3 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
 
-![Jacoco report](sprint-2-code-coverage.png)
+![Jacoco report](Sprint-3-jacoco-report.png)
+
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
 
@@ -222,6 +224,7 @@ All of our user stories for sprint 2 have been tested and their functionality ha
 
 
 ## Sprint 3
-> currently in progress
+- **2023/04/03**: Perform user acceptance testing with other group.
+- **2023/04/07**: Hash out sprint 3 demo plan.
 ## Sprint 4
 - N/A
