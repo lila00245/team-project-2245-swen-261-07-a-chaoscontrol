@@ -56,6 +56,15 @@ export class CupboardComponent {
   //   this.cupboardService.createNeed(need).subscribe(need => this.needs.push(need))
   // }
 
+  /**
+   * Sorts price ascending and descending by comparing cost b - a or a - b
+   * (assuming entry a is larger than b)
+   * @author Vlad
+   */
+  sortByPriceAscending():void{ this.needs.sort((a, b) => a.cost - b.cost); }
+  sortByPriceDescending():void{ this.needs.sort((a, b) => b.cost - a.cost); }
+  sortByDefault():void{this.getNeeds();}
+
   logOut(): void{
     localStorage.removeItem('user')
     localStorage.removeItem('role')
