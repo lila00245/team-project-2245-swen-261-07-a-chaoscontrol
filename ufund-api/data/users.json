@@ -1,1 +1,1 @@
-[{"name":"admin","password":"admin","basket":[],"role":"admin"},{"name":"chickenjockey","password":"Password","basket":[{"id":6,"name":"Corn","cost":1.23,"foodGroup":"Vegetable"},{"id":7,"name":"water","cost":1.2,"foodGroup":"liquid"},{"id":2,"name":"Farfalle","cost":5.4,"foodGroup":"Starch"}],"role":"user"}]
+[{"name":"admin","password":"admin","basket":[],"role":"admin"},{"name":"chickenjockey","password":"Password","basket":[],"role":"user"}]

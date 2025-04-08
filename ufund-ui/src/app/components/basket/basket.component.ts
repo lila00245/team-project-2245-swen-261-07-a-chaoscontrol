@@ -44,14 +44,23 @@ export class BasketComponent {
               },
               error: (err) => {
                 if (err.status === 404) {
-                  user.basket.splice(i,1)
-                  
+                  user.basket.splice(i, 1);
+                  this.userService.updateUser(user).subscribe({
+                    next: (updated: User) => {
+                      this.basket = updated.basket;
+                      this.totalCostCalculation();
+                    },
+                    error: (e) => {
+                      console.error('Error updating user after removing missing Need:', e);
+                    }
+                  });
                 } else {
                   console.error('Unexpected error:', err);
+                  this.basket = user.basket;
+                  this.totalCostCalculation();
                 }
-                this.basket = user.basket
-                this.totalCostCalculation()
               }
+              
               
             });
           }
