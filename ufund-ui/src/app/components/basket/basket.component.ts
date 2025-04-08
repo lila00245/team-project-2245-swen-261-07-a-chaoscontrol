@@ -37,6 +37,8 @@ export class BasketComponent {
             const item = this.basket[i];
             this.cupboardService.getNeed(item.id).subscribe({
               next: (result) => {
+                this.basket = user.basket
+                this.totalCostCalculation()
               },
               error: (err) => {
                 if (err.status === 404) {
@@ -45,8 +47,10 @@ export class BasketComponent {
                 } else {
                   console.error('Unexpected error:', err);
                 }
+                this.basket = user.basket
                 this.totalCostCalculation()
               }
+              
             });
           }
         },
