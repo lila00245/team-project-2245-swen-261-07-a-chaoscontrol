@@ -1,13 +1,28 @@
-<h1>Cupboard<br>
-    <button type="button" (click)="logOut()">Log Out</button>
-    <a href="/basket"><button>My Basket</button></a>
-    <a href="/create">
-        <button *ngIf="userAdmin">Add Needs</button>
-    </a>
-</h1>
-<app-need-search></app-need-search>
-<li *ngFor="let need of needs">
-    <a href = "/needs/{{need.id}}">{{need.name}}</a>
-</li>
+<body>
+  <!-- Content sits on top of full background -->
+  <div class="content-body">
 
+    <!-- Header / Nav section -->
+    <h1 class="page-header">
+      Cupboard
+      <div class="header-buttons">
+        <a href="/create">
+          <button *ngIf="userAdmin">Add Needs</button>
+        </a>
+      </div>
+    </h1>
 
+    <!-- Search bar -->
+    <div class="search-container">
+      <app-need-search></app-need-search>
+    </div>
+
+    <!-- Product Grid -->
+    <ul class="needs-grid">
+      <li *ngFor="let need of needs">
+        <a href="/needs/{{need.id}}">{{need.name}}</a>
+      </li>
+    </ul>
+
+  </div>
+</body>

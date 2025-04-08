@@ -39,7 +39,7 @@ export class NeedSearchComponent implements OnInit {
         if(term!=""){
           return this.cupboardService.searchNeeds(term)
         } else {
-          return this.cupboardService.searchNeeds("+")
+          return this.cupboardService.searchNeeds("----")
         }
       }),
     );

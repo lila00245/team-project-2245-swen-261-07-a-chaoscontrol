@@ -1,6 +1,8 @@
-<p>{{message | async}}</p>
-
-<input placeholder="enter username..." type="username" id = "username" class="inputField" #username>
-<input placeholder="enter password..." type="password" id = "password" class="inputField" #password>
-<button type="button" (click) = "getUser(username.value, password.value)">Login</button>
-
+<body>
+    <div id="login">
+      <p>{{message | async}}</p>
+      <input placeholder="enter username..." type="username" id="username" class="inputField" #username>
+      <input placeholder="enter password..." type="password" id="password" class="inputField" #password>
+      <button type="button" (click)="getUser(username.value, password.value)">Login</button>
+    </div>
+  </body>

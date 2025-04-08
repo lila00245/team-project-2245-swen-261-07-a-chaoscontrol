@@ -19,7 +19,7 @@ export class CreateComponent {
   ) {}
 
   createNeed(name: string, foodGroup: string, price: string){
-    this.cupboardService.createNeed(name, foodGroup, price).subscribe()
-    this.router.navigate(["/needs"])
+    this.cupboardService.createNeed(name, foodGroup, price).subscribe();
+    this.router.navigate(["/needs"]);
   }
 }

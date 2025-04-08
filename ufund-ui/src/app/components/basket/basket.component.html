@@ -1,34 +1,36 @@
-<h2>{{name}}'s basket</h2>
-<div *ngIf="basket?.length ?? 0 > 0; else emptyBasket">
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>cost</th>
-                <th>food group</th>
-                <th>remove from basket</th>
+<body>
+  <h2>{{name}}'s basket</h2>
+  <div *ngIf="basket?.length ?? 0 > 0; else emptyBasket">
+      <table>
+          <thead>
+              <tr>
+                  <th>id</th>
+                  <th>name</th>
+                  <th>cost</th>
+                  <th>food group</th>
+                  <th>remove from basket</th>
+              </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr *ngFor="let need of basket">
+              <td>{{ need.id }}</td>
+              <td>{{ need.name }}</td>
+              <td>${{ need.cost }}</td>
+              <td>{{ need.foodGroup }}</td>
+              <td><button (click)="removeNeed(need)">remove</button></td>
             </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let need of basket">
-            <td>{{ need.id }}</td>
-            <td>{{ need.name }}</td>
-            <td>${{ need.cost }}</td>
-            <td>{{ need.foodGroup }}</td>
-            <td><button (click)="removeNeed(need)">remove</button></td>
-          </tr>
-          <tr>
-            <th></th>
-            <th></th>
-            <th>Total cost: ${{totalCost}}</th>
-            <th></th>
-            <td><button type="button">Checkout</button></td>
-          </tr>
-        </tbody>
-    </table>
-</div>
-<ng-template #emptyBasket>
-  <p>Your basket is empty.</p>
-  <button (click)="goToCupboard()">go to cupboard</button>
-</ng-template>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>Total cost: ${{totalCost}}</th>
+              <th></th>
+              <td><button (click)="checkout()">Checkout</button></td>
+            </tr>
+          </tbody>
+      </table>
+  </div>
+  <ng-template #emptyBasket>
+    <p>Your basket is empty.</p>
+    <button (click)="goToCupboard()">go to cupboard</button>
+  </ng-template>
+</body>

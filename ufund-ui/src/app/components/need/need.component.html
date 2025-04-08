@@ -1,20 +1,31 @@
-<div *ngIf="need && edit" >
-    <h2>{{need.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{need.id}}</div>
-    <div><span>name: </span>{{need.name}}</div>
-    <div><span>cost: </span>{{need.cost}}</div>
-    <div><span>food group: </span>{{need.foodGroup}}</div>
-    
-</div>
-<div>
-    <div *ngIf="!edit">
-        <input placeholder="Enter Need Name..." type="name" id = "name" class="inputField" #name><br>
-        <input placeholder="Enter Need Food Group..." type="foodGroup" id = "foodGroup" class="inputField" #foodGroup><br>
-        <input placeholder="Enter Need Food Price..." type="price" id = "price" class="inputField" #price><br>
-        <button  *ngIf="!edit" (click)="editNeed(name.value,foodGroup.value,price.value)">save</button>
+<body>
+<div class="product-view">
+
+    <div *ngIf="need && edit">
+      <h2>{{ need.name | uppercase }} Details</h2>
+      <div><span>ID:</span> {{ need.id }}</div>
+      <div><span>Name:</span> {{ need.name }}</div>
+      <div><span>Cost:</span> ${{ need.cost }}</div>
+      <div><span>Food Group:</span> {{ need.foodGroup }}</div>
     </div>
-    <button *ngIf="edit" type="button" (click)="addNeedToBasket()">add to basket</button>
-    <button type="button" (click)="goBack()">go back</button>
-    <button *ngIf="userAdmin && edit" type="button" (click)="remove()">remove</button>
-    <button type="button" (click)="editMode()">edit mode</button>
-</div>
+  
+    <div *ngIf="!edit && need">
+        <h4>{{need.name}}</h4>
+        <input placeholder="Enter New Need Name..." type="text" id="name" class="inputField" #name><br>
+        <h4>{{need.foodGroup}}</h4>
+        <input placeholder="Enter New Food Group..." type="text" id="foodGroup" class="inputField" #foodGroup><br>
+        <h4>{{need.cost}}</h4>
+        <input placeholder="Enter New Price..." type="number" id="price" class="inputField" #price><br>
+      <button (click)="editNeed(name.value, foodGroup.value, price.value)">Save</button>
+    </div>
+  
+    <div id="description">
+      <button *ngIf="edit" (click)="addNeedToBasket()">Add to Basket</button>
+      <button (click)="goBack()">Go Back</button>
+      <button *ngIf="userAdmin && edit" (click)="remove()">Remove</button>
+      <button *ngIf="userAdmin" (click)="editMode()">Edit Mode</button>
+    </div>
+  
+  </div>
+  </body>
+  
