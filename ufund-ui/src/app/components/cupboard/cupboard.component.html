@@ -18,13 +18,23 @@
     </div>
 
     <!-- Sort Options (10%) -->
-    <button (click)="sortByPriceAscending()">Sort Cost (High to Low)</button>
-    <button (click)="sortByPriceDescending()">Sort Cost (Low to High)</button>
+    <div class="header-buttons" style="margin-bottom:25px;">
+      <button (click)="sortByDefault()">Default</button>
+      <button (click)="sortByPriceAscending()"
+      [disabled]="!needs || needs.length === 0">Sort Cost (High to Low)</button>
+      <button (click)="sortByPriceDescending()"
+      [disabled]="!needs || needs.length === 0">Sort Cost (Low to High)</button>
+    </div>
 
     <!-- Product Grid -->
     <ul class="needs-grid">
-      <li *ngFor="let need of needs">
-        <a href="/needs/{{need.id}}">{{need.name}}</a>
+      <li *ngFor="let need of needs" style="width:100%;">
+        <a href="/needs/{{need.id}}">
+          <div style="display:flex;justify-content: space-between;align-items:center;width:100%;">
+            <p>{{need.name}}</p>
+            <p>{{need.cost}}</p>
+          </div>
+        </a>
       </li>
     </ul>
 

@@ -63,6 +63,7 @@ export class CupboardComponent {
    */
   sortByPriceAscending():void{ this.needs.sort((a, b) => a.cost - b.cost); }
   sortByPriceDescending():void{ this.needs.sort((a, b) => b.cost - a.cost); }
+  sortByDefault():void{this.getNeeds();}
 
   logOut(): void{
     localStorage.removeItem('user')
