@@ -25,6 +25,19 @@ body {
   margin-bottom: 2rem;
   color: #333;
 }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background:linear-gradient(rgb(14, 14, 148),rgb(18, 18, 76)) ;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.65);
+  z-index: -1;
+}
 
 .inputField {
   width: 100%;

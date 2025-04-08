@@ -28,14 +28,33 @@ export class BasketComponent {
     this.loadBasket();
   }
 
-  loadBasket():void {
+  loadBasket(): void {
     if (this.name) {
       this.userService.getUser(this.name).subscribe({
         next: (user: User) => {
-          this.basket = user.basket;    // set user's basket to variable
-          this.totalCostCalculation();  // initialize the basket's sum
+          this.basket = user.basket;
+          for (let i = this.basket.length - 1; i >= 0; i--) {
+            const item = this.basket[i];
+            this.cupboardService.getNeed(item.id).subscribe({
+              next: (result) => {
+                this.basket = user.basket
+                this.totalCostCalculation()
+              },
+              error: (err) => {
+                if (err.status === 404) {
+                  user.basket.splice(i,1)
+                  
+                } else {
+                  console.error('Unexpected error:', err);
+                }
+                this.basket = user.basket
+                this.totalCostCalculation()
+              }
+              
+            });
+          }
         },
-        error: (e) => { console.error("Error loading user."); }
+        error: err => console.error('Failed to load user:', err)
       });
     }
   }
