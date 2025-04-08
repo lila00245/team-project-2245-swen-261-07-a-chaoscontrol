@@ -16,6 +16,11 @@ export class DashboardComponent {
     private location: Location
   ){}
 
+  ngOnInit(): void {
+    if(localStorage.getItem('user') != null){
+      this.router.navigate(['/needs']);
+    }
+  }
   goToLogin():void{
     this.router.navigate(['/login']);
   }
