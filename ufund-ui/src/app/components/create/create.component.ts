@@ -18,6 +18,12 @@ export class CreateComponent {
     private cupboardService: CupboardService
   ) {}
 
+  ngOnInit(): void{
+    if(localStorage.getItem('role')!='admin'){
+      this.router.navigate([`/needs`])
+    }
+  }
+
   createNeed(name: string, foodGroup: string, price: string){
     this.cupboardService.createNeed(name, foodGroup, price).subscribe();
     this.router.navigate(["/needs"]);
