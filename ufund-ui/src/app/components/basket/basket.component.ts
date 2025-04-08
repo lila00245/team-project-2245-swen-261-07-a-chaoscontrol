@@ -94,6 +94,41 @@ export class BasketComponent {
     }
   }
 
+  /**
+   * Takes in current user and empties the basket, passing in updated user to the UserDAO
+   */
+  checkout():void {
+    // checks if user exists, if not gives an error
+    if (!this.name) {
+      console.error("The User is not valid."); 
+    } 
+    else {
+      this.userService.getUser(this.name).subscribe({
+        next: (user: User) => {
+          // case where there are 0 items in basket
+          if (user.basket.length === 0) { 
+            console.error("Basket has 0 items."); 
+            return; 
+          } 
+          console.log("checking out basket, ", this.basket);
+          user.basket = []; // empty the basket
+
+          // run an update to the UserDAO
+          this.userService.updateUser(user).subscribe({
+            next: (updated: User) => {
+              this.basket = updated.basket;// re-set Needs basket
+              this.totalCostCalculation(); // re-run cost calculation with updated basket
+              alert(this.name + " has checked out their basket.");
+            },
+            error: (e) => { console.error("Error removing Need from User, ", e); }
+          });
+        },
+        error: (e) => { console.error("Error removing Need."); }
+      });
+    }
+  }
+
+
   goToCupboard():void{
     this.router.navigate(['/needs']);
   }
