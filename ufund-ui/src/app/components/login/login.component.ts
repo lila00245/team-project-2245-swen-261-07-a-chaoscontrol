@@ -41,7 +41,7 @@ getUser(name: string, password: string): void {
           window.location.reload();
         });
       } else {
-        this.message.next("Incorrect username, please enter again.");
+        this.message.next("Incorrect username or password, please enter again.");
       }
     });
   }

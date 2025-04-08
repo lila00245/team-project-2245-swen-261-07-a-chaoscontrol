@@ -45,12 +45,12 @@ export class CupboardComponent {
     }
   }
 
-  searchNeeds(name: string):void{
-    this.router.navigate([`/needs`])
-        .then(() => {
-          window.location.reload();
-        });
-  }
+  // searchNeeds(name: string):void{
+  //   this.router.navigate([`/needs`])
+  //       .then(() => {
+  //         window.location.reload();
+  //       });
+  // }
 
   // add(need: Need):void{
   //   this.cupboardService.createNeed(need).subscribe(need => this.needs.push(need))

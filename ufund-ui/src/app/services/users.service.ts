@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/User';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class UsersService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
   currentUser?: User
+  loggedInStatus = new BehaviorSubject<boolean>(false);
   url = "http://localhost:8080/users"
 
   constructor(private http: HttpClient) { }
@@ -37,6 +38,7 @@ export class UsersService {
 
   setCurrentUser(user:User): void{
     this.currentUser = user;
+    this.loggedInStatus.next(true);
   }
   
   getCurrentUser():User | undefined{
