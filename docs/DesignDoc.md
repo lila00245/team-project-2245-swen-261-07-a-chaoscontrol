@@ -85,7 +85,7 @@ This application uses a REST API to keep track of all user information and needs
 The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
 **NOTE**: detailed diagrams are required in later sections of this document.
 
-![The Tiers & Layers of the Architecture](Food-bank-MVVM-sprint-2.png)
+![The Tiers & Layers of the Architecture](Food-bank-MVVM.png)
 
 The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
