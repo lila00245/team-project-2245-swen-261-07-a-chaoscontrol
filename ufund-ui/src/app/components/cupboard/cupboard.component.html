@@ -17,6 +17,10 @@
       <app-need-search></app-need-search>
     </div>
 
+    <!-- Sort Options (10%) -->
+    <button (click)="sortByPriceAscending()">Sort Cost (High to Low)</button>
+    <button (click)="sortByPriceDescending()">Sort Cost (Low to High)</button>
+
     <!-- Product Grid -->
     <ul class="needs-grid">
       <li *ngFor="let need of needs">
