@@ -12,19 +12,25 @@ import { User } from '../../model/User';
   styleUrl: './basket.component.css'
 })
 export class BasketComponent {
-  name:string|null = localStorage.getItem('user');
-  basket:Need[] = [];
-  totalCost:number = 0;
+  name: string | null = localStorage.getItem('user');
+  basket: Need[] = [];
+  totalCost: number = 0;
+
+  // Local map of quantities (key = Need ID)
+  quantities: { [id: number]: number } = {};
+
   constructor(
-      private router: Router,
-      private cupboardService: CupboardService,
-      private userService: UsersService
-    ){}
-    
-  ngOnInit(): void{
-    if(!localStorage.getItem('user')){
-      this.router.navigate([`/`])
+    private router: Router,
+    private cupboardService: CupboardService,
+    private userService: UsersService
+  ) {}
+
+  ngOnInit(): void {
+    if (!this.name) {
+      this.router.navigate(['/']);
+      return;
     }
+
     this.loadBasket();
   }
 
@@ -33,123 +39,110 @@ export class BasketComponent {
       this.userService.getUser(this.name).subscribe({
         next: (user: User) => {
           this.basket = user.basket;
-          for (let i = this.basket.length - 1; i >= 0; i--) {
-            const item = this.basket[i];
-            this.cupboardService.getNeed(item.id).subscribe({
-              next: (result) => {
-                this.basket = user.basket
-                this.totalCostCalculation()
-              },
-              error: (err) => {
-                if (err.status === 404) {
-                  user.basket.splice(i,1)
-                  
-                } else {
-                  console.error('Unexpected error:', err);
-                }
-                this.basket = user.basket
-                this.totalCostCalculation()
-              }
-              
-            });
-          }
+
+          // Default quantity to 1 for each item
+          this.basket.forEach(need => {
+            this.quantities[need.id] = 1;
+          });
+
+          this.totalCostCalculation();
         },
         error: err => console.error('Failed to load user:', err)
       });
     }
   }
 
-  /**
-   * Sums up all columns from basket
-   * 
-   * @author Vlad
-   */
-  totalCostCalculation():void {
-    if (this.name) {
-      let sum = 0;
-      for (const need of this.basket) {
-        sum += 100 * need.cost;
-      }
-      this.totalCost = sum / 100;
-    }
+  onQuantityChange(needId: number, value: any): void {
+    const quantity = Math.max(1, Number(value));
+    this.quantities[needId] = quantity;
+    this.totalCostCalculation();
   }
 
-  /**
-   * Takes in selected Need and current user, filters out item, and passes in updated user to the UserDAO
-   * 
-   * @author Vlad
-   */
-  removeNeed(need: Need):void {
-    // case where needs or the user don't exist
-    if (!need || !this.name){
-      if (!need) { console.error("There are no needs in your basket to remove."); }
-      if (!this.name) { console.error("The User is not valid."); }
+  totalCostCalculation(): void {
+    let sum = 0;
+    for (const need of this.basket) {
+      const qty = this.quantities[need.id] || 1;
+      sum += need.cost * qty;
     }
-    if (need && this.name) {
-      this.userService.getUser(this.name).subscribe({
-        next: (user: User) => {
-          console.log("Removing need from list, ", need);
-          if (user.basket.length === 0) { console.error("Basket has 0 items."); return; } // case where there are 0 items in basket
+    this.totalCost = Math.round(sum * 100) / 100;
+  }
 
-          for (let i = 0; i < user.basket.length; i++) {
-            if (user.basket[i].id === need.id) {
-              user.basket.splice(i, 1); // find first occurrence of the Need
-              break;
-            }
+  removeNeed(need: Need): void {
+    if (!need || !this.name) {
+      if (!need) console.error("There are no needs in your basket to remove.");
+      if (!this.name) console.error("The User is not valid.");
+      return;
+    }
+
+    this.userService.getUser(this.name).subscribe({
+      next: (user: User) => {
+        if (user.basket.length === 0) {
+          console.error("Basket has 0 items.");
+          return;
+        }
+
+        for (let i = 0; i < user.basket.length; i++) {
+          if (user.basket[i].id === need.id) {
+            user.basket.splice(i, 1);
+            break;
           }
+        }
 
-          // run an update to the UserDAO
-          this.userService.updateUser(user).subscribe({
-            next: (updated: User) => {
-              this.basket = updated.basket;// re-set Needs basket
-              this.totalCostCalculation(); // re-run cost calculation with updated basket
-              alert("Removed Need " + need.id + " from " + this.name + " basket.");
-            },
-            error: (e) => { console.error("Error removing Need from User, ", e); }
-          });
-        },
-        error: (e) => { console.error("Error removing Need."); }
-      });
-    }
+        this.userService.updateUser(user).subscribe({
+          next: (updated: User) => {
+            this.basket = updated.basket;
+            // Reset quantities to 1 for all items
+            this.quantities = {};
+            this.basket.forEach(n => (this.quantities[n.id] = 1));
+            this.totalCostCalculation();
+            alert("Removed Need " + need.id + " from " + this.name + " basket.");
+          },
+          error: (e) => {
+            console.error("Error removing Need from User, ", e);
+          }
+        });
+      },
+      error: (e) => {
+        console.error("Error removing Need.");
+      }
+    });
   }
 
-  /**
-   * Takes in current user and empties the basket, passing in updated user to the UserDAO
-   */
-  checkout():void {
-    // checks if user exists, if not gives an error
+  checkout(): void {
     if (!this.name) {
-      console.error("The User is not valid."); 
-    } 
-    else {
-      this.userService.getUser(this.name).subscribe({
-        next: (user: User) => {
-          // case where there are 0 items in basket
-          if (user.basket.length === 0) { 
-            console.error("Basket has 0 items."); 
-            return; 
-          } 
-          console.log("checking out basket, ", this.basket);
-          user.basket = []; // empty the basket
-
-          // run an update to the UserDAO
-          this.userService.updateUser(user).subscribe({
-            next: (updated: User) => {
-              this.basket = updated.basket;// re-set Needs basket
-              this.totalCostCalculation(); // re-run cost calculation with updated basket
-              alert(this.name + " has checked out their basket.");
-            },
-            error: (e) => { console.error("Error removing Need from User, ", e); }
-          });
-        },
-        error: (e) => { console.error("Error removing Need."); }
-      });
+      console.error("The User is not valid.");
+      return;
     }
+
+    this.userService.getUser(this.name).subscribe({
+      next: (user: User) => {
+        if (user.basket.length === 0) {
+          console.error("Basket has 0 items.");
+          return;
+        }
+
+        console.log("Checking out basket:", this.basket);
+        user.basket = [];
+
+        this.userService.updateUser(user).subscribe({
+          next: (updated: User) => {
+            this.basket = updated.basket;
+            this.quantities = {};
+            this.totalCostCalculation();
+            alert(this.name + " has checked out their basket.");
+          },
+          error: (e) => {
+            console.error("Error checking out basket.", e);
+          }
+        });
+      },
+      error: (e) => {
+        console.error("Error checking out.");
+      }
+    });
   }
 
-
-  goToCupboard():void{
+  goToCupboard(): void {
     this.router.navigate(['/needs']);
   }
-
 }
