@@ -8,9 +8,9 @@
               <span class="site-title">Chaos Control</span>
             </a>
           
-            <div class="nav-actions">
+            <div *ngIf="userLoggedIn" class="nav-actions">
               <button type="button" (click)="logOut()">Log Out</button>
-              <a href="/basket"><button>My Basket</button></a>
+              <a *ngIf="!userAdmin" href="/basket"><button>My Basket</button></a>
             </div>
           </header>
         </div>
