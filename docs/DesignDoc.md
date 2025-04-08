@@ -174,7 +174,7 @@ Low coupling was applied in our design by utilizing dependency injection in our 
 ### Encapsulation
 We applied encapsulation in our design by grouping related methods and data into classes. The Need class has methods and data needed to represent the state and behavior of a need, for example. 
 ### Dependency Injection
-Dependency injection is applied in our design with the Angular services we created. The auth service, we've injected it into the root of the app so other components will use the same instance of the service instead of creating new instances.
+Dependency injection is applied in our design with the Angular services we created. With the authentication service, we've injected it into the root of the app so other components will use the same instance of the service instead of creating new instances.
 
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
