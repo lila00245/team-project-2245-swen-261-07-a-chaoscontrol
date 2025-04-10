@@ -142,7 +142,7 @@ export class BasketComponent {
           } 
           console.log("checking out basket, ", this.basket);
           user.basket = []; // empty the basket
-
+          user.totalFunding+= this.totalCost
           // run an update to the UserDAO
           this.userService.updateUser(user).subscribe({
             next: (updated: User) => {

@@ -34,5 +34,6 @@ export class AppComponent {
     localStorage.removeItem('role')
     this.userLoggedIn = false;
     this.router.navigate([`/`])
+    location.reload()
   }
 }

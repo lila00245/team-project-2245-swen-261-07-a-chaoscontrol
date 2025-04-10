@@ -18,6 +18,7 @@ public class User{
     @JsonProperty("password") private String password;  // for storing password for authentication
     @JsonProperty("basket") private ArrayList<Need> basket;
     @JsonProperty("role") private String role;  // role (user or admin)
+    @JsonProperty("totalFunding") double totalFunding;
 
     /**
      * Create a user with the given name, password, basket, and role
@@ -40,6 +41,7 @@ public class User{
         this.password = password;
         this.basket = basket;
         this.role = role;
+        this.totalFunding=0;
     }
 
     /**
@@ -50,7 +52,7 @@ public class User{
      * @param password The password of the user
      */
     public User(String name, String password, String role){
-
+        this.totalFunding = 0;
         this.name = name;
         this.password = password;
         this.basket = new ArrayList<>();
@@ -104,6 +106,10 @@ public class User{
      * @param need The need to add to the basket
      */
     public void addToBasket(Need need){basket.add(need);}
+
+    public double getTotalFunding(){return this.totalFunding;}
+
+    public void addTotalFunding(double amount){this.totalFunding+=amount;}
     
     /**
      * {@inheritDoc}

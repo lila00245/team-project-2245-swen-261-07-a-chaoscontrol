@@ -9,7 +9,9 @@ import { User } from '../../model/User';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
+
 export class DashboardComponent {
+  user: string | null = null;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -17,10 +19,9 @@ export class DashboardComponent {
   ){}
 
   ngOnInit(): void {
-    // if(localStorage.getItem('user') != null){
-    //   this.router.navigate(['/needs']);
-    // }
+    this.user = localStorage.getItem('user')
   }
+
   goToLogin():void{
     this.router.navigate(['/login']);
   }

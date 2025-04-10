@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CupboardService } from '../../services/cupboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { catchError, of } from 'rxjs';
 
 
 @Component({
@@ -27,7 +28,12 @@ export class CreateComponent {
   }
 
   createNeed(name: string, foodGroup: string, price: string){
-    this.cupboardService.createNeed(name, foodGroup, price).subscribe();
-    this.router.navigate(["/needs"]);
+    this.cupboardService.createNeed(name, foodGroup, price)
+    .pipe(catchError((ex,ob)=>{
+      this.message = "Need Already in Cupboard"
+      return of();
+    } )
+    ).subscribe( status => this.router.navigate(["/needs"]));
+    
   }
 }
