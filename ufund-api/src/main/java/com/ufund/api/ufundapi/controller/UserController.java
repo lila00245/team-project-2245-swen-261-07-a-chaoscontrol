@@ -196,21 +196,5 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @PostMapping("/{name}/funding")
-    public ResponseEntity<User> addToFunding(@PathVariable String name, @RequestBody double funds) {
-        try {
-            User user = userDAO.getUser(name);      
-            if (user == null) { return new ResponseEntity<>(HttpStatus.NOT_FOUND); }
-            user.addTotalFunding(funds);                
-            User updated = userDAO.updateUser(user); 
-            return new ResponseEntity<>(updated, HttpStatus.OK);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
    
 }
