@@ -32,6 +32,7 @@ export class LeaderboardComponent {
     this.userService.getUsers().subscribe(users=>{
       this.users=users.filter(user => user.role != 'admin')
       this.users.sort((a,b)=>b.totalFunding - a.totalFunding)
+      this.users = this.users.slice(0,10)
     });
   }
   
