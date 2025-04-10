@@ -12,6 +12,7 @@ import { NeedComponent } from './components/need/need.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NeedSearchComponent } from './components/need-search/need-search.component';
 import { CreateComponent } from './components/create/create.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CreateComponent } from './components/create/create.component';
     DashboardComponent,
     NeedSearchComponent,
     CreateComponent,
+    LeaderboardComponent,
   ],
   imports: [
     BrowserModule,

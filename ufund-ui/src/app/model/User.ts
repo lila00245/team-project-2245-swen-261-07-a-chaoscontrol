@@ -5,4 +5,5 @@ export interface User{
     password:string,
     basket:Need[],
     role:string // admin or user
+    totalFunding: number;
 }

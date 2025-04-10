@@ -1,0 +1,9 @@
+<body>
+    <div class="display-board">
+        <h3 style="text-align: center; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Top Donation's</h3>
+        <div *ngFor="let user of users" class="leaderboard-entity">
+            <p *ngIf="user.role != 'admin'">{{user.name}}</p>
+            <p *ngIf="user.role != 'admin'">${{user.totalFunding}}</p>
+        </div>
+    </div>
+</body>

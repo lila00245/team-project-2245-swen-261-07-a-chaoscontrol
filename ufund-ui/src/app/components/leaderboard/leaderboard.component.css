@@ -1,0 +1,49 @@
+.display-board {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: rgba(143, 140, 140, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: url('../../images/Tornado.jpg') no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+  }
+  
+  .leaderboard-entity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    border: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+  }
+  
+  .leaderboard-entity:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .leaderboard-entity p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .leaderboard-entity p:last-child {
+    font-weight: 600;
+    color: #2e7d32;
+  }
+  

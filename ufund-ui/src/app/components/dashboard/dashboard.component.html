@@ -1,6 +1,6 @@
 <body>
-    <div id="options">
-        <button type="button" (click)="goToLogin()">Login</button>
+    <div *ngIf="!user" id="options">
+        <button  type="button" (click)="goToLogin()">Login</button>
         <button type="button" (click)="goToRegister()">Register</button>
     </div>
     <div id = "info-sections">

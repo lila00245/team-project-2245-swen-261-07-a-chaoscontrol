@@ -8,6 +8,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NeedSearchComponent } from './components/need-search/need-search.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CreateComponent } from './components/create/create.component';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 
 const routes: Routes = [
   {path:'', component: DashboardComponent},
@@ -16,8 +17,8 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'needs/:id', component: NeedComponent},
-  {path:'create', component: CreateComponent}
-
+  {path:'create', component: CreateComponent},
+  {path: 'leaderboard', component: LeaderboardComponent}
 ];
 
 @NgModule({

@@ -129,24 +129,23 @@ public class NeedController {
     @PostMapping("")
     public ResponseEntity<Need> createNeed(@RequestBody Map<String, Object> data) {
         try{
+            
             if(data.get("name")=="" || data.get("foodGroup")=="" || data.get("price")==""){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            Need newNeed = needDao.createNeed((String)data.get("name"),
-            (String)data.get("foodGroup"),
-            Double.parseDouble((String)data.get("price")));
-            
-            if(newNeed != null){
-                Need[] needlyst = needDao.getNeeds();
-                for (Need need : needlyst) {
-                    if(need.getName() == newNeed.getName()){
-                        return new ResponseEntity<>(HttpStatus.CONFLICT);
-                    }
+            Need[] needlyst = needDao.getNeeds();
+            for (Need need : needlyst) {
+                if(need.getName().equals(data.get("name"))){
+                    return new ResponseEntity<>(HttpStatus.CONFLICT);
                 }
-                return new ResponseEntity<>(newNeed, HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
+            Need newNeed = needDao.createNeed(
+                (String)data.get("name"),
+                (String)data.get("foodGroup"),
+                Double.parseDouble((String)data.get("price"))
+            );
+            return new ResponseEntity<>(newNeed, HttpStatus.CREATED);
+        
         } catch (IOException e){
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
