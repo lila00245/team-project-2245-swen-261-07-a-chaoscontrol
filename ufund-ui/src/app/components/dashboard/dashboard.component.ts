@@ -17,9 +17,9 @@ export class DashboardComponent {
   ){}
 
   ngOnInit(): void {
-    if(localStorage.getItem('user') != null){
-      this.router.navigate(['/needs']);
-    }
+    // if(localStorage.getItem('user') != null){
+    //   this.router.navigate(['/needs']);
+    // }
   }
   goToLogin():void{
     this.router.navigate(['/login']);

@@ -11,6 +11,8 @@ import { Location } from '@angular/common';
   styleUrl: './create.component.css'
 })
 export class CreateComponent {
+  message = "Create Need"
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,

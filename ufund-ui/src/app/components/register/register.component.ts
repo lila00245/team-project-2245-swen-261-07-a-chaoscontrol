@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 
 export class RegisterComponent {
-
+  message = "Create a New Account"
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -37,6 +37,7 @@ export class RegisterComponent {
       console.log('Registration successful', response);
       this.router.navigate(['/login']);
     }, error => {
+      this.message = "Username In Use"
       console.error('Registration failed', error);
     }
     );
