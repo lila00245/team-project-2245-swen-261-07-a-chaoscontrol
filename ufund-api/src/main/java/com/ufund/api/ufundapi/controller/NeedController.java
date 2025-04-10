@@ -137,6 +137,12 @@ public class NeedController {
             Double.parseDouble((String)data.get("price")));
             
             if(newNeed != null){
+                Need[] needlyst = needDao.getNeeds();
+                for (Need need : needlyst) {
+                    if(need.getName() == newNeed.getName()){
+                        return new ResponseEntity<>(HttpStatus.CONFLICT);
+                    }
+                }
                 return new ResponseEntity<>(newNeed, HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);

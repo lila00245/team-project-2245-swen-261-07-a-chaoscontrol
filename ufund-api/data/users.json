@@ -1,1 +1,1 @@
-[{"name":"admin","password":"admin","basket":[],"role":"admin"},{"name":"chickenjockey","password":"Password","basket":[],"role":"user"}]
+[{"name":"admin","password":"admin","basket":[],"role":"admin"},{"name":"ariel","password":"swen261demo","basket":[{"id":16,"name":"Carrot","cost":1.2,"foodGroup":"Vegetable"}],"role":"user"},{"name":"arieladmin","password":"password","basket":[{"id":13,"name":"Fruit Salad","cost":5.0,"foodGroup":"vruit"}],"role":"admin"},{"name":"chickenjockey","password":"Password","basket":[],"role":"user"}]
