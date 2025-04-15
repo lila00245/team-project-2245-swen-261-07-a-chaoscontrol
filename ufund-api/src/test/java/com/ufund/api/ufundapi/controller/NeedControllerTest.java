@@ -80,6 +80,7 @@ public class NeedControllerTest {
      */
     @Test
     public void testCreateNeed() throws IOException {
+        when(mockNeedDao.getNeeds()).thenReturn(new Need[0]);
         Need need = new Need(99, "apple", 10, "fruit");
         when(mockNeedDao.createNeed("apple","fruit",10)).thenReturn(need);
         Map<String, Object> m = Map.ofEntries(
@@ -98,7 +99,8 @@ public class NeedControllerTest {
      */
     @Test
     public void testCreateNeedFailed() throws IOException {
-        when(mockNeedDao.createNeed("apple","fruit",10)).thenReturn(null);
+        Need existingNeed = new Need(1, "apple", 10, "fruit");
+        when(mockNeedDao.getNeeds()).thenReturn(new Need[]{existingNeed});
         Map<String, Object> m = Map.ofEntries(
             Map.entry("name", "apple"),
             Map.entry("foodGroup", "fruit"),
@@ -115,6 +117,7 @@ public class NeedControllerTest {
      */
     @Test
     public void testCreateNeedHandleException() throws Exception {
+        when(mockNeedDao.getNeeds()).thenReturn(new Need[0]);
         doThrow(new IOException()).when(mockNeedDao).createNeed("apple","fruit",10);
         Map<String, Object> m = Map.ofEntries(
             Map.entry("name", "apple"),

@@ -21,9 +21,12 @@ This platform serves two user types: Managers (Admins) and Helpers. The Manager 
 This workflow is optimized through a "basket" system, enabling Helpers to add multiple needs, review them, and commit to their schedule via a checkout process.
 
 Key features include:
-> TBD as our sprints continue.
+- A Cupboard accessible to helpers and managers, editable by managers and usable by users.
+- A basket to hold needs for helper access that allows them to view the total cost of all the needs within the basket.
+- User Interface to ensure smoother usability for both helpers and managers.
+- Authorization for different user types.
+- The ability to search for, browse, or otherwise parse needs as a helper, and the ability to add, edit, or remove needs as a manager.
 
- 
 
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
@@ -59,9 +62,25 @@ The MVP will be an online portal for a food bank to request certain items to be 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
 
+
+Epic: Populate and Manage the Cupboard (admin):
+- As an admin, I want to manage the cupboard of needs so that helpers can access accurate and up to date information. 
+- Admins are able to see list of needs, add, remove, and edit a need, and authorize with the system 
+
+Epic: Basket (helper):
+- As a helper, I want to manage my funding basket so that I can select and fund multiple needs efficiently.
+- Helpers are able to browse and search for needs, add and remove needs to basket, view total cost of their basket, and checkout / fund selected needs.
+
+Epic: Search Filter:
+- I want the ability to sort through my cupboard using a search filter to ensure I can quickly find the needs I would like.
+- Helpers and admins are able to filter by price (increasing or decreasing).
+
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
 
+- Adding password verification to ensure better safety practices and prevent from others logging into accounts that aren't theirs.
+- Adding a 'filter by price' to the cupboard to ensure better sorting for users.
+- UI updates and runability to ensure a smoother user experience.
 
 ## Application Domain
 
@@ -74,8 +93,11 @@ This section describes the application domain.
 > to each other._
 
 The domain for this project mainly consists of managers and helpers and the operations they can perform on baskets and cupboards that contain needs. 
+
 The cupboard is the central storage for the needs of the organization. In this project, the needs are food items that a food bank is in need of. Managers oversee the cupboard and add, remove, and update needs when necessary.
+
 A basket belongs to a helper to keep track of the food items they plan to buy for the food bank. A user has access to the cupboard so they can add the food items they wish to buy to their basket. 
+
 ## Architecture and Design
 
 This application uses a REST API to keep track of all user information and needs information. The API uses an Angular user interface, providing both a helper and manager view.
@@ -112,11 +134,15 @@ When a user navigates to the site, they are greeted with a login prompt. They ca
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
 
+
+
 > _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
 > of the design that you are describing.  (**For example**, in a shopping experience application you might create a 
 > sequence diagram of a customer searching for an item and adding to their cart.)
 > As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side 
 > to help illustrate the end-to-end flow._
+>>
+
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
  >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
@@ -138,6 +164,8 @@ The ViewModel tier provides the application’s interface for client interaction
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
+
+
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
@@ -199,17 +227,20 @@ Dependency injection is applied in our design with the Angular services we creat
 > have not had any testing yet. Highlight the issues found during
 > acceptance testing and if there are any concerns._
 
-All of our user stories for sprint 2 have been tested and their functionality has been verified to match the acceptance criteria. In total, we tested 8 different user stories each with at least 2 acceptance criterion. 
+All of our user stories for sprint 4 have been tested and their functionality has been verified to match the acceptance criteria. In total, we tested 8 different user stories each with at least 2 acceptance criterion. 
+
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets._
 
+The goal was to aim for around 95% code coverage. Overall, we managed to reach 97%. Our coverage targets for Persistence, Controller, and Model tiers were 95%. These values were selected because a 95% code coverage means that most branches and test cases have been exhausted with maybe a few outliers that were unable to properly be tested for. With 95%, our code and functionality proves to be working as expected. For persistence, we reached 100%, controller - 97%, and model - 93%. Our testing for the model tier could have been a bit better, but it still managed to get really close to our target, as well as achieving our overall target.
+
 >_**[Sprint 2, 3 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
 > those._
 
-![Jacoco report](Sprint-3-jacoco-report.png)
+![Jacoco report](sprint-4-jacoco-report.png)
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
@@ -224,7 +255,10 @@ All of our user stories for sprint 2 have been tested and their functionality ha
 
 
 ## Sprint 3
-- **2023/04/03**: Perform user acceptance testing with other group.
-- **2023/04/07**: Hash out sprint 3 demo plan.
+- **2025/04/03**: Perform user acceptance testing with other group.
+- **2025/04/07**: Hash out sprint 3 demo plan.
+
+
 ## Sprint 4
-- N/A
+- **2025/04/10**: Short meeting to discuss Sprint 4 plans.
+- **2025/04/11**: Work on DesignDoc updates, ideation of Epics and Enhancements.
