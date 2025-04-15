@@ -58,10 +58,15 @@ The MVP will be an online portal for a food bank to request certain items to be 
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+The top level epics within the MVP are as follows:
+> As both a manager or helper, I want the ability to sort through my cupboard using a search filter to ensure I can quickly find the needs I would like.
+> As a helper, I want to be able to add items to a wish list in case I need more time to pay for certain needs.
+> As a U-fund Manager, I want to manage the cupboard of needs so that Helpers can access accurate and up-to-date information.
 
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
-
+> Adding a 'filter by price' to the cupboard to ensure better sorting for users.
+> UI updates and runability to ensure a smoother user experience.
 
 ## Application Domain
 
@@ -112,11 +117,15 @@ When a user navigates to the site, they are greeted with a login prompt. They ca
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
 
+
+
 > _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
 > of the design that you are describing.  (**For example**, in a shopping experience application you might create a 
 > sequence diagram of a customer searching for an item and adding to their cart.)
 > As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side 
 > to help illustrate the end-to-end flow._
+>>
+
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
  >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
@@ -138,6 +147,8 @@ The ViewModel tier provides the application’s interface for client interaction
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
+
+
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
@@ -224,7 +235,10 @@ All of our user stories for sprint 2 have been tested and their functionality ha
 
 
 ## Sprint 3
-- **2023/04/03**: Perform user acceptance testing with other group.
-- **2023/04/07**: Hash out sprint 3 demo plan.
+- **2025/04/03**: Perform user acceptance testing with other group.
+- **2025/04/07**: Hash out sprint 3 demo plan.
+
+
 ## Sprint 4
-- N/A
+- **2025/04/10**: Short meeting to discuss Sprint 4 plans.
+- **2025/04/11**: Work on DesignDoc updates, ideation of Epics and Enhancements.
