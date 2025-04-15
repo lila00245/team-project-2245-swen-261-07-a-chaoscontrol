@@ -61,15 +61,32 @@ The MVP will be an online portal for a food bank to request certain items to be 
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
-The top level epics within the MVP are as follows:
-> As both a manager or helper, I want the ability to sort through my cupboard using a search filter to ensure I can quickly find the needs I would like.
-> As a helper, I want to be able to add items to a wish list in case I need more time to pay for certain needs.
-> As a U-fund Manager, I want to manage the cupboard of needs so that Helpers can access accurate and up-to-date information.
+
+
+Epic: Populate and Manage the Cupboard (admin) -
+
+- As an admin, I want to manage the cupboard of needs so that helpers can access accurate and up to date information. 
+- Admins are able to see list of needs, add, remove, and edit a need, and authorize with the system 
+
+Epic: Basket (helper) - 
+
+- As a helper, I want to manage my funding basket so that I can select and fund multiple needs efficiently.
+- Helpers are able to browse and search for needs, add and remove needs to basket, view total cost of their basket, and checkout / fund selected needs.
+
+Epic: Search Filter - 
+
+- I want the ability to sort through my cupboard using a search filter to ensure I can quickly find the needs I would like.
+- Helpers and admins are able to filter by price (increasing or decreasing).
 
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
-> Adding a 'filter by price' to the cupboard to ensure better sorting for users.
-> UI updates and runability to ensure a smoother user experience.
+
+
+Adding password verification to ensure better safety practices and prevent from others logging into accounts that aren't theirs.
+
+Adding a 'filter by price' to the cupboard to ensure better sorting for users.
+
+UI updates and runability to ensure a smoother user experience.
 
 ## Application Domain
 
@@ -82,8 +99,11 @@ This section describes the application domain.
 > to each other._
 
 The domain for this project mainly consists of managers and helpers and the operations they can perform on baskets and cupboards that contain needs. 
+
 The cupboard is the central storage for the needs of the organization. In this project, the needs are food items that a food bank is in need of. Managers oversee the cupboard and add, remove, and update needs when necessary.
+
 A basket belongs to a helper to keep track of the food items they plan to buy for the food bank. A user has access to the cupboard so they can add the food items they wish to buy to their basket. 
+
 ## Architecture and Design
 
 This application uses a REST API to keep track of all user information and needs information. The API uses an Angular user interface, providing both a helper and manager view.
