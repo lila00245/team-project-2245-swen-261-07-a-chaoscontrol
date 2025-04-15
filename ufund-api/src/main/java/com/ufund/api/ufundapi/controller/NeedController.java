@@ -130,7 +130,7 @@ public class NeedController {
     public ResponseEntity<Need> createNeed(@RequestBody Map<String, Object> data) {
         try{
             
-            if(data.get("name")=="" || data.get("foodGroup")=="" || data.get("price")==""){
+            if("".equals(data.get("name")) || "".equals(data.get("foodGroup")) || "".equals(data.get("price"))){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
             Need[] needlyst = needDao.getNeeds();
