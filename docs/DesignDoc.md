@@ -61,13 +61,21 @@ The MVP will be an online portal for a food bank to request certain items to be 
 
 ### MVP Features
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
-The top level epics within the MVP are as follows:
-> As both a manager or helper, I want the ability to sort through my cupboard using a search filter to ensure I can quickly find the needs I would like.
-> As a helper, I want to be able to add items to a wish list in case I need more time to pay for certain needs.
-> As a U-fund Manager, I want to manage the cupboard of needs so that Helpers can access accurate and up-to-date information.
+
+Epic: Populate and Manage the Cupboard (admin) - 
+	As an admin, I want to manage the cupboard of needs so that helpers can access accurate and up to date information.
+	Admins are able to see list of needs, add, remove, and edit a need, and authorize with the system
+Epic: Basket (helper) - 
+	As a helper, I want to manage my funding basket so that I can select and fund multiple needs efficiently.
+	Helpers are able to browse and search for needs, add and remove needs to basket, view total cost of their basket, and checkout / fund selected needs.
+Epic: Search Filter - 
+	I want the ability to sort through my cupboard using a search filter to ensure I can quickly find the needs I would like.
+	Helpers and admins are able to filter by price (increasing or decreasing).
 
 ### Enhancements
 > _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+
+> Adding password verification to ensure better safety practices and prevent from others logging into accounts that aren't theirs.
 > Adding a 'filter by price' to the cupboard to ensure better sorting for users.
 > UI updates and runability to ensure a smoother user experience.
 
