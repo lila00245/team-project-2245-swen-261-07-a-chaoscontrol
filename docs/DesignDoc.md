@@ -21,9 +21,12 @@ This platform serves two user types: Managers (Admins) and Helpers. The Manager 
 This workflow is optimized through a "basket" system, enabling Helpers to add multiple needs, review them, and commit to their schedule via a checkout process.
 
 Key features include:
-> TBD as our sprints continue.
+> A Cupboard accessible to helpers and managers, editable by managers and usable by users.
+> A basket to hold needs for helper access that allows them to view the total cost of all the needs within the basket.
+> User Interface to ensure smoother usability for both helpers and managers.
+> Authorization for different user types.
+> The ability to search for, browse, or otherwise parse needs as a helper, and the ability to add, edit, or remove needs as a manager.
 
- 
 
 ### Purpose
 >  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
