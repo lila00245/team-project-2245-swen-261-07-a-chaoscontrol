@@ -232,7 +232,24 @@ Dependency injection is applied in our design with the Angular services we creat
 > Analysis Tool (SonarQube) and provide your analysis and recommendations.  
 > Include any relevant screenshot(s) with each area._
 
+![Static Code Analysis](static-code.png)
+
+Our html / typescript had some reliability issues under static analysis, which are outlined below:
+
+- Some of the files contained declared imports that were never used. While this is not harmful, it does add unnecessary clutter that could lead to confusion in the future. For this, we removed the redundant imports.
+
+- We had a couple strings hardcoded directly into HTML templates. This reduces flexibility in the future. For this, we changed these strings into constants.
+
+- Some functions were flagged for being too complex, with nested conditionals and loops. For this, we refractored larger functions into smaller, more modular helper functions.
+
+
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+
+If given more time, our team would focus on the following refractoring and design improvements:
+
+-  Improved UI, the user interface we have works very well, but could always be updated to be even more geared for users
+- Receipts for User Checkout - right now we have that when a user checks out, a message pops up saying checkout successful and all items from their basket are removed. A receipt could be useful if the user wants to keep track of what exactly they have checked out in the past.
+- Filter searches - we have a filter for items by increasing and decreasing price. We could also add filters by food group or viewed status, etc.
 
 ## Testing
 > _This section will provide information about the testing performed
