@@ -81,6 +81,7 @@ Epic: Search Filter:
 - Adding password verification to ensure better safety practices and prevent from others logging into accounts that aren't theirs.
 - Adding a 'filter by price' to the cupboard to ensure better sorting for users.
 - UI updates and runability to ensure a smoother user experience.
+- Leaderboard
 
 ## Application Domain
 
