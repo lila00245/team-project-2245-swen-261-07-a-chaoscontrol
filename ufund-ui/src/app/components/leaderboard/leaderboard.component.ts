@@ -21,6 +21,9 @@ export class LeaderboardComponent {
     private userService: UsersService
   ){}
 
+  /**
+   * Loads current user and runs helper functions
+   */
   ngOnInit(): void{
     if(!localStorage.getItem('user')){
       this.router.navigate([`/`])
@@ -28,6 +31,11 @@ export class LeaderboardComponent {
     this.getUsers();
   }
 
+  /**
+   * Get users from the UserService, sort
+   * them by their total funding, and
+   * return a small selection of Users.
+   */
   getUsers(): void{
     this.userService.getUsers().subscribe(users=>{
       this.users=users.filter(user => user.role != 'admin')

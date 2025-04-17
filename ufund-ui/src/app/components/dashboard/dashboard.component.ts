@@ -18,14 +18,23 @@ export class DashboardComponent {
     private location: Location
   ){}
 
+  /**
+   * Retrieves current user
+   */
   ngOnInit(): void {
     this.user = localStorage.getItem('user')
   }
 
+  /**
+   * Navigate to the login page
+   */
   goToLogin():void{
     this.router.navigate(['/login']);
   }
 
+  /**
+   * Navigate to the register page
+   */
   goToRegister():void{
     this.router.navigate(['/register']);
   }

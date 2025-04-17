@@ -23,9 +23,13 @@ export class LoginComponent {
     
 ) {}
 
+/**
+ * Gets the user and sets both local storage and the currentUser
+ * status before navigating to the Needs dashboard.
+ * @param name name of the user
+ * @param password password of the associated user
+ */
 getUser(name: string, password: string): void {
-  // Changed by Vladislav Usatii on 03 04 25: Refactored
-  // to wait for async result before routing to /needs
     this.userService.getUser(name)
     .pipe(catchError((ex: any, caught: Observable<User>) => {
       this.message.next("Failed to login: "+ ex.status)

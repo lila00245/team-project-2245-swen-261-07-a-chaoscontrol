@@ -5,6 +5,9 @@ import { UsersService } from '../../services/users.service';
 import { Need } from '../../model/Need';
 import { User } from '../../model/User';
 
+/**
+ * Basket component
+ */
 @Component({
   selector: 'app-basket',
   standalone: false,
@@ -30,6 +33,14 @@ export class BasketComponent {
     this.loadBasket();
   }
 
+  /**
+   * Gets the current user, accesses their basket,
+   * and renders each Need and the corresponding
+   * total cost calculation.
+   * 
+   * No explicit events are returned. Errors include
+   * User update failures and Unexpected errors.
+   */
   loadBasket(): void {
     if (this.name) {
       this.userService.getUser(this.name).subscribe({
@@ -60,8 +71,6 @@ export class BasketComponent {
                   this.totalCostCalculation();
                 }
               }
-              
-              
             });
           }
         },
@@ -72,8 +81,6 @@ export class BasketComponent {
 
   /**
    * Sums up all columns from basket
-   * 
-   * @author Vlad
    */
   totalCostCalculation(): void {
     let sum = 0;
@@ -85,9 +92,9 @@ export class BasketComponent {
   }
 
   /**
-   * Takes in selected Need and current user, filters out item, and passes in updated user to the UserDAO
-   * 
-   * @author Vlad
+   * Takes in selected Need and current user,
+   * filters out item, and passes in updated
+   * user to the UserDAO.
    */
   removeNeed(need: Need):void {
     // case where needs or the user don't exist
@@ -123,9 +130,9 @@ export class BasketComponent {
     }
   }
 
-
   /**
-   * Takes in current user and empties the basket, passing in updated user to the UserDAO
+   * Takes in current user and empties the basket,
+   * passing in updated user to the UserDAO.
    */
   checkout():void {
     // checks if user exists, if not gives an error
@@ -163,11 +170,10 @@ export class BasketComponent {
     this.totalCostCalculation();
   }
 
-  
-
-
+  /**
+   * Navigates to the Needs endpoint
+   */
   goToCupboard():void{
     this.router.navigate(['/needs']);
   }
-
 }
