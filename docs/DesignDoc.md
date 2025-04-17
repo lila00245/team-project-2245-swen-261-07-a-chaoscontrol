@@ -134,6 +134,16 @@ When a user navigates to the site, they are greeted with a login prompt. They ca
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
 
+The View tier is primarily concerned with presentation and user interaction. Components within this tier all function in their own way, some with forms, events, and even subscriptions. Components that need access to our data always delegate their fetching and business logic to the ViewModel tier, where our services sit.
+
+1. Navigation (AppComponent)
+* Responsible for authentication state and rendering either Auth pages or the User pages. User pages like the BasketComponent are dependent on who is authenticated and will not be the same for any two distinct users.
+
+2. Page-Level Views (LoginComponent, RegisterComponent, CupboardComponent, BasketComponent, CreateComponent)
+* Responsible for making service calls and returning accurate Need, Basket, and Cupboard information. This includes but is not limited to: status of current Needs, current User Basket, current Cupboard, current filter on the Needs.
+
+3. Need Views (NeedComponent, NeedSearchComponent)
+* Responsible for loading in our current Needs and allowing the proper querying of Needs by their names and prices.
 
 
 > _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
@@ -143,6 +153,13 @@ When a user navigates to the site, they are greeted with a login prompt. They ca
 > to help illustrate the end-to-end flow._
 >>
 
+In Chaos Control, an unauthenticated user loads the App component and sees a Login and Register option. They register appropriately. The Helper logs in to the Cupboard component. They search and filter with the NeedSearch, find an item they are interested in, and add it to their Cupboard.
+
+![Adding a Need to Cupboard as a Helper - Sequence Diagram](BasketNeed_SequenceDiagram.svg)
+
+At any time, if the Helper clicks to check out, the Basket component loads with an order summary and an option to checkout. If a Manager/Admin logs in, they can use the Create component to add a new Need. It will then be visible to Helpers.
+
+![Create a new Need as a Manager - Sequence Diagram](Checkout_SequenceDiagram.svg)
 
 > _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
  >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
