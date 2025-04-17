@@ -27,6 +27,12 @@ export class CreateComponent {
     }
   }
 
+  /**
+   * Creates a Need object
+   * @param name the name of the Need
+   * @param foodGroup the food group to put the Need into
+   * @param price the corresponding price of each unit of the Need
+   */
   createNeed(name: string, foodGroup: string, price: string){
     this.cupboardService.createNeed(name, foodGroup, price)
     .pipe(catchError((ex,ob)=>{

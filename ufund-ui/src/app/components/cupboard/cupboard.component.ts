@@ -35,6 +35,9 @@ export class CupboardComponent {
     this.getNeeds();
   }
 
+  /**
+   * Gets a list of needs from the CupboardService
+   */
   getNeeds(): void{ 
     if(this.name!= null){
       console.log(this.name)
@@ -45,16 +48,17 @@ export class CupboardComponent {
     }
   }
 
-
   /**
    * Sorts price ascending and descending by comparing cost b - a or a - b
    * (assuming entry a is larger than b)
-   * @author Vlad
    */
   sortByPriceAscending():void{ this.needs.sort((a, b) => a.cost - b.cost); }
   sortByPriceDescending():void{ this.needs.sort((a, b) => b.cost - a.cost); }
   sortByDefault():void{this.getNeeds();}
 
+  /**
+   * Clears the user from local storage
+   */
   logOut(): void{
     localStorage.removeItem('user')
     localStorage.removeItem('role')

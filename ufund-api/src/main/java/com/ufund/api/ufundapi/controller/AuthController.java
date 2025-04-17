@@ -65,7 +65,7 @@ public class AuthController {
 
     /**
      * Handles the POST request for user registration.
-     *      * 
+     * 
      * @param authRequest The {@link User} containing the user and password
      * @return A {@link ResponseEntity} containing the {@link User} object and HTTP status {@link HttpStatus#CREATED} if successful,
      *         or HTTP status {@link HttpStatus#CONFLICT} if the user already exists.

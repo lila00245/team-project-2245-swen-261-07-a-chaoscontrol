@@ -25,6 +25,9 @@ export class NeedComponent {
     private usersService: UsersService
   ){}
 
+  /**
+   * Get current user and check role
+   */
   ngOnInit(): void{
     if(!localStorage.getItem('user')){
       this.router.navigate([`/`])
@@ -36,11 +39,17 @@ export class NeedComponent {
     this.getNeed();
   }
 
+  /**
+   * Get the listed need by id
+   */
   getNeed(): void{
       const id = parseInt(this.route.snapshot.paramMap.get('id')!,10)
       this.cupboardService.getNeed(id).subscribe(need => this.need = need) 
   }
 
+  /**
+   * Sets edit mode
+   */
   editMode():void{
     if(this.edit){
       this.edit = false;
@@ -49,6 +58,12 @@ export class NeedComponent {
     }
   }
 
+  /**
+   * Changes a Need's attributes
+   * @param name Need's new name
+   * @param foodGroup the food group associated with the updated Need
+   * @param price the new price associated with the updated Need
+   */
   editNeed(name:string, foodGroup:string, price:string):void{
     if(this.need){
       this.cupboardService.updateNeed(this.need?.id, name, foodGroup, price).subscribe()
@@ -58,8 +73,6 @@ export class NeedComponent {
 
   /**
    * Add need to basket from UI
-   * 
-   * @author Vlad
    */
   addNeedToBasket(): void {
     console.log('Adding to basket', this.need);
@@ -78,14 +91,19 @@ export class NeedComponent {
     }
   }
   
+  /**
+   * Return option
+   */
   goBack(): void {
     this.location.back();
   }
 
+  /**
+   * Check if user logged in is a manager
+   * If they are not, return
+   * If they are, remove the need from the cupboard and go back
+   */
   remove(): void {
-    // Check if user logged in is a manager
-    // If they are not, return
-    // If they are, remove the need from the cupboard and go back. 
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10)
     this.cupboardService.deleteNeed(id).subscribe({
       next: (v) => {

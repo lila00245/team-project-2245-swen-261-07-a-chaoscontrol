@@ -45,7 +45,6 @@ export class CupboardService {
     return result
   }
 
-  
   addNeedToBasket(username: string, need: Need):Observable<User> {
     return this.http.post<User>(`${this.base_url}/users/${username}/basket`, need);
   } 
