@@ -133,8 +133,8 @@ public class NeedController {
             if("".equals(data.get("name")) || "".equals(data.get("foodGroup")) || "".equals(data.get("price"))){
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
-            Need[] needlyst = needDao.getNeeds();
-            for (Need need : needlyst) {
+            Need[] needlist = needDao.getNeeds();
+            for (Need need : needlist) {
                 if(need.getName().equals(data.get("name"))){
                     return new ResponseEntity<>(HttpStatus.CONFLICT);
                 }
